@@ -35,3 +35,12 @@ nav ul li a, nav ul li a:hover{
     text-decoration: none;
 }
 
+#newsletter{
+    margin: auto;
+    margin-top: 2em;
+}
+
+footer h6{
+    margin-top: 1em;
+}
+
