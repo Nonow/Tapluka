@@ -5,9 +5,28 @@
     position: relative;
 }
 
+#background{
+    margin: auto;
+    padding-top: 50px;
+}
+
+#title h6{
+    font-size: 3em;
+    color:#CCC;
+}
+
 .bg-color{
     background-color: RGBA(13, 70, 83, 0.78);
     min-height: 820px;
+}
+
+.banner .bg-color nav form{
+    padding-left: 32px;
+}
+
+.banner .bg-color nav form a{
+    color: white;
+    text-decoration: none;
 }
 
 .banner-text{
