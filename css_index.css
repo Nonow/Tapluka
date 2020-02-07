@@ -1,0 +1,52 @@
+#img_bg{
+    background: url('../img/alimentation.jpg') no-repeat fixed;
+    background-size: cover;
+    min-height: 820px;
+    position: relative;
+}
+
+.bg-color{
+    background-color: RGBA(13, 70, 83, 0.78);
+    min-height: 820px;
+}
+
+.banner-text{
+    color: #fff;
+}
+.banner-text h1{
+    font-size: 35px;
+    text-transform: uppercase;
+    padding-bottom:15px;
+}
+.btn-appoint, .btn-appoint:hover, .btn-appoint:focus{
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: rgba(12, 184, 182, 0.91);
+    border-radius: 3px;
+    color: #fff;
+}
+
+#service{
+    padding: 60px 0px;
+    text-align: center;
+}
+
+#jouer{
+    width: 200px;
+}
+
+.container{
+    margin: auto;
+}
+
+.icon i{
+    color: #0cb8b6;
+    font-size: 45px;
+    margin-bottom: 25px;
+}
+
+.carre{
+    height: 200px;
+    margin: 5px;
+}
