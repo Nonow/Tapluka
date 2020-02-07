@@ -1,0 +1,88 @@
+footer{
+	margin-top: 5em;
+	padding: 2em;
+	background-color: #0a4963;	 /*325C6A*/
+	text-align: center;
+}
+
+footer p a{
+	color: black;
+}
+
+footer p a:hover{
+	text-decoration:none;
+}
+
+#container{
+	padding: 2em;
+}
+
+#container .input-group{
+	width: 400px;
+	margin: auto;
+}
+
+#footer h6 a{
+	color: #0cb8b6;
+	text-decoration: none;
+}
+
+#footer h6 a:hover{
+	color: #0cb8b6;
+}
+
+.bouton{
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	background: #f1f1f1;
+	margin: 10px;
+	border-radius: 30%;
+	box-shadow: 0 5px 5px -5px #000000;
+	color: #0cb8b6;
+	overflow: hidden;
+	position: relative;
+}
+
+.bouton i{
+	line-height: 60px;
+	font-size: 30px;
+	transition: 0.3s linear;
+}
+
+.bouton:hover i{
+	transform: scale(1.3);
+	color: white;
+}
+
+.bouton::before{
+	content: "";
+	position: absolute;
+	width: 120%;
+	height: 120%;
+	background: #0cb8b6;
+	transform: rotate(45deg);
+	left:110%;
+	top:90%;
+}
+
+.bouton:hover::before{
+	animation: aaa 0.7s 1;
+	top: -10%;
+	left: -10%;
+}
+
+@keyframes aaa{
+	0%{
+		left: -110%;
+		top: 90%;
+	}
+	50%{
+		left: 10%;
+		top: -30%;
+	}
+	100%{
+		top:-10%;
+		left: -10%;
+	}
+}
