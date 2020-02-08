@@ -3,16 +3,15 @@
 
 	<head>
 		<meta charset="utf-8">
-
 		<title>TAPLUKA | Accueil</title>
 		<link rel="shortcut icon" href="./img/favicon.png">
 
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/css.css">
 		<link rel="stylesheet" type="text/css" href="css/css_index.css">
 		<link rel="stylesheet" type="text/css" href="css/css_footer.css">
@@ -22,7 +21,7 @@
 	</head>
 
 	<body>
-		<section id="img_bg" class="banner">
+		<div id="img_bg" class="banner">
 			<div class="bg-color">
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
 					<!--<a class="navbar-brand" href="index.html"><img src="img/logo1.png"></a>-->
@@ -31,22 +30,22 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
-				  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li class="nav-item active">
-							<a class="nav-link" href="index.html"><i class="fa fa-home"></i> Accueil</span></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="inscription.html">Inscription</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="regles.html">Règles</a>
-						</li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-					    <button class="btn btn-info"><a href="#">Connexion</a></button>
-				    </form>
-				  </div>
+				 	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+						<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+							<li class="nav-item active">
+								<a class="nav-link" href="index.html"><i class="fa fa-home"></i> Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="inscription.html">Inscription</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="regles.html">Règles</a>
+							</li>
+						</ul>
+						<form class="form-inline my-2 my-lg-0" method="POST" action="connexion.html">
+							<input class="btn btn-info" type="submit" name="Connexion" value="Connexion" >
+						</form>
+					</div>
 				</nav>
 
 				<div class="container">
@@ -65,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 		
 		<section id="service">
 			<div class="container">
@@ -75,7 +74,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-shopping-cart"></i></a>
+								<a href="listecourse.html"><i class="fas fa-shopping-cart"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Liste de courses</h4>
@@ -87,7 +86,7 @@
 					
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-blender"></i></a>
+								<a href="construction.html"><i class="fas fa-blender"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Thermomix</h4>
@@ -99,7 +98,7 @@
 
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-pepper-hot"></i></a>
+								<a href="construction.html"><i class="fas fa-pepper-hot"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Création de recette</h4>
@@ -115,7 +114,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-calendar-alt"></i></a>
+								<a href="construction.html"><i class="fas fa-calendar-alt"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Planning</h4>
@@ -127,7 +126,7 @@
 
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-coins"></i></a>
+								<a href="construction.html"><i class="fas fa-coins"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Budget étudiant</h4>
@@ -139,7 +138,7 @@
 
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-comments"></i></a>
+								<a href="construction.html"><i class="fas fa-comments"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Forum</h4>
@@ -155,7 +154,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-book"></i></a>
+								<a href="construction.html"><i class="fas fa-book"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Recette de cuisine</h4>
@@ -167,7 +166,7 @@
 					
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-globe-europe"></i></a>
+								<a href="construction.html"><i class="fas fa-globe-europe"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Spécialité du monde</h4>
@@ -179,7 +178,7 @@
 
 						<div class="carre">
 							<div class="icon">
-								<a href="regles.html"><i class="fas fa-user-alt"></i></a>
+								<a href="construction.html"><i class="fas fa-user-alt"></i></a>
 							</div>
 							<div class="icon-info">
 								<h4>Préférences personnelles</h4>

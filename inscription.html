@@ -6,11 +6,12 @@
 		<title>TAPLUKA | Inscription</title>
 		<link rel="shortcut icon" href="./img/favicon.png">
 
-  		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/css.css">
 		<link rel="stylesheet" type="text/css" href="css/css_entete.css">
 		<link rel="stylesheet" type="text/css" href="css/css_footer.css">
@@ -20,7 +21,7 @@
 	</head>
 
 	<body>
-		<section class="banner">
+		<div class="banner">
 			<div class="bg-color">
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
 					<!--<a class="navbar-brand" href="index.html"><img src="img/logo1.png"></a>-->
@@ -29,24 +30,25 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
-				  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li class="nav-item active">
-							<a class="nav-link" href="index.html"><i class="fa fa-home"></i> Accueil</span></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="inscription.html">Inscription</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="regles.html">Règles</a>
-						</li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-					    <button class="btn btn-info"><a href="#">Connexion</a></button>
-				    </form>
-				  </div>
+					<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+						<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+							<li class="nav-item active">
+								<a class="nav-link" href="index.html"><i class="fa fa-home"></i> Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="inscription.html">Inscription</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="regles.html">Règles</a>
+							</li>
+						</ul>
+						<form class="form-inline my-2 my-lg-0" method="POST" action="connexion.html">
+							<input class="btn btn-info" type="submit" name="Connexion" value="Connexion" >
+						</form>
+					</div>
 				</nav>
-		</section>
+			</div>
+		</div>
 
 		<section>
 			<h4>Inscription</h4>
@@ -54,7 +56,7 @@
 			<form id="formulaire" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<div>
 					<label class="radio"><input type="radio" name="sexe" id="madame"/> Madame</label>
-	            	<label class="radio"><input type="radio" name="sexe" id="monsieur"/> Monsieur</label>
+					<label class="radio"><input type="radio" name="sexe" id="monsieur"/> Monsieur</label>
 				</div>
 				
 				<div>
@@ -105,7 +107,7 @@
 					<a href=email> contact@tapluka.com</a> | Copyright © TAPLUKA | Tous droits réservés
 				</h6>
 				
-	    		<div id="newsletter" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div id="newsletter" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 					<p class="blanc">
 						Inscrivez vous à notre newsletter
 					</p>
