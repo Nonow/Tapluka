@@ -22,4 +22,8 @@ router.get('/regles', function(req, res, next) {
   res.render('regles', { title: 'regles' });
 });
 
+router.get('/recette', function(req, res, next) {
+  res.render('recette', { title: 'recette' });
+});
+
 module.exports = router;

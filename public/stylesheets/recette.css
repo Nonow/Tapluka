@@ -1,0 +1,25 @@
+.recette-img-carousel{
+
+}
+
+.guide-container{
+
+}
+
+.titre-guide{
+    background: grey;
+}
+
+.guide-conditions{
+    border-top: 1px solid lightgrey;
+    margin:0;
+}
+
+.guide-rep{
+    border-bottom: 1px solid lightgrey;
+    margin:0;
+}
+
+.ingredient{
+    border-right: 1px solid lightgrey;
+}
