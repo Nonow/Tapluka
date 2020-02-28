@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var model = require('../models/model.js')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'index' });
+  model.test(function (profils) {
+    res.render('index', { title: 'index', profils : profils });
+  })
+
 });
 
 router.get('/connexion', function(req, res, next) {
