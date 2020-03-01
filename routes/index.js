@@ -59,7 +59,19 @@ router.get('/modifier_famille', function (req, res, next) {
 });
 
 router.get('/modifier_famille/:id', function (req, res, next) {
-    res.render('modifier_famille', {title: 'modifier_famille'});
+    model.singleFamille(currentUser, req.params.id, function (status,data, coched, uncoched) {
+        console.log(status)
+        res.render('modifier_famille', {title: 'modifier_famille', data: data, coched: coched, uncoched: uncoched});
+    })
 });
+
+router.post('/modifier_famille/:id', function (req, res, next) {
+    model.modifierFamille(currentUser, req.params.id,req.body, function (status) {
+        console.log(status)
+        res.redirect('/famille')
+       })
+});
+
+
 
 module.exports = router;
