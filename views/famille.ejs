@@ -45,23 +45,30 @@
                         <h6 class="card-subtitle mb-2 text-muted">Enfant</h6>
                     <% } else { %>
                         <h6 class="card-subtitle mb-2 text-muted">Adulte</h6>
-                    <% } %>
-                    <form action="/famille" method="post">
-                        <input id="form" name="form" type="hidden" value="remove">
-                        <input id="id" name="id" type="hidden" value="<%= famille.id %>">
-                        <button type="submit" class="btn btn-outline-danger">Supprimer</button>
-                    </form>
-                    <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning">Modifier</a>
-                    <a class="btn btn-primary" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">Spec Alim</a>
-                    <ul id="collapsespec_<%= famille.nom %>" class="collapse list-group list-group-flush">
-                        <% var loop = specAlim; %>
-                        <% for (loop of loop){ %>
-                            <% if (famille.id == loop.id_famille ){ %>
-                                <li class="list-group-item"><%= loop.nom %></li>
-                            <% } %>
-                        <% } %>
-                    </ul>
+                    <% } %>cation
+                    <!-- zone de modification -->
+                    <div class="row m-1">
+                      <form action="/famille" method="post">
+                          <input id="form" name="form" type="hidden" value="remove">
+                          <input id="id" name="id" type="hidden" value="<%= famille.id %>">
+                          <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                      </form>
+                      <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning">Modifier</a>
 
+                    </div>
+                    <div class="row m-1">
+                      <!--Zone de specification des regime alimentaire -->
+                      <a class="btn btn-primary" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">Spec Alim <i class="fas fa-angle-down rotate-icon pl-3"></i></a>
+
+                      <ul id="collapsespec_<%= famille.nom %>" class="collapse list-group list-group-flush">
+                          <% var loop = specAlim; %>
+                          <% for (loop of loop){ %>
+                              <% if (famille.id == loop.id_famille ){ %>
+                                  <li class="list-group-item"><%= loop.nom %></li>
+                              <% } %>
+                          <% } %>
+                      </ul>
+                    </div>
                 </div>
             </div>
         <% } %>
