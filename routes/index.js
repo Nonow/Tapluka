@@ -31,6 +31,16 @@ router.get('/recette', function (req, res, next) {
     res.render('recette', {title: 'recette'});
 });
 
+router.get('/recette/:id', function (req, res, next) {
+    model.singleRecette(req.params.id, currentUser, function(status, recettes, image, ingredients, typeRecette){
+        console.log(recettes)
+        console.log(image)
+        console.log(ingredients)
+        console.log(typeRecette)
+        res.render('recette', {title: 'recette', recettes: recettes, image: image, ingredients: ingredients, typeRecette: typeRecette});
+    })
+});
+
 router.get('/famille', function (req, res, next) {
     model.famille(currentUser, function (famille, specAlim, allSA) {
         res.render('famille', {title: 'famille', famille: famille, specAlim: specAlim, allSA: allSA});

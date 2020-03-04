@@ -1,6 +1,36 @@
 <% include header %>
 <link rel="stylesheet" type="text/css" href="/stylesheets/recette.css">
 
+<% for (recette of recettes) {  %>
+    <p><%= recette.id %></p>
+    <p><%= recette.nom %></p>
+    <p><%= recette.description %></p>
+    <p><%= recette.difficulte %></p>
+    <p><%= recette.tempsPreparation %></p>
+    <p><%= recette.tempsCuisson %></p>
+    <p><%= recette.categorie %></p>
+    <p><%= recette.sousCategorie %></p>
+    <p><%= recette.video %></p>
+<%}%>
+
+<% for (image of image) {  %>
+    <p><%= image.id %></p>
+    <p><%= image.id_recette %></p>
+    <p><%= image.chemin %></p>
+<%}%>
+
+<% for (ingredient of ingredients) {  %>
+    <p><%= ingredient.id_recette %></p>
+    <p><%= ingredient.id_ingredient %></p>
+    <p><%= ingredient.nom %></p>
+    <p><%= ingredient.quantite %></p>
+    <p><%= ingredient.type %></p>
+<%}%>
+
+<% for (typeRecette of typeRecette) {  %>
+    <p><%= typeRecette.nom %></p>
+<%}%>
+
 <div class="container-fluid">
 
     <h2 id="titre">Céréales LION</h2>
