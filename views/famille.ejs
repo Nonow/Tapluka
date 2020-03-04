@@ -52,8 +52,8 @@
                         <button type="submit" class="btn btn-outline-danger">Supprimer</button>
                     </form>
                     <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning">Modifier</a>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item active">Spec Alim</li>
+                    <a class="btn btn-primary" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">Spec Alim</a>
+                    <ul id="collapsespec_<%= famille.nom %>" class="collapse list-group list-group-flush">
                         <% var loop = specAlim; %>
                         <% for (loop of loop){ %>
                             <% if (famille.id == loop.id_famille ){ %>
