@@ -1,11 +1,16 @@
-.recette-img-carousel{
-
+#recette-img-carousel{
+width:60%;
 }
 
-.guide-container{
-
+.img-carou{
+    height:400px;
 }
 
+.arrow-container{
+    width:30px;
+    background-color:#0cb8b6;
+    border-radius:50px;
+}
 .titre-guide{
     background: grey;
 }
@@ -22,4 +27,15 @@
 
 .ingredient{
     border-right: 1px solid lightgrey;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance:textfield;
 }

@@ -140,6 +140,22 @@ class Model {
             }
         })
     }
+
+    static singleRecette(idRecette, idUser, cb) {
+        connection.query("select * from recettes where id = ?", [idRecette], (err, rows1) => {
+            if (err) throw err
+            connection.query("select * from imageRecette where id_recette = ?", [idRecette], (err, rows2) => {
+                if (err) throw err
+                connection.query("select DISTINCT id_recette, id_ingredient, nom, quantite, type from ingrédients i right join recette_ingredient ri on i.id = ri.id_ingredient where id_recette = ?", [idRecette], (err, rows3) => {
+                    if (err) throw err
+                    connection.query("select DISTINCT nom from recette_typeRecette rtr left join typeRecette tr on rtr.id_recette = tr.id where id_recette = ?", [idRecette], (err, rows4) => {
+                        if (err) throw err
+                        cb("OK", rows1, rows2, rows3, rows4)
+                    })
+                })
+            })
+       })
+    }
 }
 
 module.exports = Model
