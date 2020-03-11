@@ -76,6 +76,7 @@ class Model {
                     if (err) throw err
                     connection.query("delete from familles where id=?", [idFamille], (err, rows) => {
                         if (err) throw err
+                        cb("OK")
                     })
                 })
             } else {

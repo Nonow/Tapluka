@@ -55,6 +55,7 @@ router.post('/famille', function (req, res, next) {
         })
     } else if (req.body.form == "remove") {
         model.removeFamille(currentUser, req.body.id, function (status) {
+          console.log("redirection removeF");
             res.redirect('/famille')
         })
     } else {
