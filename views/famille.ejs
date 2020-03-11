@@ -1,6 +1,5 @@
 <% include header %>
 <!-- mathieu -->
-
 <section class="container">
 
     <h4>Ma famille</h4>
@@ -13,7 +12,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">Enfant</h6>
                     <% } else { %>
                         <h6 class="card-subtitle mb-2 text-muted">Adulte</h6>
-                    <% } %>cation
+                    <% } %>
                     <!-- zone de modification -->
                     <div class="row m-1">
                       <form action="/famille" method="post">
@@ -26,7 +25,7 @@
                     </div>
                     <div class="grid m-1">
                       <!--Zone de specification des regime alimentaire -->
-                      <a class="btn btn-primary" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">Spec Alim <i class="fas fa-angle-down rotate-icon pl-3"></i></a>
+                      <a class="btn text-light" style="background-color: RGBA(12, 184, 182, 0.91);" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">Spécification alimentaire<i class="fas fa-angle-down rotate-icon pl-3"></i></a>
 
                       <ul id="collapsespec_<%= famille.nom %>" class="collapse list-group list-group-flush">
                           <% var loop = specAlim; %>
@@ -45,7 +44,7 @@
         <form action="/famille" method="post">
           <input id="form" name="form" type="hidden" value="add">
             <div class="row pt-3">
-              <input type="text" id="Nom" name="nom" placeholder="Prénom" class="col-md-8 offset-md-1" required>
+              <input type="text" id="Nom" name="nom" placeholder="Prénom" class="col-md-8 offset-md-1 rounded" required>
             </div>
             <div class="row pt-3">
                 <div class="form-check form-check-inline offset-md-1">
@@ -59,8 +58,8 @@
             </div>
 
             <!-- Button trigger modal -->
-            <div class="row pt-3 offset-md-1">
-              <button type="button" class="btn btn-primary col-md-10" data-toggle="modal" data-target="#exampleModal">
+            <div class="row pt-3">
+              <button type="button" class="btn text-light col-md-10 offset-md-1" style="background-color: RGBA(12, 184, 182, 0.91);" data-toggle="modal" data-target="#exampleModal">
                 Spécification alimentaire
               </button>
             </div>
@@ -70,7 +69,7 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Spécification(s) alimentaire(s)</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Spécifications alimentaires</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -81,25 +80,24 @@
                       <% for (allSA of allSA){ %>
                           <div>
                               <input type="checkbox" id="<%= allSA.id %>" name="specAlim" value="<%= allSA.id %>">
-                              <label for="coding"><%= allSA.nom %></label>
+                              <label for="<%= allSA.id %>"><%= allSA.nom %></label>
                           </div>
                       <% } %>
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                      <button type="button" class="btn btn-primary" style="background-color: RGBA(12, 184, 182, 0.91); data-dismiss="modal">Sauvegarder</button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="row pt-3 pb-3 offset-md-1">
-                <button type="submit" class="btn btn-outline-success">+ Ajouter</button>
+              <div class="row pt-3 pb-3">
+                <button type="submit" class="btn btn-outline-success offset-md-1 offset-xs-4">+ Ajouter</button>
               </div>
 
         </form>
     </div>
 </div>
 </section>
-
 <% include footer %>
