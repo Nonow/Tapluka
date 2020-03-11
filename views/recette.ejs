@@ -3,15 +3,15 @@
 
 <% for (recette of recettes) {  %>
     <p><%= recette.id %></p>
-    <p><%= recette.nom %></p>
-    <p><%= recette.description %></p>
-    <p><%= recette.difficulte %></p>
-    <p><%= recette.tempsPreparation %></p>
-    <p><%= recette.tempsCuisson %></p>
-    <p><%= recette.categorie %></p>
-    <p><%= recette.sousCategorie %></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
     <p><%= recette.video %></p>
-<%}%>
+
 
 <% for (image of image) {  %>
     <p><%= image.id %></p>
@@ -32,10 +32,17 @@
 <%}%>
 
 <div class="container-fluid">
-    <div class="recette-content">
-        <h2 id="titre">Céréales LION</h2>
-        <div class="mx-auto text-center note"> Note /5</div>
-        <div class="mx-auto text-center text-secondary allergenes"> Selon nos informations, cette recette est compatible avec le régime suivant : sans lactose</div>
+    <div class="recette-content text-center mx-auto">
+        <h2 class="grd-titre"><%= recette.nom %></h2>
+        <h3 class="ss-titre"><%= recette.categorie %> - <%= recette.sousCategorie %></h3>
+        <div class=" note"> Note /5</div>
+        <div class="text-secondary allergenes">
+            <%= recette.description %>
+        </div>
+        <div>
+            <p></p>
+        </div>
+
 
         <!--<img src="/images/img_course.jpg" class="mx-auto d-block" alt="img cereales">-->
         <div id="recette-img-carousel" class="carousel slide mx-auto" data-ride="carousel">
@@ -71,15 +78,13 @@
         <div class="container conditions text-center guide-container">
             <div class="h4 text-center mt-5 titre-guide"> Guide de préparation </div>
             <div class="row font-weight-bold guide-conditions">
-                <div class="col">Temps</div>
-                <div class="col">Personnes</div>
+                <div class="col">Temps total</div>
                 <div class="col">Difficulté</div>
                 <div class="col">Coût</div>
             </div>
             <div class="row guide-rep">
-                <div class="col">2h20</div>
-                <div class="col">4</div>
-                <div class="col">Facile</div>
+                <div class="col"><%= recette.tempsPreparation + recette.tempsCuisson%> minutes</div>
+                <div class="col"><%= recette.difficulte %></div>
                 <div class="col">moyen</div>
             </div>
 
@@ -124,9 +129,22 @@
                         </div>
 
                     </div>
+
+
                     <div class="col-7">
                         <h5>Préparation</h5>
-
+                        <div>
+                            <p class="mb-0">Préparation : <span class="font-weight-bold"><%= recette.tempsPreparation%></span> minutes</p>
+                            <p>Cuisson : <span class="font-weight-bold"><%= recette.tempsCuisson %> </span> minutes</p>
+                                <video id=recette-video" preload="auto" controls>
+                                    <source src="/video/<%= recette.video %>" type="video/mp4">
+                                </video>
+                        </div>
+                            <ol>
+                                <% for (preparation of preparation) {  %>
+                                    <li class="text-left liste-preparation"><%= preparation.description%></li>
+                                <%}%>
+                            </ol>
                     </div>
                 </div>
             </div>
@@ -136,5 +154,6 @@
 </div>
 
 
-
+<%}%>
+<script src="/javascripts/recette.js"></script>
 <% include footer %>
