@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="Um177LwAqA@remotemysql.com" uuid="6a4da51c-e82b-4ed9-9698-450e013e6e33">
+    <data-source name="Um177LwAqA@remotemysql.com" uuid="8156cac1-3d80-46a4-b5e9-f92bde6a50e9">
       <database-info product="MySQL" version="8.0.13-4" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.15 (Revision: 79a4336f140499bd22dd07f02b708e163844e3d5)" dbms="MYSQL" exact-version="8.0.13" exact-driver-version="8.0">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
@@ -9,11 +9,7 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>Um177LwAqA</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" qname="@" />
-        </introspection-scope>
-      </schema-mapping>
+      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
 </project>

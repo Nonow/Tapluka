@@ -90,6 +90,7 @@
 
             <div class="container mt-5">
                 <div class="row text-center">
+
                     <div class="col-5 ingredient">
                         <h5>Ingrédient</h5>
                         <p class="mb-0 mt-2">Nombre de personnes</p>
@@ -99,35 +100,21 @@
                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
                             <button class="btn btn-outline-secondary" type="button">+</button>
                         </div>
-
+                        <% for (ingredient of ingredients) {  %>
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
                                     <img src="/images/burger.jpg" class="card-img" alt="ingredient">
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body">
-                                        <p class="card-text">ta de la chance hein</p>
-
+                                    <div class="card-body ">
+                                        <p class="card-text mb-0"><%= ingredient.nom %></p>
+                                        <p class="card-text mb-0"><%= ingredient.quantite %>g/ml ?</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="/images/img_course.jpg" class="card-img" alt="ingredient">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <p class="card-text">ta de la chance hein</p>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        <%}%>
                     </div>
 
 
@@ -140,9 +127,9 @@
                                     <source src="/video/<%= recette.video %>" type="video/mp4">
                                 </video>
                         </div>
-                            <ol>
+                            <ol class="liste-preparation mt-3 ml-3">
                                 <% for (preparation of preparation) {  %>
-                                    <li class="text-left liste-preparation"><%= preparation.description%></li>
+                                    <li class="text-left mb-3 numero-preparation"><%= preparation.description%></li>
                                 <%}%>
                             </ol>
                     </div>
