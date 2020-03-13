@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var model = require('../models/model.js')
-var currentUser = 3
+var currentUser = 1
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
