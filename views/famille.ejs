@@ -1,8 +1,8 @@
 <% include header %>
-<!-- mathieu -->
+
 <section class="container">
 
-    <h4>Ma famille</h4>
+    <h4 class="mt-3">Ma famille</h4>
     <div class="row">
         <% for (famille of famille){ %>
             <div class="card m-1" style="width: 18rem;">
@@ -14,18 +14,19 @@
                         <h6 class="card-subtitle mb-2 text-muted">Adulte</h6>
                     <% } %>
                     <!-- zone de modification -->
-                    <div class="row m-1">
-                      <form action="/famille" method="post">
+                    <div class="row">
+                      <form action="/famille" method="post" class="col-10">
                           <input id="form" name="form" type="hidden" value="remove">
                           <input id="id" name="id" type="hidden" value="<%= famille.id %>">
-                          <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                          <button type="submit" class="btn btn-outline-danger col-12">Supprimer</button>
                       </form>
-                      <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning">Modifier</a>
-
-                    </div>
-                    <div class="grid m-1">
+                  </div>
+                  <div class="row">
+                      <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-10 offset-1">Modifier</a>
+                  </div>
+                    <div class="row mt-2">
                       <!--Zone de specification des regime alimentaire -->
-                      <a class="btn text-light" style="background-color: RGBA(12, 184, 182, 0.91);" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">Spécification alimentaire<i class="fas fa-angle-down rotate-icon pl-3"></i></a>
+                      <a class="btn text-light col-10 offset-1" style="background-color: RGBA(12, 184, 182, 0.91);" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">Spécification alimentaire<i class="fas fa-angle-down rotate-icon pl-2"></i></a>
 
                       <ul id="collapsespec_<%= famille.nom %>" class="collapse list-group list-group-flush">
                           <% var loop = specAlim; %>
@@ -40,18 +41,20 @@
             </div>
         <% } %>
 
+
     <div class="card m-1" style="width: 18rem;">
+      <div class="card-body">
         <form action="/famille" method="post">
           <input id="form" name="form" type="hidden" value="add">
-            <div class="row pt-3">
-              <input type="text" id="Nom" name="nom" placeholder="Prénom" class="col-md-8 offset-md-1 rounded" required>
+            <div class="row">
+              <input type="text" id="Nom" name="nom" placeholder="Prénom" class="col-8 offset-1 rounded" required>
             </div>
             <div class="row pt-3">
-                <div class="form-check form-check-inline offset-md-1">
+                <div class="form-check form-check-inline offset-1">
                   <input class="form-check-input" type="radio" name="type" id="ageChoixAdulte" value="0" checked>
                   <label class="form-check-label" for="ageChoixAdulte">Adulte</label>
                 </div>
-                <div class="form-check form-check-inline offset-md-1">
+                <div class="form-check form-check-inline offset-1">
                   <input class="form-check-input" type="radio" name="type" id="ageChoixEnfant" value="1">
                   <label class="form-check-label" for="ageChoixEnfant">Enfant</label>
                 </div>
@@ -59,7 +62,7 @@
 
             <!-- Button trigger modal -->
             <div class="row pt-3">
-              <button type="button" class="btn text-light col-md-10 offset-md-1" style="background-color: RGBA(12, 184, 182, 0.91);" data-toggle="modal" data-target="#exampleModal">
+              <button type="button" class="btn text-light col-10 offset-1" style="background-color: RGBA(12, 184, 182, 0.91);" data-toggle="modal" data-target="#exampleModal">
                 Spécification alimentaire
               </button>
             </div>
@@ -86,17 +89,18 @@
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" style="background-color: RGBA(12, 184, 182, 0.91); data-dismiss="modal">Sauvegarder</button>
+                      <button type="button" class="btn btn-primary" style="background-color: RGBA(12, 184, 182, 0.91);" data-dismiss="modal">Sauvegarder</button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="row pt-3 pb-3">
-                <button type="submit" class="btn btn-outline-success offset-md-1 offset-xs-4">+ Ajouter</button>
+              <div class="row pt-3">
+                <button type="submit" class="btn btn-outline-success col-10 offset-1">+ Ajouter</button>
               </div>
 
         </form>
+    </div>
     </div>
 </div>
 </section>
