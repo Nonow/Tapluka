@@ -151,7 +151,11 @@ class Model {
                     if (err) throw err
                     connection.query("select DISTINCT nom from recette_typeRecette rtr left join typeRecette tr on rtr.id_recette = tr.id where id_recette = ?", [idRecette], (err, rows4) => {
                         if (err) throw err
-                        cb("OK", rows1, rows2, rows3, rows4)
+                        connection.query("select * from preparations where id_recette = ? order by numero", [idRecette],(err,rows5)=>{
+                            if (err) throw err
+                            cb("OK", rows1, rows2, rows3, rows4,rows5)
+
+                        })
                     })
                 })
             })

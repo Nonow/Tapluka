@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var model = require('../models/model.js')
-var currentUser = 3
+var currentUser = 1
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -32,12 +32,12 @@ router.get('/recette', function (req, res, next) {
 });
 
 router.get('/recette/:id', function (req, res, next) {
-    model.singleRecette(req.params.id, currentUser, function(status, recettes, image, ingredients, typeRecette){
+    model.singleRecette(req.params.id, currentUser, function(status, recettes, image, ingredients, typeRecette,preparation){
         console.log(recettes)
         console.log(image)
         console.log(ingredients)
         console.log(typeRecette)
-        res.render('recette', {title: 'recette', recettes: recettes, image: image, ingredients: ingredients, typeRecette: typeRecette});
+        res.render('recette', {title: 'recette', recettes: recettes, image: image, ingredients: ingredients, typeRecette: typeRecette,preparation:preparation});
     })
 });
 
