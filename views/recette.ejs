@@ -90,19 +90,19 @@
                                 <div class="col">
                                     <p class="mb-0 mt-2">Nombre d'adultes</p>
                                     <div class="input-group mb-3">
-                                        <button class="btn btn-outline-secondary" type="button">-</button>
-                                        <input type="type" class="form-control text-center "
+                                        <button class="btn btn-outline-secondary btn-remove" type="button">-</button>
+                                        <input type="type" id="adult-quantity" class="form-control text-center"
                                                onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-                                        <button class="btn btn-outline-secondary" type="button">+</button>
+                                        <button class="btn btn-outline-secondary btn-add" type="button">+</button>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <p class="mb-0 mt-2">Nombre d'enfants</p>
                                     <div class="input-group mb-3">
-                                        <button class="btn btn-outline-secondary" type="button">-</button>
-                                        <input type="type" class="form-control text-center "
+                                        <button class="btn btn-outline-secondary btn-remove" type="button">-</button>
+                                        <input type="type"id="child-quantity" class="form-control text-center "
                                                onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-                                        <button class="btn btn-outline-secondary" type="button">+</button>
+                                        <button class="btn btn-outline-secondary btn-add" type="button">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                                     <div class="card-body ">
                                         <p class="card-text mb-0 font-weight-bold"><%= ingredient.nom %></p>
                                         <p class="card-text mb-0 font-weight-lighter font-italic">
-                                            <%= ingredient.quantite %><%if(ingredient.type==0){%>g<%}%><%if(ingredient.type==1){%>cl<%}%>
+                                            <span class="quantity"><%= ingredient.quantite %></span><%if(ingredient.type==0){%>g<%}%><%if(ingredient.type==1){%>cl<%}%>
                                             <%if(ingredient.type==2){%><%}%>
                                             <%if(ingredient.type==3){%><%}%>
                                             <%if(ingredient.type==4){%>cueillères à soupe<%}%>
@@ -165,5 +165,6 @@
 
 
 <%}%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/javascripts/recette.js"></script>
 <% include footer %>
