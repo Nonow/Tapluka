@@ -161,6 +161,17 @@ class Model {
             })
        })
     }
+
+    static connect(mail,passwd,cb){
+        connection.query("select * from utilisateurs where mail=? and motdepasse=?",[mail,passwd],(err,rows)=>{
+            if (err) throw err
+            if (rows.length > 0){
+                cb(rows[0]['id'])
+            }else{
+                cb(-1)
+            }
+        })
+    }
 }
 
 module.exports = Model
