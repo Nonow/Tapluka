@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -22,33 +21,65 @@
 </head>
 
 <body>
+<% if (login == undefined){ %>
+    <div class="banner">
+        <div class="bg-color">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!--<a class="navbar-brand" href="index.html"><img src="img/logo1.png"></a>-->
+                <a class="navbar-brand" href="/">TAPLUKA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-<div class="banner">
-    <div class="bg-color">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!--<a class="navbar-brand" href="index.html"><img src="img/logo1.png"></a>-->
-            <a class="navbar-brand" href="/">TAPLUKA</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/"><i class="fa fa-home"></i> Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/inscription">Inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/regles">Règles</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" method="get" action="/connexion">
-                    <input class="btn btn-info" type="submit" name="Connexion" value="Connexion">
-                </form>
-            </div>
-        </nav>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/"><i class="fa fa-home"></i> Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/inscription">Inscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/regles">Règles</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0" method="get" action="/connexion">
+                        <input class="btn btn-info" type="submit" name="Connexion" value="Connexion">
+                    </form>
+                </div>
+            </nav>
+        </div>
     </div>
-</div>
+
+<% }else{ %>
+    <div class="banner">
+        <div class="bg-color">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!--<a class="navbar-brand" href="index.html"><img src="img/logo1.png"></a>-->
+                <a class="navbar-brand" href="/">TAPLUKA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/"><i class="fa fa-home"></i> Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/inscription">Inscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/regles">Règles</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0" method="post" action="/deconnexion">
+                        <input class="btn btn-info" type="submit" name="Connexion" value="Déconnexion">
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </div>
+<% } %>

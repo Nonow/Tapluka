@@ -5,16 +5,15 @@ let connection = mysql.createConnection({
     password: 'j5GGwOJHsi',
     database: 'Um177LwAqA',
     insecureAuth : true,
-});
-/*
+});/*
 let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'm1-gestionprojet',
     insecureAuth : true,
-});
-*/
+});*/
+
 connection.connect(function(err) {
     if (err) throw err;
     console.log("Connected to MySQl");
