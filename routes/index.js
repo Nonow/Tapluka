@@ -18,7 +18,7 @@ router.get('/connexion', function (req, res, next) {
 router.post('/connexion', function (req, res, next) {
     model.connect(req.body.email, req.body.passwd, function (id) {
         console.log(id)
-        if (id == 0) {
+        if (id == -1) {
             console.log("mail ou mdp incorrect")
             res.redirect("/connexion")
         } else {
