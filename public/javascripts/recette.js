@@ -21,6 +21,7 @@ $( document ).ready(function() {
             $(this).prev().val(quantity);
             console.log("ajout d'une unité");
         }
+        //on met a jour les quantites
         majQuantity(tabQuantity);
         console.log("click on ajout");
     });
@@ -53,8 +54,35 @@ $( document ).ready(function() {
             $(this).next().val(quantity);
             console.log("suppresion d'une unité");
         }
+        //on met a jour les quantites
         majQuantity(tabQuantity);
         console.log("click on remove");
+    });
+
+    //listener pour insertions clavier
+    $(".input-quantity").keyup(function() {
+        var quantity=$(this).val();
+        if(quantity!=""){
+          var idHere=$(this).attr("id");
+          var idThere;
+          if(idHere=="adult-quantity"){
+            idThere=$("#child-quantity");
+          }
+          else{
+            idThere=$("#adult-quantity");
+          }
+          //condition pour gerer le zero
+          if (quantity==0) {
+            if (idThere.val()==0){
+              $(this).val(1);
+            }
+            else{
+              $(this).val(0);
+            }
+          }
+          //on met a jour les quantites
+          majQuantity(tabQuantity);
+        }
     });
 
     console.log( "ready!" );
@@ -66,7 +94,7 @@ function majQuantity(tabQ){
   var childQuantity=$("#child-quantity").val();
   $(".quantity").each(function(index){
     accurateQuantity=tabQ[index];
-    newQuantity=(accurateQuantity*adultQuantity)+((accurateQuantity/2)*childQuantity);
+    newQuantity=(accurateQuantity*adultQuantity)+((accurateQuantity/2)*childQuantity).toFixed(2);
     $(this).text(newQuantity);
   });
 }
