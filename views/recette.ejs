@@ -19,19 +19,7 @@
 -->
 
     <div class="container-fluid p-0">
-        <% if (login != undefined){ %>
-            <% if (estFav){ %>
-                <form action="/recette/<%= idRecette%>" method="post" >
-                    <input type="hidden" name="favAction" value="remove" >
-                    <button type="submit" class="btn btn-outline-danger">Supprimer des Favoris</button>
-                </form>
-            <% }else{ %>
-                <form action="/recette/<%= idRecette%>" method="post" >
-                    <input type="hidden" name="favAction" value="add" >
-                    <button type="submit"  class="btn btn-outline-success">Ajouter des Favoris</button>
-                </form>
-            <% } %>
-        <% } %>
+
         <div class="recette-content text-center mx-auto mt-3">
             <h2 class="grd-titre"><%= recette.nom %></h2>
             <h3 class="ss-titre"><%= recette.categorie %> - <%= recette.sousCategorie %></h3>
@@ -83,7 +71,20 @@
 
 
             <div class="container conditions text-center guide-container shadow-lg p-1 p-lg-3 mb-5 bg-white rounded">
-                <div class="h4 text-center mt-5 titre-guide"> Guide de préparation</div>
+                <% if (login != undefined){ %>
+                    <% if (estFav){ %>
+                        <form action="/recette/<%= idRecette%>" method="post" >
+                            <input type="hidden" name="favAction" value="remove" >
+                            <button type="submit" class="btn btn-outline-danger">Supprimer des Favoris</button>
+                        </form>
+                    <% }else{ %>
+                        <form action="/recette/<%= idRecette%>" method="post" >
+                            <input type="hidden" name="favAction" value="add" >
+                            <button type="submit"  class="btn btn-outline-success favoris-btn">Ajouter aux Favoris <span class="favoris-star">★</span></button>
+                        </form>
+                    <% } %>
+                <% } %>
+                <div class="h4 text-center mt-4 titre-guide"> Guide de préparation</div>
                 <div class="row font-weight-bold guide-conditions">
                     <div class="col">Temps total</div>
                     <div class="col">Difficulté</div>

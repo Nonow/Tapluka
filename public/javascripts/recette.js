@@ -85,7 +85,17 @@ $( document ).ready(function() {
         }
     });
 
+    // modifier couleur étoile des favoris
+    $(".favoris-btn").hover(function(){
+        $(".favoris-star").css("color","white");
+    }, function(){
+        $(".favoris-star").css("color","yellow");
+    });
+
     console.log( "ready!" );
+
+
+
 });
 
 //fonction pour calculer et mettre à jour les quantités

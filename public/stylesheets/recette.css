@@ -62,6 +62,11 @@
     background-color:#0cb8b6;
     border-radius:50px;
 }
+/* étoile favoris */
+
+.favoris-star{
+    color:yellow;
+}
 
 /* guide de préparation */
 .titre-guide{
