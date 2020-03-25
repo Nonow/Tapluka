@@ -25,7 +25,6 @@ router.post('/connexion', function (req, res, next) {
             req.session.id_user = id;
             res.redirect("/")
         }
-
     })
 
 });
@@ -52,11 +51,7 @@ router.get('/recette', function (req, res, next) {
 });
 
 router.get('/recette/:id', function (req, res, next) {
-    model.singleRecette(req.params.id, req.session.id_user, function (status, recettes, image, ingredients, typeRecette, preparation) {
-        console.log(recettes)
-        console.log(image)
-        console.log(ingredients)
-        console.log(typeRecette)
+    model.singleRecette(req.params.id, req.session.id_user, function (status, recettes, image, ingredients, typeRecette, preparation, estFav) {
         res.render('recette', {
             login: req.session.id_user,
             title: 'recette',
@@ -64,22 +59,43 @@ router.get('/recette/:id', function (req, res, next) {
             image: image,
             ingredients: ingredients,
             typeRecette: typeRecette,
-            preparation: preparation
+            preparation: preparation,
+            estFav: estFav,
+            idRecette: req.params.id
         });
     })
 });
 
+router.post('/recette/:id', function (req, res, next) {
+    if (req.body.favAction == "add") {
+        model.addFav(req.session.id_user, req.params.id, function (status) {
+            res.redirect("/recette/" + req.params.id)
+        })
+    } else if (req.body.favAction == "remove") {
+        model.removeFav(req.session.id_user, req.params.id, function (status) {
+            res.redirect("/recette/" + req.params.id)
+        })
+    } else {
+        res.redirect("/recette/" + req.params.id)
+    }
+
+});
+
+
 router.get('/famille', function (req, res, next) {
-    if (req.session.id_user==undefined){
+    if (req.session.id_user == undefined) {
         res.redirect("/")
     }
-    model.famille(req.session.id_user, function (famille, specAlim, allSA) {
+    model.famille(req.session.id_user, function (famille, specAlim, allSA, planning,planningF) {
+        console.log(planning)
         res.render('famille', {
             login: req.session.id_user,
             title: 'famille',
             famille: famille,
             specAlim: specAlim,
-            allSA: allSA
+            allSA: allSA,
+            planning: planning,
+            planningF:planningF
         });
     })
 });

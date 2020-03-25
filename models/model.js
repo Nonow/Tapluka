@@ -36,8 +36,15 @@ class Model {
             connection.query('select * from famille_spec fs join specificationsAlimentaires sA on fs.id_spec = sA.id', (err, rows2) => {
                 if (err) throw err
                 connection.query("select * from specificationsAlimentaires", (err, rows3) => {
+                    if (err) throw err
+                    connection.query("select planning.id as idP,jour,moment,r.id,r.nom from planning join recettes r on planning.id_recette = r.id where planning.id_utilisateur = ?", [idUser], (err, rows4) => {
+                        if (err) throw err
+                        connection.query("select * from planning_famille p join familles f on f.id = p.id_famille where id_utilisateur = ?", [idUser], (err, rows5) => {
+                            if (err) throw err
+                            cb(rows, rows2, rows3, rows4, rows5)
+                        })
+                    })
 
-                    cb(rows, rows2, rows3)
                 })
 
             })
@@ -49,7 +56,7 @@ class Model {
         connection.query("insert into familles values (?,?,?,?);", [newId, idUser, data.nom, data.type], (err, rows) => {
             if (err) throw err
             var sql = "insert into famille_spec values"
-            if (data.specAlim!=undefined){
+            if (data.specAlim != undefined) {
                 for (var i = 0; i < data.specAlim.length; i++) {
                     if (i == 0) {
                         sql += "(" + newId + "," + data.specAlim[i] + ")"
@@ -61,7 +68,7 @@ class Model {
                     if (err) throw err
                     cb("OK")
                 })
-            }else {
+            } else {
                 cb("OK without specAlim")
             }
 
@@ -97,7 +104,7 @@ class Model {
                         connection.query("insert into familles values (?,?,?,?);", [newId, idUser, data.nom, data.type], (err, rows) => {
                             if (err) throw err
                             var sql = "insert into famille_spec values"
-                            if (data.specAlim!=undefined){
+                            if (data.specAlim != undefined) {
                                 for (var i = 0; i < data.specAlim.length; i++) {
                                     if (i == 0) {
                                         sql += "(" + newId + "," + data.specAlim[i] + ")"
@@ -109,7 +116,7 @@ class Model {
                                     if (err) throw err
                                     cb("OK")
                                 })
-                            }else {
+                            } else {
                                 cb("OK without specAlim")
                             }
 
@@ -151,27 +158,50 @@ class Model {
                     if (err) throw err
                     connection.query("select DISTINCT nom from recette_typeRecette rtr left join typeRecette tr on rtr.id_recette = tr.id where id_recette = ?", [idRecette], (err, rows4) => {
                         if (err) throw err
-                        connection.query("select * from preparations where id_recette = ? order by numero", [idRecette],(err,rows5)=>{
+                        connection.query("select * from preparations where id_recette = ? order by numero", [idRecette], (err, rows5) => {
                             if (err) throw err
-                            cb("OK", rows1, rows2, rows3, rows4,rows5)
+                            connection.query("select * from recette_favori where id_recette = ? and id_utilisateur = ?", [idRecette, idUser], (err, rows6) => {
+                                if (err) throw err
+                                if (rows6.length > 0) {
+                                    cb("OK", rows1, rows2, rows3, rows4, rows5, true)
+                                } else {
+                                    cb("OK", rows1, rows2, rows3, rows4, rows5, false)
+                                }
+                            })
+
 
                         })
                     })
                 })
             })
-       })
+        })
     }
 
-    static connect(mail,passwd,cb){
-        connection.query("select * from utilisateurs where mail=? and motdepasse=?",[mail,passwd],(err,rows)=>{
+    static removeFav(idUser, idRecette, cb) {
+        connection.query("delete from recette_favori where id_recette = ? and id_utilisateur = ?", [idRecette, idUser], (err, rows) => {
             if (err) throw err
-            if (rows.length > 0){
+            cb("OK")
+        })
+    }
+
+    static addFav(idUser, idRecette, cb) {
+        connection.query("insert into recette_favori values (?,?)", [idRecette, idUser], (err, rows) => {
+            if (err) throw err
+            cb("OK")
+        })
+    }
+
+    static connect(mail, passwd, cb) {
+        connection.query("select * from utilisateurs where mail=? and motdepasse=?", [mail, passwd], (err, rows) => {
+            if (err) throw err
+            if (rows.length > 0) {
                 cb(rows[0]['id'])
-            }else{
+            } else {
                 cb(-1)
             }
         })
     }
+
 }
 
 module.exports = Model
