@@ -175,7 +175,7 @@
                                         <%= loop.nom %>
                                         <form action="/famille" method="post">
                                             <input type="hidden" name="form" value="addFP">
-                                            <input type="hidden" name="idPlanning" value="<%= loop.id %>">
+                                            <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
                                             <select class="form-control" name="idFamille">
                                                 <% var loop3 = familleBis; %>
                                                 <% for (famille of loop3){ %>
