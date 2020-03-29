@@ -4,6 +4,7 @@
 
     <h4>Mon entourage</h4>
     <div class="row">
+        <% var familleBis = famille; %>
         <% for (famille of famille){ %>
             <div class="card m-1" style="width: 18rem; background-color: RGB(237, 237, 237);">
                 <div class="card-body">
@@ -108,7 +109,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row pt-3 pb-3">
                     <button type="submit" class="btn btn-outline-success offset-md-1 offset-xs-4">+ Ajouter</button>
                 </div>
@@ -116,58 +116,103 @@
             </form>
         </div>
     </div>
-
-    <h1>Mon Planning</h1>
-    <div class="row">
-
+    <h2>Mon Planning</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Petit Dejeuner</th>
+            <th scope="col">Dejeuner</th>
+            <th scope="col">Gouter</th>
+            <th scope="col">Dinner</th>
+        </tr>
+        </thead>
+        <tbody>
         <% for(var i = 0;i < 7;i++){ %>
-            <div class="col">
-                <% if(i == 0){ %>
-                    Lundi
-                <% } else if(i == 1) { %>
-                    Mardi
-                <% } else if(i == 2) { %>
-                    Mercredi
-                <% } else if(i == 3){ %>
-                    Jeudi
-                <% } else if(i == 4) { %>
-                    Vendredi
-                <% } else if(i == 5) { %>
-                    Samedi
-                <% } else { %>
-                    Dimanche
-                <% } %>
+            <tr>
+                <th scope="row">
+                    <% if(i == 0){ %>
+                        Lundi
+                    <% } else if(i == 1) { %>
+                        Mardi
+                    <% } else if(i == 2) { %>
+                        Mercredi
+                    <% } else if(i == 3){ %>
+                        Jeudi
+                    <% } else if(i == 4) { %>
+                        Vendredi
+                    <% } else if(i == 5) { %>
+                        Samedi
+                    <% } else { %>
+                        Dimanche
+                    <% } %>
+                    <% var loop4 = recetteFav; %>
+                    <form action="/famille" method="post">
+                        <input type="hidden" name="form" value="addRP">
+                        <input type="hidden" name="jour" value="<%= i+1 %>">
+
+                        <select class="form-control" name="idRecette">
+                            <% for (loop4 of loop4){ %>
+                                <option value="<%= loop4.id_recette %>"><%= loop4.nom %></option>
+                            <% } %>
+                        </select>
+                        <select class="form-control" name="moment">
+                            <option value="1">petit Dejeuner</option>
+                            <option value="2">Dejeuner</option>
+                            <option value="3">Gouter</option>
+                            <option value="4">Dinner</option>
+                        </select>
+                        <button type="submit" class="btn btn-outline-success">Ajouter</button>
+                    </form>
+                </th>
                 <% for(var j = 0;j < 4;j++){ %>
-                    <div class="row">
-                        <% if(j == 0){ %>
-                            Petit Dejeuner
-                        <% } else if(j == 1) { %>
-                            Dejeuner
-                        <% } else if(j == 2) { %>
-                            Gouter
-                        <% } else { %>
-                            Dinner
-                        <% } %>
+                    <td>
                         <% var loop = planning; %>
                         <% for (loop of loop){ %>
+                            <ul class="list-group">
+                                <% if(loop.jour == i + 1 && loop.moment == j + 1){ %>
+                                    <li class="list-group-item ">
+                                        <%= loop.nom %>
+                                        <form action="/famille" method="post">
+                                            <input type="hidden" name="form" value="addFP">
+                                            <input type="hidden" name="idPlanning" value="<%= loop.id %>">
+                                            <select class="form-control" name="idFamille">
+                                                <% var loop3 = familleBis; %>
+                                                <% for (famille of loop3){ %>
+                                                    <option value="<%= famille.id %>"><%= famille.nom %></option>
+                                                <% } %>
+                                            </select>
+                                            <button type="submit" class="btn btn-outline-success">+</button>
+                                        </form>
+                                        <form action="/famille" method="post">
+                                            <input type="hidden" name="form" value="removeRP">
+                                            <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
+                                            <button type="submit" class="btn btn-outline-danger">x</button>
+                                        </form>
+                                    </li>
+                                    <% var loop2 = planningF; %>
+                                    <% for (loop2 of loop2){ %>
+                                        <% if(loop.idP == loop2.id_planning){ %>
+                                            <li class="list-group-item">
+                                                <%= loop2.nom %>
+                                                <form action="/famille" method="post">
+                                                    <input type="hidden" name="form" value="removeFP">
+                                                    <input type="hidden" name="idPlanning" value="<%= loop2.id_planning%>">
+                                                    <input type="hidden" name="idFamille" value="<%= loop2.id_famille %>">
+                                                    <button type="submit" class="btn btn-outline-danger">x</button>
+                                                </form>
 
-                            <% if(loop.jour == i && loop.moment == j){ %>
-                                <br>
-                                <%= loop.nom %>
-                                <% var loop2 = planningF; %>
-                                <% for (loop2 of loop2){ %>
-                                    <% if(loop.idP == loop2.id_planning){ %>
-                                        <br>
-                                        <%= loop2.nom %>
+                                            </li>
+                                        <% } %>
                                     <% } %>
                                 <% } %>
-                            <% } %>
-
+                            </ul>
                         <% } %>
-                    </div>
+                    </td>
                 <% } %>
-            </div>
+            </tr>
         <% } %>
-    </div>
+        </tbody>
+    </table>
 </section>
 <% include footer %>

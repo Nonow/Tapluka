@@ -41,7 +41,11 @@ class Model {
                         if (err) throw err
                         connection.query("select * from planning_famille p join familles f on f.id = p.id_famille where id_utilisateur = ?", [idUser], (err, rows5) => {
                             if (err) throw err
-                            cb(rows, rows2, rows3, rows4, rows5)
+                            connection.query("select * from recette_favori join recettes r on recette_favori.id_recette = r.id where recette_favori.id_utilisateur = ?", [idUser], (err, rows6) => {
+                                if (err) throw err
+                                cb(rows, rows2, rows3, rows4, rows5, rows6)
+                            })
+
                         })
                     })
 
@@ -202,6 +206,49 @@ class Model {
         })
     }
 
-}
+    static addPlatPlanning(idUser, idRecette, jour, moment, cb) {
+        connection.query("insert into planning values (default, ?,?,?,?)", [jour, moment, idUser, idRecette], (err, rows) => {
+            if (err) throw err
+            cb("OK")
+        })
+    }
 
+    static removePlatPlanning(idUser, idPlanning, cb) {
+        connection.query("select * from planning where id = ? and id_utilisateur = ?", [idPlanning, idUser], (err, rows) => {
+            if (err) throw err
+            if (rows.length > 0) {
+                connection.query("delete from planning_famille where id_planning = ?", [idPlanning], (err, rows2) => {
+                    if (err) throw err
+                    connection.query("delete from planning where id = ?", [idPlanning], (err, rows3) => {
+                        if (err) throw err
+                        cb("OK")
+                    })
+                })
+            } else {
+                cb("KO")
+            }
+        })
+    }
+
+    static addFamillePlanning(idPlanning, idFamille, cb) {
+        connection.query("select * from planning_famille where id_planning = ? and id_famille = ?", [idPlanning, idFamille], (err, rows) => {
+            if (err) throw err
+            if (rows.length > 0) {
+                cb("KO")
+            } else {
+                connection.query("insert into planning_famille values (?,?)", [idPlanning, idFamille], (err, rows) => {
+                    if (err) throw err
+                    cb("OK")
+                })
+            }
+        })
+    }
+
+    static removeFamillePlanning(idPlanning, idFamille, cb) {
+        connection.query("delete from planning_famille where id_planning = ? and id_famille = ?",[idPlanning,idFamille],(err,rows)=>{
+            if (err) throw err
+            cb("OK")
+        })
+    }
+}
 module.exports = Model

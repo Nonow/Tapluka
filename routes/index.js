@@ -86,8 +86,7 @@ router.get('/famille', function (req, res, next) {
     if (req.session.id_user == undefined) {
         res.redirect("/")
     }
-    model.famille(req.session.id_user, function (famille, specAlim, allSA, planning,planningF) {
-        console.log(planning)
+    model.famille(req.session.id_user, function (famille, specAlim, allSA, planning, planningF, recetteFav) {
         res.render('famille', {
             login: req.session.id_user,
             title: 'famille',
@@ -95,7 +94,8 @@ router.get('/famille', function (req, res, next) {
             specAlim: specAlim,
             allSA: allSA,
             planning: planning,
-            planningF:planningF
+            planningF: planningF,
+            recetteFav: recetteFav
         });
     })
 });
@@ -110,6 +110,23 @@ router.post('/famille', function (req, res, next) {
         model.removeFamille(req.session.id_user, req.body.id, function (status) {
             console.log("redirection removeF");
             res.redirect('/famille')
+        })
+    } else if (req.body.form == "addRP") {
+        model.addPlatPlanning(req.session.id_user, req.body.idRecette, req.body.jour, req.body.moment, function (status) {
+            res.redirect("/famille")
+        })
+    } else if (req.body.form == "addFP") {
+        model.addFamillePlanning(req.body.idPlanning, req.body.idFamille, function (status) {
+            res.redirect("/famille")
+        })
+    } else if (req.body.form == "removeRP") {
+        model.removePlatPlanning(req.session.id_user, req.body.idPlanning, function (status) {
+            res.redirect("/famille")
+        })
+    } else if(req.body.form == "removeFP"){
+        console.log(req.body)
+        model.removeFamillePlanning(req.body.idPlanning,req.body.idFamille,function (status) {
+            res.redirect("/famille")
         })
     } else {
         res.redirect('/famille')
