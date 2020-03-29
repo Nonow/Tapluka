@@ -2,11 +2,11 @@
 <!-- mathieu -->
 <section class="container">
 
-    <h4>Mon entourage</h4>
+    <h2 class="my-4 ml-2">Mon entourage</h2>
     <div class="row">
         <% var familleBis = famille; %>
         <% for (famille of famille){ %>
-            <div class="card m-1" style="width: 18rem; background-color: RGB(237, 237, 237);">
+            <div class="card m-3" style="width: 18rem; background-color: RGB(237, 237, 237);">
                 <div class="card-body">
                     <h5 class="card-title"><%= famille.nom %></h5>
                     <% if (famille.type == 1 ){ %>
@@ -24,7 +24,7 @@
 
                         <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-4 offset-3">Modifier</a>
                     </div>
-                    <div class="row mt-3">
+                    <div class="form-row mt-3">
                         <!--Zone de specification des regime alimentaire -->
                         <a class="btn text-light col-10 offset-1" style="background-color: RGBA(12, 184, 182, 0.91);"
                            href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false"
@@ -50,7 +50,7 @@
             </div>
         <% } %>
 
-        <div class="card m-1" style="width: 18rem;">
+        <div class="card m-3" style="width: 18rem;">
             <form action="/famille" method="post">
                 <input id="form" name="form" type="hidden" value="add">
                 <div class="row pt-3">
@@ -70,7 +70,7 @@
 
                 <!-- Button trigger modal -->
                 <div class="row pt-3">
-                    <button type="button" class="btn text-light col-md-10 offset-md-1"
+                    <button type="button" class="btn btn-default text-light col-md-10 offset-md-1"
                             style="background-color: RGBA(12, 184, 182, 0.91);" data-toggle="modal"
                             data-target="#exampleModal">
                         Spécification alimentaire
@@ -116,7 +116,7 @@
             </form>
         </div>
     </div>
-    <h2>Mon Planning</h2>
+    <h2 class="my-4 ml-2">Mon Planning</h2>
     <table class="table">
         <thead>
         <tr>
