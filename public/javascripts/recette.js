@@ -9,6 +9,11 @@ $( document ).ready(function() {
     tabQuantity.push(parseFloat($(this).text()));
   });
 
+  var tabPreparation=[];
+  $(".preparation").each(function(){
+    tabPreparation.push($(this).text());
+  });
+
   //listener pour ajouter une personne
     $( ".btn-add" ).click(function() {
         var quantity=$(this).prev().val();
@@ -92,6 +97,40 @@ $( document ).ready(function() {
         $(".favoris-star").css("color","yellow");
     });
 
+    //Traitement checkbox Thermomix
+    $("#thermomix").click(function(){
+      if( $(this).is(':checked') ){
+        $(".preparation").each(function(){
+          if(stringMatch($(this).text(),"pétrir") || stringMatch($(this).text(),"malaxer")){
+            $(this).text("Pétrir ou malaxer en utilisant la fonction épi du thermomix");
+            $(this).css("color","green");
+          }
+          if(stringMatch($(this).text(),"fouetter") || stringMatch($(this).text(),"battre")){
+            $(this).text("Fouetter ou battre en insérant le fouet avec des vitesses inférieur à 4");
+            $(this).css("color","green");
+          }
+          if(stringMatch($(this).text(),"mélanger")){
+            $(this).text("Pour mélanger tout-en-un : 30 à 45 sec/Vitesse3 - Pour ingrédients liquide 20 sec/Vitesse 5 puis ingrédient sec 20 sec/Vitesse3 - Pour de la pâte 50 sec/Vitesse 4");
+            $(this).css("color","green");
+          }
+          if(stringMatch($(this).text(),"fondre") || stringMatch($(this).text(),"fusionner")){
+            $(this).text("Pour chocolat noir/au lait 5min à 50°C vitesse 1 - Pour chocolat blanc 4 min à 45 °C vitesse 1 - Pour du beurre 3min/55°C/Vitesse 2");
+            $(this).css("color","green");
+          }
+          if(stringMatch($(this).text(),"hacher") || stringMatch($(this).text(),"râper") || stringMatch($(this).text(),"broyer")){
+            $(this).text("Hacher, râper ou broyer en mettant vitesses turbo,10 ou 9 quelques secondes jusqu'à obtenir le résultat souhaité");
+            $(this).css("color","green");
+          }
+        });
+      }
+      else if($(this).is(':checked')==false){
+        $(".preparation").css("color","black");
+        $(".preparation").each(function(index){
+          $(this).text(tabPreparation[index]);
+        });
+      }
+    });
+
     console.log( "ready!" );
 
 
@@ -104,7 +143,24 @@ function majQuantity(tabQ){
   var childQuantity=$("#child-quantity").val();
   $(".quantity").each(function(index){
     accurateQuantity=tabQ[index];
-    newQuantity=(accurateQuantity*adultQuantity)+((accurateQuantity/2)*childQuantity).toFixed(2);
+    newQuantity=(accurateQuantity*adultQuantity)+((accurateQuantity/2)*childQuantity);
+    if(Number.isInteger(newQuantity)==false){
+      newQuantity=newQuantity.toFixed(2);
+    }
     $(this).text(newQuantity);
   });
+}
+
+//fonction pour tester si un mots est dans une string
+function stringMatch(str1,str2){
+  var str2bis=str2.charAt(0).toUpperCase() + str2.slice(1) //première lettre en maj
+  if(str1.indexOf(str2)!=-1){
+    return true;
+  }
+  else if(str1.indexOf(str2bis)!=-1){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
