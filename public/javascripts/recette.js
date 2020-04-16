@@ -1,13 +1,14 @@
 $( document ).ready(function() {
   //valeur quantite selecteur initial
-  $("#adult-quantity").val(1);
-  $("#child-quantity").val(0);
+
 
   //valeur quantite initial pour un adulte
   var tabQuantity=[];
   $(".quantity").each(function(){
     tabQuantity.push(parseFloat($(this).text()));
   });
+
+  majQuantity(tabQuantity)
 
   var tabPreparation=[];
   $(".preparation").each(function(){

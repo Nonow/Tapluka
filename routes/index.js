@@ -51,6 +51,14 @@ router.get('/recette', function (req, res, next) {
 });
 
 router.get('/recette/:id', function (req, res, next) {
+    console.log(req.query)
+    console.log(req.query.nbAdulte)
+    console.log(req.query.nbEnfant)
+    nbEnfant = req.query.nbEnfant
+    nbAdulte = req.query.nbAdulte
+    if (nbAdulte == 0) {
+        nbAdulte = 1;
+    }
     model.singleRecette(req.params.id, req.session.id_user, function (status, recettes, image, ingredients, typeRecette, preparation, estFav) {
         res.render('recette', {
             login: req.session.id_user,
@@ -61,12 +69,15 @@ router.get('/recette/:id', function (req, res, next) {
             typeRecette: typeRecette,
             preparation: preparation,
             estFav: estFav,
-            idRecette: req.params.id
+            idRecette: req.params.id,
+            nbEnfant: nbEnfant,
+            nbAdulte: nbAdulte
         });
     })
 });
 
 router.post('/recette/:id', function (req, res, next) {
+
     if (req.body.favAction == "add") {
         model.addFav(req.session.id_user, req.params.id, function (status) {
             res.redirect("/recette/" + req.params.id)
@@ -123,9 +134,9 @@ router.post('/famille', function (req, res, next) {
         model.removePlatPlanning(req.session.id_user, req.body.idPlanning, function (status) {
             res.redirect("/famille")
         })
-    } else if(req.body.form == "removeFP"){
+    } else if (req.body.form == "removeFP") {
         console.log(req.body)
-        model.removeFamillePlanning(req.body.idPlanning,req.body.idFamille,function (status) {
+        model.removeFamillePlanning(req.body.idPlanning, req.body.idFamille, function (status) {
             res.redirect("/famille")
         })
     } else {
