@@ -1,85 +1,179 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<!-- Page principale (page d'accueil-->
+<html lang="fr"> 
 <head>
-    <meta charset="utf-8">
-    <title>TAPLUKA | Accueil</title>
-    <link rel="shortcut icon" href="./img/favicon.png">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway">
+	<!-- Encodage de la page (accents, caractère spéciaux) -->
+	<meta charset="utf-8">	
+	<!-- Titre de la page-->
+	<title> TAPLUKA </title> 
+	<!-- Liens et scipts pour le bon fonctionnement de la page-->	 <link rel="shortcut icon" href="/images/favicon.png">
+	 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/css.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/css_entete.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/css_footer.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.11.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-</head>
 
-<body>
-<% if (login == undefined){ %>
-    <div class="banner">
-        <div class="bg-color">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <!--<a class="navbar-brand" href="index.html"><img src="img/logo1.png"></a>-->
-                <a class="navbar-brand" href="/">TAPLUKA</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+	<style>
+		body{
+            background-color: rgb(242, 242, 242);
+            overflow-x:none !important;
+        }
+        h6{
+        	color:black;
+        }
+        .navbar{
+            background-color: white;
+        }
+        .nav-item{
+        	padding-top: 10px;
+        }
+        #nav-link1:hover{
+            color:black;
+        }
+        #nav-link2:hover{
+            color:black;
+        }
+        #nav-link3:hover{
+            color:black;
+        }
+        .login-container{
+			padding-top: 17px;
+		}
+		#tapluka{
+			padding-top: 0px;
+			color: black;
+			font-size: 120%;
+		}
+		#corps{
+			padding-top:4.5%;
+		}
+		#div-message{
+			background-color: white !important;
+			padding-bottom: 14.4%;
+		}
+		#div-img{
+			margin-right: -1.2%;
+		}
+		#div-bienvenue{
+			padding-top: 25%;
+		}
+	
+		#imgBack1{
+			padding-bottom: 32%;
+			background-image: url("/images/img/img6.PNG");
+			background-repeat:no-repeat;
+			background-position: center;
+		}
+		#imgBack2{
+			padding-bottom: 32%;
+			background-image: url("/images/img/img5.PNG");
+			background-repeat:no-repeat;
+			background-position: center;
 
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/"><i class="fa fa-home"></i> Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/inscription">Inscription</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/regles">Règles</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0" method="get" action="/connexion">
-                        <input class="btn btn-info" type="submit" name="Connexion" value="Connexion">
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </div>
+		}
+		#imgBack3{
+			padding-bottom:32%;
+			background-image: url("/images/img/img17.JPG");
+			background-repeat:no-repeat;
+			background-position: center;
+		}
+		#imgBack4{
+			padding-bottom: 32%;
+			background-image: url("/images/img/img9.PNG");
+			background-repeat:no-repeat;
+			background-position: center;
 
-<% }else{ %>
-    <div class="banner">
-        <div class="bg-color">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <!--<a class="navbar-brand" href="index.html"><img src="img/logo1.png"></a>-->
-                <a class="navbar-brand" href="/">TAPLUKA</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+		}
 
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/"><i class="fa fa-home"></i> Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/inscription">Inscription</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/regles">Règles</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0" method="post" action="/deconnexion">
-                        <input class="btn btn-info" type="submit" name="Connexion" value="Déconnexion">
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </div>
-<% } %>
+		#imgBack5{
+			padding-bottom: 32%;
+			background-image: url("/images/img/img15.PNG");
+			background-repeat:no-repeat;
+			background-position: center;
+
+		}
+		#imgBack6{
+			padding-bottom:32%;
+			background-image: url("/images/img/img16.PNG");
+			background-repeat:no-repeat;	
+			background-position: center;
+		}
+		.white-div{
+			background-color: white;
+			position: relative;
+			bottom: 20px;
+  			left: 0%;
+  			padding: 20px;
+		}
+		.content-white-div{
+			font-size: 180%;
+  			font-weight: 600;	
+  		}
+  		#footer{
+  			background-color: lightgrey;
+  			opacity: 0.7;
+  			position:fixed;
+			bottom:0;
+			right: 0;
+			left:0	;
+
+  		}
+
+  		
+	</style>
+	<script >
+            
+	</script>
+</head> 
+<body> 
+	<!-- Barre de navigation en haut-->
+	<nav class="navbar navbar-inverse navbar-fixed-top" >
+		<div class="container-fluid">
+			<!-- Au rétraicissement de la page on regroupe les champs de la barre de navigation en un block pour le design-->
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul  class="nav navbar-nav">
+					<li id="tapluka"><a href="/"><h6 id="tapluka">TAPLUKA</h6></a></li>
+					<li class="nav-item" id="supp"><a id="nav-link1" href="/"><i class="fa fa-home"></i> Accueil</a></li>
+					<li class="nav-item" id="insc"><a id="nav-link2" href="/inscription">S'inscrire</a></li>
+					<li class="nav-item" id="deco"><a id="nav-link3" href="/regles">Règles</a></li>
+			<% if (login == undefined){ %>
+				</ul>
+				<ul class="nav navbar-nav pull-right">
+					<li><div class="form-inline login-container ">
+						<form id="myForm" action="/connexion" method="post">
+						 	<input class="form-control" type="email" placeholder="Email" name="email">
+							<input class="form-control" type="password" placeholder="Mot de passe" name="passwd">
+							<button type="submit" class="btn btn-default">Se Connecter</button>
+						</form>
+						<div id="message" class=""></div>
+					</div>
+					</li>
+				</ul>
+			<% }else{ %>
+				</ul>
+				<ul class="nav navbar-nav pull-right">
+					<li><div class="form-inline login-container ">
+                <form id="myForm" method="post" action="/deconnexion">
+                    <input class="btn btn-default" type="submit" name="Connexion" value="Déconnexion">
+						</form>
+						<div id="message" class=""></div>
+					</div>
+					</li>
+				</ul>
+			<% } %>
+			</div>
+		</div>
+	</nav>
+	
+
