@@ -149,7 +149,7 @@
                     <% var loop4 = recetteFav; %>
                     <form action="/famille" method="post">
                         <input type="hidden" name="form" value="addRP">
-                        <input type="hidden" name="jour" value="<%= i+1 %>">
+                        <input type="hidden" name="jour" value="<%= i + 1 %>">
 
                         <select class="form-control" name="idRecette">
                             <% for (loop4 of loop4){ %>
@@ -191,20 +191,34 @@
                                         </form>
                                     </li>
                                     <% var loop2 = planningF; %>
+                                    <% var nbEnfant = 0; %>
+                                    <% var nbAdulte = 0; %>
                                     <% for (loop2 of loop2){ %>
                                         <% if(loop.idP == loop2.id_planning){ %>
+                                            <% if (loop2.type == 1) {
+                                                nbEnfant++;
+                                            } else {
+                                                nbAdulte++;
+                                            } %>
                                             <li class="list-group-item">
                                                 <%= loop2.nom %>
                                                 <form action="/famille" method="post">
                                                     <input type="hidden" name="form" value="removeFP">
-                                                    <input type="hidden" name="idPlanning" value="<%= loop2.id_planning%>">
-                                                    <input type="hidden" name="idFamille" value="<%= loop2.id_famille %>">
+                                                    <input type="hidden" name="idPlanning"
+                                                           value="<%= loop2.id_planning %>">
+                                                    <input type="hidden" name="idFamille"
+                                                           value="<%= loop2.id_famille %>">
                                                     <button type="submit" class="btn btn-outline-danger">x</button>
                                                 </form>
 
                                             </li>
                                         <% } %>
                                     <% } %>
+                                    <form action="/recette/<%= loop.id %>">
+                                        <input type="hidden" name="nbAdulte" value="<%= nbAdulte %>">
+                                        <input type="hidden" name="nbEnfant" value="<%= nbEnfant %>">
+                                        <button type="submit">Voir la recette</button>
+                                    </form>
                                 <% } %>
                             </ul>
                         <% } %>
