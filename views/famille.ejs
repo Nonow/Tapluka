@@ -179,7 +179,7 @@
                                   <label for="select-plat-<%= i %>"> Quel plat ?</label>
                                   <select id="select-plat-<%= i %>" class="form-control" name="idRecette">
                                       <% for (loop4 of loop4){ %>
-                                          <option value="<%= loop4.id_recette %>"><%= loop4.nom %></option>
+                                          <option value="<%= loop4.id_recette %>"> <%= loop4.nom %> </option>
                                       <% } %>
                                   </select>
                                 </div>
@@ -204,11 +204,21 @@
                     <td class="col-3">
                         <% var loop = planning; %>
                         <% for (loop of loop){ %>
-                            <div class="container mb-1 bg-light">
+                            <div class="container mb-2 bg-light">
                                 <% if(loop.jour == i + 1 && loop.moment == j + 1){ %>
-                                    <!-- Affichage recette du jour dans planing -->
-                                    <div class="bg-light border-0 pt-1">
-                                        <h5 class="mb-3"><%= loop.nom %></h5>
+                                      <!-- Affichage recette du jour dans planing -->
+                                      <div class="bg-light border-0 pt-2">
+                                        <!-- Formulaire suppresion plat -->
+                                        <form action="/famille" method="post">
+                                            <input type="hidden" name="form" value="removeRP">
+                                            <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
+                                            <!-- Croix pour suppresion -->
+                                            <button id="btn-close-plat" type="submit" class="close" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </form>
+                                        <!-- Nom du plat -->
+                                        <h5 class="mb-3 pr-3"><%= loop.nom %></h5>
                                         <!-- Formulaire ajout personne repas -->
                                         <h6>Prevoir pour</h6>
                                         <form action="/famille" method="post" class="row">
@@ -222,13 +232,12 @@
                                                   <% } %>
                                               </select>
                                             </div>
-                                            <button type="submit" class="btn btn-outline-success col-2"> + </button>
-                                        </form>
-                                        <form action="/famille" method="post">
-                                            <input type="hidden" name="form" value="removeRP">
-                                            <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
-                                            <button type="submit" style="color: #C4151C; font-size: 50px; line-height: 0; margin-top: -75%" class="close" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
+                                            <button type="submit" class="col-2 btn">
+                                              <svg class="bi bi-plus-square btn-outline-success" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
+                                              </svg>
                                             </button>
                                         </form>
                                     </div>
@@ -268,7 +277,7 @@
                                       </ul>
                                     </div>
                                     <!-- Button voir la recette -->
-                                    <form action="/recette/<%= loop.id %>" method="get" class="bg-light text-center pt-1">
+                                    <form action="/recette/<%= loop.id %>" method="get" class="bg-light text-center pt-1 pb-1">
                                         <input type="hidden" name="nbAdulte" value="<%= nbAdulte %>">
                                         <input type="hidden" name="nbEnfant" value="<%= nbEnfant %>">
                                         <button type="submit" class="btn btn-info mb-2"> Voir la recette </button>
