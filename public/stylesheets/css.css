@@ -59,5 +59,30 @@ footer h6{
   line-height: 0;
   position: absolute;
   right: 16px;
-  padding-top: 8px;
+  padding-top: 10px;
+  z-index: 999;
+}
+
+.bg-plat-planing{
+
+background-image: url("https://www.krampouz.com/actualites/wp-content/uploads/2016/03/56-93.jpg");
+
+height: 100%;
+width: 100%;
+
+opacity: 0.5;
+
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+.nom-plat-planing{
+opacity: 0.8;
+background-color: white;
+padding: 5px !important;
+}
+
+.nom-plat-planing h6{
+  opacity: 1;
 }
