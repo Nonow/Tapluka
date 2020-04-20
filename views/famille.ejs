@@ -135,7 +135,7 @@
       Mon Planning
     </h2>
     <!-- Tableau du planing -->
-    <table class="table table-striped  table-borderless">
+    <table class="table table-striped  table-borderless shadow-sm">
         <!-- Entete du tableau -->
         <thead class="thead-light">
           <tr>
@@ -207,7 +207,7 @@
                             <div class="mb-2 bg-light shadow rounded">
                                 <% if(loop.jour == i + 1 && loop.moment == j + 1){ %>
                                       <!-- Affichage recette du jour dans planing -->
-                                      <div class=" border-0 mt-2 h-100">
+                                      <div class=" border-0 mt-2">
                                         <!-- Formulaire suppresion plat -->
                                         <form action="/famille" method="post">
                                             <input type="hidden" name="form" value="removeRP">
@@ -218,9 +218,9 @@
                                             </button>
                                         </form>
                                         <!-- Nom du plat et iamge du plat -->
-                                        <div class="pb-3 p-3 mb-2 h-100 bg-plat-planing rounded-top">
+                                        <div class="pt-5 pb-5 pl-3 pr-3 mb-2 bg-plat-planing rounded-top">
                                           <div class="nom-plat-planing">
-                                            <h5 class="text-center"><%= loop.nom %></h5>
+                                            <h5 class="text-center pt-1"><%= loop.nom %></h5>
                                           </div>
                                         </div>
                                         <div class="ml-2">
@@ -261,7 +261,7 @@
                                               } else {
                                                   nbAdulte++;
                                               } %>
-                                                <li class="list-group-item border-0 bg-light">
+                                                <li class="list-group-item border-0 bg-light p-0">
                                                   <!-- Formulaire pour supprimer une personne prevue pour un repas -->
                                                   <form action="/famille" method="post">
                                                       <input type="hidden" name="form" value="removeFP">
@@ -270,7 +270,7 @@
                                                       <!-- Button supprimer une personne du repas -->
                                                       <button type="button" style="color: #C4151C; font-size: 40px; line-height: 0" class="btn" aria-label="Close">
                                                         <!-- Icon - encerclée -->
-                                                        <svg class="bi bi-dash-circle" width="25px" height="25px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <svg class="bi bi-dash-circle btn-outline-danger rounded" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                           <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
                                                           <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
                                                         </svg>
