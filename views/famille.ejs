@@ -217,12 +217,11 @@
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                         </form>
-                                        <!-- Nom du plat et iamge du plat -->
-                                        <div class="pt-5 pb-5 pl-3 pr-3 mb-2 bg-plat-planing rounded-top">
-                                          <div class="nom-plat-planing">
+                                         <!-- Nom du plat -->
+                                         <div class="container border-bottom mb-2 pr-4 pl-4">
                                             <h5 class="text-center pt-1"><%= loop.nom %></h5>
-                                          </div>
-                                        </div>
+                                         </div>
+
                                         <div class="ml-2">
                                           <!-- Formulaire ajout personne repas -->
                                           <h6>Prevoir pour</h6>
@@ -268,7 +267,7 @@
                                                       <input type="hidden" name="idPlanning" value="<%= loop2.id_planning %>">
                                                       <input type="hidden" name="idFamille" value="<%= loop2.id_famille %>">
                                                       <!-- Button supprimer une personne du repas -->
-                                                      <button type="button" style="color: #C4151C; font-size: 40px; line-height: 0" class="btn" aria-label="Close">
+                                                      <button type="submit" style="color: #C4151C; font-size: 40px; line-height: 0" class="btn" aria-label="Close">
                                                         <!-- Icon - encerclée -->
                                                         <svg class="bi bi-dash-circle btn-outline-danger rounded" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                           <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
