@@ -62,3 +62,12 @@ footer h6{
   padding-top: 10px;
   z-index: 999;
 }
+
+.btn-add-pers-plat {
+  margin-left: -5%;
+  margin-top: -6%;
+}
+
+.btn-popup-plat{
+  margin-top: auto;
+}

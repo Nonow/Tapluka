@@ -157,8 +157,8 @@
                     <%= jour  %>
                     <h6><% var loop4 = recetteFav; %></h6>
                     <!-- Button + qui active modal pop-up ajout nouveaux plats -->
-                    <button style="color:grey;" type="button" name="btn-add-plat" class="btn" data-toggle="modal" data-target="#popup-add-plat-<%= i %>">
-                      <svg class="bi bi-plus-circle" width="40px" height="40px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <button type="button" name="btn-add-plat" class="btn btn-popup-plat" data-toggle="modal" data-target="#popup-add-plat-<%= i %>">
+                      <svg style="color: grey;" class="bi bi-plus-circle btn-outline-secondary rounded" width="40px" height="40px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
@@ -223,20 +223,21 @@
                                          </div>
 
                                         <div class="ml-2">
-                                          <!-- Formulaire ajout personne repas -->
+                                          <!-- Formulaire ajout personne plat -->
                                           <h6>Prevoir pour</h6>
                                           <form action="/famille" method="post" class="row">
                                               <input type="hidden" name="form" value="addFP">
                                               <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
                                               <div class="form-group col-9">
-                                                <select class="form-control" name="idFamille">
+                                                <select class="browser-default custom-select" name="idFamille">
                                                     <% var loop3 = familleBis; %>
                                                     <% for (famille of loop3){ %>
                                                         <option value="<%= famille.id %>"><%= famille.nom %></option>
                                                     <% } %>
                                                 </select>
                                               </div>
-                                              <button type="submit" class="col-2 btn">
+                                              <!-- Button ajouter qqn au plat -->
+                                              <button type="submit" class="col-2 btn btn-add-pers-plat">
                                                 <svg class="bi bi-plus-square btn-outline-success" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                   <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                                                   <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
@@ -279,10 +280,14 @@
                                                 </li>
                                           <% } %>
                                       <% } %>
+                                      <!-- Si personne n'est prevu on affiche le message suivant -->
+                                      <% if (nbEnfant == 0 && nbAdulte == 0){ %>
+                                        <span class="text-center font-italic"> personne </span>
+                                      <% }%>
                                       </ul>
                                     </div>
                                     <!-- Button voir la recette -->
-                                    <form action="/recette/<%= loop.id %>" method="get" class="bg-light text-center pt-1 pb-1 rounded-bottom">
+                                    <form action="/recette/<%= loop.id %>" method="get" class="bg-light text-center pt-2 pb-1 rounded-bottom">
                                         <input type="hidden" name="nbAdulte" value="<%= nbAdulte %>">
                                         <input type="hidden" name="nbEnfant" value="<%= nbEnfant %>">
                                         <button type="submit" class="btn btn-info mb-2"> Voir la recette </button>
