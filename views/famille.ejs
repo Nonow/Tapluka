@@ -148,28 +148,16 @@
         </thead>
         <!-- Corps du tableau -->
         <tbody>
-        <% for(var i = 0;i < 7;i++){ %>
+        <!-- Affichage du tableau -->
+        <% var semaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']; %>
+        <% semaine.forEach((jour, i) => { %>
             <tr>
                 <!-- Premiere colonne du tableau -->
                 <th scope="row">
-                    <% if(i == 0){ %>
-                        Lundi
-                    <% } else if(i == 1) { %>
-                        Mardi
-                    <% } else if(i == 2) { %>
-                        Mercredi
-                    <% } else if(i == 3){ %>
-                        Jeudi
-                    <% } else if(i == 4) { %>
-                        Vendredi
-                    <% } else if(i == 5) { %>
-                        Samedi
-                    <% } else { %>
-                        Dimanche
-                    <% } %>
+                    <%= jour  %>
                     <h6><% var loop4 = recetteFav; %></h6>
                     <!-- Button + qui active modal pop-up ajout nouveaux plats -->
-                    <button type="button" name="btn-add-plat" class="btn btn-light" data-toggle="modal" data-target="#popup-add-plat">
+                    <button type="button" name="btn-add-plat" class="btn btn-light" data-toggle="modal" data-target="#popup-add-plat-<%= i %>">
                       <svg class="bi bi-plus-circle" width="40px" height="40px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
@@ -177,8 +165,9 @@
                       </svg>
                     </button>
                     <!-- Formulaires ajout nouveaux plats -->
-                    <div id="popup-add-plat" class="modal fade" role="dialog">
+                    <div id="popup-add-plat-<%= i %>" class="modal fade" role="dialog">
                       <div class="modal-dialog bg-light p-4">
+                        <h5>Choisisez votre plat pour le <%= jour %> </h5>
                         <form action="/famille" method="post">
                             <input type="hidden" name="form" value="addRP">
                             <input type="hidden" name="jour" value="<%= i + 1 %>">
@@ -274,7 +263,7 @@
                     </td>
                 <% } %>
             </tr>
-        <% } %>
+        <%    }); %>
         </tbody>
     </table>
 </section>
