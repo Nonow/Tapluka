@@ -1,7 +1,7 @@
 <% include header %>
 <!-- mathieu -->
 <section class="container">
-
+    <!-- Affichage de l'entourage -->
     <h2 class="my-4 ml-2">
       <svg class="bi bi-person-lines-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
@@ -11,8 +11,8 @@
     <div class="row">
         <% var familleBis = famille; %>
         <% for (famille of famille){ %>
-            <div class="card m-3" style="width: 18rem; background-color: RGB(237, 237, 237);">
-                <div class="card-body">
+            <div class="card border-0 col-4 mb-4">
+                <div class="card-body shadow-sm bg-light">
                     <h5 class="card-title"><%= famille.nom %></h5>
                     <% if (famille.type == 1 ){ %>
                         <h6 class="card-subtitle mb-2 text-muted">Enfant</h6>
@@ -26,28 +26,25 @@
                             <input id="id" name="id" type="hidden" value="<%= famille.id %>">
                             <button type="submit" class="btn btn-outline-danger">Supprimer</button>
                         </form>
-
                         <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-4 offset-3">Modifier</a>
                     </div>
-                    <div class="form-row mt-3">
-                        <!--Zone de specification des regime alimentaire -->
-                        <a class="btn text-light col-10 offset-1" style="background-color: RGBA(12, 184, 182, 0.91);"
-                           href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false"
-                           aria-controls="collapsespec">Spécification alimentaire<i
-                                    class="fas fa-angle-down rotate-icon pl-2"></i></a>
-
+                    <div class="row mt-3">
+                        <!-- Button Drop down de specification -->
+                        <a class="btn btn-info col-10 offset-1" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">
+                          Spécification alimentaire
+                        <i class="fas fa-angle-down rotate-icon pl-2"></i></a>
+                        <!-- Drop down de specification des regime alimentaire -->
                         <ul id="collapsespec_<%= famille.nom %>"
-                            class="collapse list-group list-group-flush mt-3 offset-1">
+                            class="collapse list-group list-group mt-3 offset-1">
                             <% var loop = specAlim; %>
                             <% var i = 0; %>
                             <% for (loop of loop){ %>
                                 <% if (famille.id == loop.id_famille ){ %>
-                                    <li class="list-group-item"
-                                        style="background-color: RGB(250, 230, 230);"><%= loop.nom %></li>
+                                    <li class="list-group-item"><%= loop.nom %></li>
                                 <% i++;} %>
                             <% } %>
                             <% if (i == 0) { %>
-                                <p>Pas de spécification alimentaire</p>
+                                <span class="text-center font-italic">Pas de spécification alimentaire</span>
                             <% } %>
                         </ul>
                     </div>
@@ -55,33 +52,33 @@
             </div>
         <% } %>
 
-        <div class="card m-3" style="width: 18rem;">
+        <!-- Formulaires pour nouveau membre -->
+        <div class="card border-0 col-4 mb-4">
+          <div class="card-body shadow-sm bg-light">
             <form action="/famille" method="post">
+                <h5>Un nouveau membre ?</h5>
+                <h6>Ajouter le en 3 clic !</h6>
                 <input id="form" name="form" type="hidden" value="add">
-                <div class="row pt-3">
+                <div class="form-group">
                     <input type="text" id="Nom" name="nom" placeholder="Prénom" class="col-md-8 offset-md-1 rounded"
                            required>
                 </div>
-                <div class="row pt-3">
-                    <div class="form-check form-check-inline offset-md-1">
+                <div class="form-group">
+                    <div class="form-check-inline offset-md-1">
                         <input class="form-check-input" type="radio" name="type" id="ageChoixAdulte" value="0" checked>
                         <label class="form-check-label" for="ageChoixAdulte">Adulte</label>
                     </div>
-                    <div class="form-check form-check-inline offset-md-1">
+                    <div class=" form-check-inline offset-md-1">
                         <input class="form-check-input" type="radio" name="type" id="ageChoixEnfant" value="1">
                         <label class="form-check-label" for="ageChoixEnfant">Enfant</label>
                     </div>
                 </div>
-
                 <!-- Button trigger modal -->
-                <div class="row pt-3">
-                    <button type="button" class="btn btn-default text-light col-md-10 offset-md-1"
-                            style="background-color: RGBA(12, 184, 182, 0.91);" data-toggle="modal"
-                            data-target="#exampleModal">
+                <div class="row">
+                    <button type="button" class="btn btn-info col-md-10 offset-md-1" data-toggle="modal" data-target="#exampleModal">
                         Spécification alimentaire
                     </button>
                 </div>
-
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -120,6 +117,7 @@
 
             </form>
         </div>
+      </div>
     </div>
 
     <!-- Debut du planing -->
