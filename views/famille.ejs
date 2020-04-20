@@ -157,7 +157,7 @@
                     <%= jour  %>
                     <h6><% var loop4 = recetteFav; %></h6>
                     <!-- Button + qui active modal pop-up ajout nouveaux plats -->
-                    <button type="button" name="btn-add-plat" class="btn btn-light" data-toggle="modal" data-target="#popup-add-plat-<%= i %>">
+                    <button style="color:grey;" type="button" name="btn-add-plat" class="btn" data-toggle="modal" data-target="#popup-add-plat-<%= i %>">
                       <svg class="bi bi-plus-circle" width="40px" height="40px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
@@ -166,25 +166,36 @@
                     </button>
                     <!-- Formulaires ajout nouveaux plats -->
                     <div id="popup-add-plat-<%= i %>" class="modal fade" role="dialog">
-                      <div class="modal-dialog bg-light p-4">
-                        <h5>Choisisez votre plat pour le <%= jour %> </h5>
-                        <form action="/famille" method="post">
-                            <input type="hidden" name="form" value="addRP">
-                            <input type="hidden" name="jour" value="<%= i + 1 %>">
-
-                            <select class="form-control" name="idRecette">
-                                <% for (loop4 of loop4){ %>
-                                    <option value="<%= loop4.id_recette %>"><%= loop4.nom %></option>
-                                <% } %>
-                            </select>
-                            <select class="form-control" name="moment">
-                                <option value="1">petit Dejeuner</option>
-                                <option value="2">Dejeuner</option>
-                                <option value="3">Gouter</option>
-                                <option value="4">Dinner</option>
-                            </select>
-                            <button type="submit" class="btn btn-outline-success">Ajouter</button>
-                        </form>
+                      <div class="modal-dialog">
+                        <div class="modal-content bg-light p-4">
+                          <div class="modal-header">
+                            <h5>Choisisez votre plat pour le <%= jour %> </h5>
+                          </div>
+                          <div class="modal-body">
+                            <form action="/famille" method="post">
+                                <input type="hidden" name="form" value="addRP">
+                                <input type="hidden" name="jour" value="<%= i + 1 %>">
+                                <div class="form-group">
+                                  <label for="select-plat-<%= i %>"> Quel plat ?</label>
+                                  <select id="select-plat-<%= i %>" class="form-control" name="idRecette">
+                                      <% for (loop4 of loop4){ %>
+                                          <option value="<%= loop4.id_recette %>"><%= loop4.nom %></option>
+                                      <% } %>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="select-mm-<%= i %>"> Quel moment ? </label>
+                                  <select id="select-mm-<%= i %>" class="form-control" name="moment">
+                                      <option value="1">petit Dejeuner</option>
+                                      <option value="2">Dejeuner</option>
+                                      <option value="3">Gouter</option>
+                                      <option value="4">Dinner</option>
+                                  </select>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success"> Ajouter </button>
+                            </form>
+                          </div>
+                        </div>
                       </div>
                     </div>
                 </th>
@@ -193,23 +204,25 @@
                     <td class="col-3">
                         <% var loop = planning; %>
                         <% for (loop of loop){ %>
-                            <ul class="list-group">
+                            <div class="container mb-1 bg-light">
                                 <% if(loop.jour == i + 1 && loop.moment == j + 1){ %>
                                     <!-- Affichage recette du jour dans planing -->
-                                    <li class="list-group-item bg-light border-0">
+                                    <div class="bg-light border-0 pt-1">
                                         <h5 class="mb-3"><%= loop.nom %></h5>
                                         <!-- Formulaire ajout personne repas -->
-                                        <h6>Prévue pour</h6>
-                                        <form action="/famille" method="post">
+                                        <h6>Prevoir pour</h6>
+                                        <form action="/famille" method="post" class="row">
                                             <input type="hidden" name="form" value="addFP">
                                             <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
-                                            <select class="form-control" name="idFamille">
-                                                <% var loop3 = familleBis; %>
-                                                <% for (famille of loop3){ %>
-                                                    <option value="<%= famille.id %>"><%= famille.nom %></option>
-                                                <% } %>
-                                            </select>
-                                            <button type="submit" class="btn btn-outline-success"> Ajouter    </button>
+                                            <div class="form-group col-9 ml-1">
+                                              <select class="form-control col-12" name="idFamille">
+                                                  <% var loop3 = familleBis; %>
+                                                  <% for (famille of loop3){ %>
+                                                      <option value="<%= famille.id %>"><%= famille.nom %></option>
+                                                  <% } %>
+                                              </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-outline-success col-2"> + </button>
                                         </form>
                                         <form action="/famille" method="post">
                                             <input type="hidden" name="form" value="removeRP">
@@ -218,52 +231,56 @@
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                         </form>
-                                    </li>
+                                    </div>
                                     <% var loop2 = planningF; %>
                                     <% var nbEnfant = 0; %>
                                     <% var nbAdulte = 0; %>
-                                    <% for (loop2 of loop2){ %>
-                                        <% if(loop.idP == loop2.id_planning){ %>
-                                            <% if (loop2.type == 1) {
-                                                nbEnfant++;
-                                            } else {
-                                                nbAdulte++;
-                                            } %>
-                                            <!-- Liste des personnes prevus pour le repas -->
-                                            <li class="list-group-item bg-light border-0">
-                                                <span class=""><%= loop2.nom %></span>
-                                                <form action="/famille" method="post">
-                                                    <input type="hidden" name="form" value="removeFP">
-                                                    <input type="hidden" name="idPlanning"
-                                                           value="<%= loop2.id_planning %>">
-                                                    <input type="hidden" name="idFamille"
-                                                           value="<%= loop2.id_famille %>">
-                                                    <!-- Button supprimer une personne du repas -->
-                                                    <button type="submit" style="color: #C4151C; font-size: 40px; line-height: 0" class="close float-left" aria-label="Close">
-                                                      <!-- Icon - encerclée -->
-                                                      <svg class="bi bi-dash-circle" width="25px" height="25px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                        <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-                                                      </svg>
-                                                    </button>
-                                                </form>
-
-                                            </li>
-                                        <% } %>
-                                    <% } %>
+                                    <!-- Liste des personnes prevus pour le repas -->
+                                    <div class=" bg-light border-0">
+                                      <h6>Prévu pour</h6>
+                                      <ul class="list-group ">
+                                      <% for (loop2 of loop2){ %>
+                                          <% if(loop.idP == loop2.id_planning){ %>
+                                              <% if (loop2.type == 1) {
+                                                  nbEnfant++;
+                                              } else {
+                                                  nbAdulte++;
+                                              } %>
+                                                <li class="list-group-item border-0 bg-light">
+                                                  <!-- Formulaire pour supprimer une personne prevue pour un repas -->
+                                                  <form action="/famille" method="post">
+                                                      <input type="hidden" name="form" value="removeFP">
+                                                      <input type="hidden" name="idPlanning" value="<%= loop2.id_planning %>">
+                                                      <input type="hidden" name="idFamille" value="<%= loop2.id_famille %>">
+                                                      <!-- Button supprimer une personne du repas -->
+                                                      <button type="button" style="color: #C4151C; font-size: 40px; line-height: 0" class="btn" aria-label="Close">
+                                                        <!-- Icon - encerclée -->
+                                                        <svg class="bi bi-dash-circle" width="25px" height="25px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                          <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                                                          <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                                                        </svg>
+                                                      </button>
+                                                      <span class=" "><%= loop2.nom %></span>
+                                                  </form>
+                                                </li>
+                                          <% } %>
+                                      <% } %>
+                                      </ul>
+                                    </div>
                                     <!-- Button voir la recette -->
-                                    <form action="/recette/<%= loop.id %>" method="get" class="bg-light text-center">
+                                    <form action="/recette/<%= loop.id %>" method="get" class="bg-light text-center pt-1">
                                         <input type="hidden" name="nbAdulte" value="<%= nbAdulte %>">
                                         <input type="hidden" name="nbEnfant" value="<%= nbEnfant %>">
                                         <button type="submit" class="btn btn-info mb-2"> Voir la recette </button>
                                     </form>
                                 <% } %>
-                            </ul>
+                            </div>
                         <% } %>
                     </td>
                 <% } %>
             </tr>
-        <%    }); %>
+        <!-- Fin affichage ligne du tableau -->
+        <% }); %>
         </tbody>
     </table>
 </section>
