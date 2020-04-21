@@ -30,9 +30,6 @@
                     <% } %>
                     <!-- zone de modification d'une personne -->
                     <div class="row">
-                      <!-- Liens page a part pour modifier -->
-                      <!-- <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-4 offset-3">Modifier</a> -->
-                      <!-- Tentative de modifier en one page -->
                       <!-- Button trigger modal -->
                       <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-modif-<%= famille.id %>">
                         <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +43,7 @@
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5>Modifier ici </h5>
+                              <h5> Vous modifier : <%= famille.nom %></h5>
                             </div>
                             <div class="modal-body">
                               <form action="/modifier_famille/<%= famille.id %>" method="post">
@@ -58,7 +55,7 @@
                                       </div>
                                       <div class="form-group col-md-6">
                                           <label for="type">Enfant ou adulte ? </label>
-                                          <select id="type" class="form-control" name="type">
+                                          <select id="type" class="browser-default custom-select" name="type">
                                               <% if ( famille.type == 0){ %>
                                                   <option selected value="0">Adulte</option>
                                                   <option value="1">Enfant</option>
@@ -69,8 +66,23 @@
                                           </select>
                                       </div>
                                   </div>
-                                  <!--  Emplacements du fieldset -->
-                                  <button type="submit" class="btn btn-outline-success">+ Ajouter</button>
+                                  <fieldset>
+                                      <legend>Veuillez sélectionner vos intérêts :</legend>
+                                      <% var loop = specAlim; %>
+                                      <% var i = 0; %>
+                                      <% for (loop of loop){ %>
+                                          <% if (famille.id == loop.id_famille ){ %>
+                                            <div>
+                                                <input type="checkbox" id="<%= loop.nom %>" name="specAlim" value="<%= loop.nom %>" checked>
+                                                <label for="coding"><%= loop.nom %></label>
+                                            </div>
+                                          <% i++;} %>
+                                      <% } %>
+                                      <% if (i == 0) { %>
+                                          <span class="text-center font-italic">Pas de spécification alimentaire</span>
+                                      <% } %>
+                                  </fieldset>
+                                  <button type="submit" class="btn btn-outline-success"> Sauvgarder </button>
                               </form>
                             </div>
                           </div>
