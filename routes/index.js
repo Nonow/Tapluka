@@ -166,9 +166,8 @@ router.get('/modifier_famille/:id', function (req, res, next) {
 router.post('/modifier_famille/:id', function (req, res, next) {
     model.modifierFamille(req.session.id_user, req.params.id, req.body, function (status) {
         console.log(status)
-        res.redirect('/famille')
+        //res.redirect('/famille')
     })
 });
-
 
 module.exports = router;
