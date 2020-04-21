@@ -38,6 +38,7 @@
                         </svg>
                         Modifier
                       </button>
+                      <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-4 offset-3">Modifier</a>
                       <!-- Formulaire modal modification -->
                       <div class="modal fade" id="modal-modif-<%= famille.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"">
                         <div class="modal-dialog" role="document">
@@ -47,7 +48,7 @@
                             </div>
                             <div class="modal-body mb-1 p-1">
                               <div class="embed-responsive embed-responsive-16by9 p-1">
-                                <iframe src="/modifier_famille/<%= famille.id %>" class=""></iframe>
+                                <iframe src="/modifier_famille/<%= famille.id %>" class=" "></iframe>
                               </div>
                             </div>
                           </div>

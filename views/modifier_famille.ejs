@@ -1,44 +1,57 @@
-<link rel="stylesheet" type="text/css"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Modifier l'entourage</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <section>
+        <% for (data of data){ %>
+            <form action="/modifier_famille/<%= data.id %>" method="post">
+                <input id="form" name="form" type="hidden" value="add">
+                <div class="form-group">
+                    <div class="form-group col-md-6">
+                        <label for="Nom">Nom</label>
+                        <input type="text" class="form-control" id="Nom" name="nom" value="<%= data.nom %>">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="type">Enfant ou adulte ? </label>
+                        <select id="type" class="browser-default custom-select" name="type">
+                            <% if ( data.type == 0){ %>
+                                <option selected value="0">Adulte</option>
+                                <option value="1">Enfant</option>
+                            <% } else{ %>
+                                <option value="0">Adulte</option>
+                                <option selected value="1">Enfant</option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <fieldset class="form-group p-1 m-3">
+                    <h5>Veuillez sélectionner vos intérêts :</h5>
+                    <% for (coched of coched){ %>
+                        <div class="control-group form-check">
+                            <input type="checkbox" class="checked" id="<%= coched.id %>" name="specAlim" value="<%= coched.id %>" checked>
+                            <label for="coding" class="form-check-label"><%= coched.nom %></label>
+                        </div>
+                    <% } %>
+                    <% for (uncoched of uncoched){ %>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="" id="<%= uncoched.id %>" name="specAlim" value="<%= uncoched.id %>" >
+                            <label for="coding" class="form-check-label"><%= uncoched.nom %></label>
+                        </div>
+                    <% } %>
+                </fieldset>
+                <button type="submit" class="btn btn-outline-success">+ Ajouter</button>
+            </form>
+        <% } %>
+    </section>
+  </body>
 
-<section>
-    <% for (data of data){ %>
-        <form action="/modifier_famille/<%= data.id %>" method="post">
-            <input id="form" name="form" type="hidden" value="add">
-            <div class="form-group">
-                <div class="form-group col-md-6">
-                    <label for="Nom">Nom</label>
-                    <input type="text" class="form-control" id="Nom" name="nom" value="<%= data.nom %>">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="type">Enfant ou adulte ? </label>
-                    <select id="type" class="browser-default custom-select" name="type">
-                        <% if ( data.type == 0){ %>
-                            <option selected value="0">Adulte</option>
-                            <option value="1">Enfant</option>
-                        <% } else{ %>
-                            <option value="0">Adulte</option>
-                            <option selected value="1">Enfant</option>
-                        <% } %>
-                    </select>
-                </div>
-            </div>
-            <fieldset>
-                <legend>Veuillez sélectionner vos intérêts :</legend>
-                <% for (coched of coched){ %>
-                    <div>
-                        <input type="checkbox" id="<%= coched.id %>" name="specAlim" value="<%= coched.id %>" checked>
-                        <label for="coding"><%= coched.nom %></label>
-                    </div>
-                <% } %>
-                <% for (uncoched of uncoched){ %>
-                    <div>
-                        <input type="checkbox" id="<%= uncoched.id %>" name="specAlim" value="<%= uncoched.id %>" >
-                        <label for="coding"><%= uncoched.nom %></label>
-                    </div>
-                <% } %>
-            </fieldset>
-            <button type="submit" class="btn btn-outline-success">+ Ajouter</button>
-        </form>
-    <% } %>
-</section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="/javascripts/script.js"></script>
+
+</html>
