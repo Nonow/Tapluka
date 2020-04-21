@@ -71,3 +71,13 @@ footer h6{
 .btn-popup-plat{
   margin-top: auto;
 }
+
+.btn-close-pers{
+  color: #C4151C;
+  font-size: 50px;
+  line-height: 0;
+  position: absolute;
+  right: 16px;
+  padding-top: 10px;
+  z-index: 999;
+}

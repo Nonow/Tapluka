@@ -13,21 +13,71 @@
         <% for (famille of famille){ %>
             <div class="card border-0 col-4 mb-4">
                 <div class="card-body shadow-sm bg-light">
+                    <!-- Button de suppresion  -->
+                    <form action="/famille" method="post" class="col-4">
+                        <input id="form" name="form" type="hidden" value="remove">
+                        <input id="id" name="id" type="hidden" value="<%= famille.id %>">
+                        <button type="submit" class="close btn-close-pers" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </form>
+                    <!-- Nom de la personne -->
                     <h5 class="card-title"><%= famille.nom %></h5>
                     <% if (famille.type == 1 ){ %>
                         <h6 class="card-subtitle mb-2 text-muted">Enfant</h6>
                     <% } else { %>
                         <h6 class="card-subtitle mb-2 text-muted">Adulte</h6>
                     <% } %>
-                    <!-- zone de modification -->
+                    <!-- zone de modification d'une personne -->
                     <div class="row">
-                        <form action="/famille" method="post" class="col-4">
-                            <input id="form" name="form" type="hidden" value="remove">
-                            <input id="id" name="id" type="hidden" value="<%= famille.id %>">
-                            <button type="submit" class="btn btn-outline-danger">Supprimer</button>
-                        </form>
-                        <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-4 offset-3">Modifier</a>
+                      <!-- Liens page a part pour modifier -->
+                      <!-- <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-4 offset-3">Modifier</a> -->
+                      <!-- Tentative de modifier en one page -->
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-modif-<%= famille.id %>">
+                        <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z"/>
+                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clip-rule="evenodd"/>
+                        </svg>
+                        Modifier
+                      </button>
+                      <!-- Formulaire modal modification -->
+                      <div class="modal fade" id="modal-modif-<%= famille.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5>Modifier ici </h5>
+                            </div>
+                            <div class="modal-body">
+                              <form action="/modifier_famille/<%= famille.id %>" method="post">
+                                  <input id="form" name="form" type="hidden" value="add">
+                                  <div class="form-row">
+                                      <div class="form-group col-md-6">
+                                          <label for="Nom">Nom</label>
+                                          <input type="text" class="form-control" id="Nom" name="nom" value="<%= famille.nom %>">
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label for="type">Enfant ou adulte ? </label>
+                                          <select id="type" class="form-control" name="type">
+                                              <% if ( famille.type == 0){ %>
+                                                  <option selected value="0">Adulte</option>
+                                                  <option value="1">Enfant</option>
+                                              <% } else{ %>
+                                                  <option value="0">Adulte</option>
+                                                  <option selected value="1">Enfant</option>
+                                              <% } %>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <!--  Emplacements du fieldset -->
+                                  <button type="submit" class="btn btn-outline-success">+ Ajouter</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <!-- Fin de la zone pour modifier une personne -->
                     <div class="row mt-3">
                         <!-- Button Drop down de specification -->
                         <a class="btn btn-info col-10 offset-1" href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false" aria-controls="collapsespec">
