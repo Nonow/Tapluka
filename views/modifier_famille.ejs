@@ -1,18 +1,18 @@
-<% include header %>
-
+<link rel="stylesheet" type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <section>
     <% for (data of data){ %>
         <form action="/modifier_famille/<%= data.id %>" method="post">
             <input id="form" name="form" type="hidden" value="add">
-            <div class="form-row">
+            <div class="form-group">
                 <div class="form-group col-md-6">
                     <label for="Nom">Nom</label>
                     <input type="text" class="form-control" id="Nom" name="nom" value="<%= data.nom %>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="type">Enfant ou adulte ? </label>
-                    <select id="type" class="form-control" name="type">
+                    <select id="type" class="browser-default custom-select" name="type">
                         <% if ( data.type == 0){ %>
                             <option selected value="0">Adulte</option>
                             <option value="1">Enfant</option>
@@ -42,5 +42,3 @@
         </form>
     <% } %>
 </section>
-
-<% include footer %>

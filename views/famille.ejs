@@ -45,45 +45,10 @@
                             <div class="modal-header">
                               <h5> Vous modifier : <%= famille.nom %></h5>
                             </div>
-                            <div class="modal-body">
-                              <form action="/modifier_famille/<%= famille.id %>" method="post">
-                                  <input id="form" name="form" type="hidden" value="add">
-                                  <div class="form-row">
-                                      <div class="form-group col-md-6">
-                                          <label for="Nom">Nom</label>
-                                          <input type="text" class="form-control" id="Nom" name="nom" value="<%= famille.nom %>">
-                                      </div>
-                                      <div class="form-group col-md-6">
-                                          <label for="type">Enfant ou adulte ? </label>
-                                          <select id="type" class="browser-default custom-select" name="type">
-                                              <% if ( famille.type == 0){ %>
-                                                  <option selected value="0">Adulte</option>
-                                                  <option value="1">Enfant</option>
-                                              <% } else{ %>
-                                                  <option value="0">Adulte</option>
-                                                  <option selected value="1">Enfant</option>
-                                              <% } %>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <fieldset>
-                                      <legend>Veuillez sélectionner vos intérêts :</legend>
-                                      <% var loop = specAlim; %>
-                                      <% var i = 0; %>
-                                      <% for (loop of loop){ %>
-                                          <% if (famille.id == loop.id_famille ){ %>
-                                            <div>
-                                                <input type="checkbox" id="<%= loop.nom %>" name="specAlim" value="<%= loop.nom %>" checked>
-                                                <label for="coding"><%= loop.nom %></label>
-                                            </div>
-                                          <% i++;} %>
-                                      <% } %>
-                                      <% if (i == 0) { %>
-                                          <span class="text-center font-italic">Pas de spécification alimentaire</span>
-                                      <% } %>
-                                  </fieldset>
-                                  <button type="submit" class="btn btn-outline-success"> Sauvgarder </button>
-                              </form>
+                            <div class="modal-body mb-1 p-1">
+                              <div class="embed-responsive embed-responsive-16by9 p-1">
+                                <iframe src="/modifier_famille/<%= famille.id %>" class=""></iframe>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -237,7 +202,7 @@
                                 <input type="hidden" name="jour" value="<%= i + 1 %>">
                                 <div class="form-group">
                                   <label for="select-plat-<%= i %>"> Quel plat ?</label>
-                                  <select id="select-plat-<%= i %>" class="form-control" name="idRecette">
+                                  <select id="select-plat-<%= i %>" class="browser-default custom-select" name="idRecette">
                                       <% for (loop4 of loop4){ %>
                                           <option value="<%= loop4.id_recette %>"> <%= loop4.nom %> </option>
                                       <% } %>
@@ -245,7 +210,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label for="select-mm-<%= i %>"> Quel moment ? </label>
-                                  <select id="select-mm-<%= i %>" class="form-control" name="moment">
+                                  <select id="select-mm-<%= i %>" class="browser-default custom-select" name="moment">
                                       <option value="1">petit Dejeuner</option>
                                       <option value="2">Dejeuner</option>
                                       <option value="3">Gouter</option>
