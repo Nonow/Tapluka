@@ -17,7 +17,7 @@
                     <form action="/famille" method="post" class="col-4">
                         <input id="form" name="form" type="hidden" value="remove">
                         <input id="id" name="id" type="hidden" value="<%= famille.id %>">
-                        <button type="submit" class="close btn-close-pers" aria-label="Close">
+                        <button type="submit" id="btn-close-pers" class="close" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                     </form>
@@ -45,8 +45,8 @@
                             <div class="modal-header">
                               <h5> Vous modifier : <%= famille.nom %></h5>
                             </div>
-                            <div class="modal-body mb-1 p-1">
-                              <div class="embed-responsive embed-responsive-16by9 p-1">
+                            <div class="modal-body mb-2 p-1">
+                              <div class="embed-responsive embed-responsive-16by9 p-3 m-1">
                                 <iframe src="/modifier_famille/<%= famille.id %>" class=" "></iframe>
                               </div>
                             </div>
