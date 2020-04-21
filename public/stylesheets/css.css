@@ -80,3 +80,11 @@ footer h6{
   top: -32px;
   z-index: 999;
 }
+
+.btn-add-plat-img{
+  color: grey;
+}
+
+.btn-add-plat-img:hover{
+  color: black;
+}
