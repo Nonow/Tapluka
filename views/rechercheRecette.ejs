@@ -1,0 +1,20 @@
+
+<% for (recette of recettes) { %>
+
+    <div class="container-fluid p-0">
+
+        <div class="recette-content text-center mx-auto mt-3">
+            <h2 class="grd-titre"><%= recette.nom %></h2>
+            <h3 class="ss-titre"><%= recette.categorie %> - <%= recette.sousCategorie %></h3>
+            <div class=" note"> Note /5</div>
+            <div class="text-secondary allergenes">
+                <%= recette.description %>
+            </div>
+            <div>
+                <p></p>
+            </div>
+	</div>
+    </div>
+
+<% } %>
+
