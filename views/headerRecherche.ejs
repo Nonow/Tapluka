@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- Page principale (page d'accueil-->
+<html lang="fr"> 
+<head>
+	<!-- Encodage de la page (accents, caractère spéciaux) -->
+	<meta charset="utf-8">	
+	<!-- Titre de la page-->
+	<title> TAPLUKA </title> 
+	<!-- Liens et scipts pour le bon fonctionnement de la page-->	 <link rel="shortcut icon" href="/images/favicon.png">
+	 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.11.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+	<style>
+		body{
+            background-color: rgb(242, 242, 242);
+            overflow-x:none !important;
+            background-image: url("./img/img10.jpg");
+            background-repeat: no-repeat;
+			background-position:50% 40%;   
+			background-size: 100%;    
+
+		}
+        .navbar{
+            background-color: white;
+        }
+        .nav-item{
+        	padding-top: 10px;
+        }
+        #nav-link1:hover{
+            color:black;
+        }
+        #nav-link2:hover{
+            color:black;
+        }
+        #nav-link3:hover{
+            color:black;
+        }
+        #btn-recherche:hover{
+        	background-color:#303031;
+        	color: white;
+        }	
+        .login-container{
+			padding-top: 17px;
+		}
+		#tapluka{
+			padding-top: 0px;
+			color: black;
+			font-size: 120%;
+		}
+		#corps{
+			padding-top:4.5%;
+		}
+		
+  		#footer{
+  			background-color: lightgrey;
+  			opacity: 0.7;
+  			position:fixed;
+			bottom:0;
+			right: 0;
+			left:0	;
+
+  		}
+ 
+  		#div-opacity{
+  			background-color: white;
+  			opacity: 0.85;
+  			margin-top: 12%;
+  			padding-left: 10%;
+  			padding-right: 10%;
+  			margin-left: 10%;
+  			margin-right: 10%;
+  			padding-bottom: 1%;
+  			padding-top: 1%;
+  		}
+  
+  		.slidecontainer {
+			  width: 100%;
+			}
+
+			.slider {
+			  -webkit-appearance: none;
+			  width: 100%;
+			  height: 20px;
+			  border-radius: 20px;
+			  background: #d3d3d3;
+			  outline: none;
+			  opacity: 0.8;
+			  -webkit-transition: .2s;
+			  transition: opacity .2s;
+			}
+
+			.slider:hover {
+			  opacity: 1;
+			}
+
+			.slider::-webkit-slider-thumb {
+			  -webkit-appearance: none;
+			  appearance: none;
+			      border-radius: 20px;
+			  width: 25px;
+			  height: 25px;
+			  background:#303031;
+			  cursor: pointer;
+			}
+
+			.slider::-moz-range-thumb {
+			  width: 25px;
+			  height: 25px;
+			  background: #303031;
+			  cursor: pointer;
+			  border-radius: 20px;
+			}
+			#textInput{
+				border-color: transparent;
+			}
+			#textInput2{
+				border-color: transparent;
+			}
+			#div-range{
+				padding-top:1%;
+			}
+
+	</style>
+	<script >
+    	function updateTextInput(val) {
+          document.getElementById('textInput').value=val; 
+        } 
+        function updateTextInput2(val) {
+          document.getElementById('textInput2').value=val; 
+        } 
+	</script>
+</head> 
+<body> 
+	<!-- Barre de navigation en haut-->
+	<nav class="navbar navbar-inverse navbar-fixed-top" >
+		<div class="container-fluid">
+			<!-- Au rétraicissement de la page on regroupe les champs de la barre de navigation en un block pour le design-->
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul  class="nav navbar-nav">
+					<li id="tapluka"><a href="./"><h6 id="tapluka">TAPLUKA</h6></a></li>
+					<li class="nav-item" id="supp"><a id="nav-link1" href="/"><i class="fa fa-home"></i> Accueil</a></li>
+					<li class="nav-item" id="insc"><a id="nav-link2" href="/inscription">S'inscrire</a></li>
+					<li class="nav-item" id="deco"><a id="nav-link3" href="/regles">Règles</a></li>
+			<% if (login == undefined){ %>
+				</ul>
+				<ul class="nav navbar-nav pull-right">
+					<li><div class="form-inline login-container ">
+						<form id="myForm" action="/connexion" method="post">
+						 	<input class="form-control" type="email" placeholder="Email" name="email">
+							<input class="form-control" type="password" placeholder="Mot de passe" name="passwd">
+							<button type="submit" class="btn btn-default">Se Connecter</button>
+						</form>
+						<div id="message" class=""></div>
+					</div>
+					</li>
+				</ul>
+			<% }else{ %>
+				</ul>
+				<ul class="nav navbar-nav pull-right">
+					<li><div class="form-inline login-container ">
+                <form id="myForm" method="post" action="/deconnexion">
+                    <input class="btn btn-default" type="submit" name="Connexion" value="Déconnexion">
+						</form>
+						<div id="message" class=""></div>
+					</div>
+					</li>
+				</ul>
+			<% } %>
+			</div>
+		</div>
+	</nav>
+	
+

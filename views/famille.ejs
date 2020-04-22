@@ -1,0 +1,218 @@
+<% include header %>
+<!-- mathieu -->
+<section class="container">
+
+    <h2 class="my-4 ml-2">Mon entourage</h2>
+    <div class="row">
+        <% var familleBis = famille; %>
+        <% for (famille of famille){ %>
+            <div class="card m-3" style="width: 18rem; background-color: RGB(237, 237, 237);">
+                <div class="card-body">
+                    <h5 class="card-title"><%= famille.nom %></h5>
+                    <% if (famille.type == 1 ){ %>
+                        <h6 class="card-subtitle mb-2 text-muted">Enfant</h6>
+                    <% } else { %>
+                        <h6 class="card-subtitle mb-2 text-muted">Adulte</h6>
+                    <% } %>
+                    <!-- zone de modification -->
+                    <div class="row">
+                        <form action="/famille" method="post" class="col-4">
+                            <input id="form" name="form" type="hidden" value="remove">
+                            <input id="id" name="id" type="hidden" value="<%= famille.id %>">
+                            <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                        </form>
+
+                        <a href="/modifier_famille/<%= famille.id %>" class="btn btn-outline-warning col-4 offset-3">Modifier</a>
+                    </div>
+                    <div class="form-row mt-3">
+                        <!--Zone de specification des regime alimentaire -->
+                        <a class="btn text-light col-10 offset-1" style="background-color: RGBA(12, 184, 182, 0.91);"
+                           href="#collapsespec_<%= famille.nom %>" data-toggle="collapse" aria-expanded="false"
+                           aria-controls="collapsespec">Spécification alimentaire<i
+                                    class="fas fa-angle-down rotate-icon pl-2"></i></a>
+
+                        <ul id="collapsespec_<%= famille.nom %>"
+                            class="collapse list-group list-group-flush mt-3 offset-1">
+                            <% var loop = specAlim; %>
+                            <% var i = 0; %>
+                            <% for (loop of loop){ %>
+                                <% if (famille.id == loop.id_famille ){ %>
+                                    <li class="list-group-item"
+                                        style="background-color: RGB(250, 230, 230);"><%= loop.nom %></li>
+                                <% i++;} %>
+                            <% } %>
+                            <% if (i == 0) { %>
+                                <p>Pas de spécification alimentaire</p>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="card m-3" style="width: 18rem;">
+            <form action="/famille" method="post">
+                <input id="form" name="form" type="hidden" value="add">
+                <div class="row pt-3">
+                    <input type="text" id="Nom" name="nom" placeholder="Prénom" class="col-md-8 offset-md-1 rounded"
+                           required>
+                </div>
+                <div class="row pt-3">
+                    <div class="form-check form-check-inline offset-md-1">
+                        <input class="form-check-input" type="radio" name="type" id="ageChoixAdulte" value="0" checked>
+                        <label class="form-check-label" for="ageChoixAdulte">Adulte</label>
+                    </div>
+                    <div class="form-check form-check-inline offset-md-1">
+                        <input class="form-check-input" type="radio" name="type" id="ageChoixEnfant" value="1">
+                        <label class="form-check-label" for="ageChoixEnfant">Enfant</label>
+                    </div>
+                </div>
+
+                <!-- Button trigger modal -->
+                <div class="row pt-3">
+                    <button type="button" class="btn btn-default text-light col-md-10 offset-md-1"
+                            style="background-color: RGBA(12, 184, 182, 0.91);" data-toggle="modal"
+                            data-target="#exampleModal">
+                        Spécification alimentaire
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Spécifications alimentaires</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <!-- Spec alimentaire -->
+                                <% for (allSA of allSA){ %>
+                                    <div>
+                                        <input type="checkbox" id="<%= allSA.id %>" name="specAlim"
+                                               value="<%= allSA.id %>">
+                                        <label for="<%= allSA.id %>"><%= allSA.nom %></label>
+                                    </div>
+                                <% } %>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary"
+                                        style="background-color: RGBA(12, 184, 182, 0.91);" data-dismiss="modal">
+                                    Sauvegarder
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3 pb-3">
+                    <button type="submit" class="btn btn-outline-success offset-md-1 offset-xs-4">+ Ajouter</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <h2 class="my-4 ml-2">Mon Planning</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Petit Dejeuner</th>
+            <th scope="col">Dejeuner</th>
+            <th scope="col">Gouter</th>
+            <th scope="col">Dinner</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i = 0;i < 7;i++){ %>
+            <tr>
+                <th scope="row">
+                    <% if(i == 0){ %>
+                        Lundi
+                    <% } else if(i == 1) { %>
+                        Mardi
+                    <% } else if(i == 2) { %>
+                        Mercredi
+                    <% } else if(i == 3){ %>
+                        Jeudi
+                    <% } else if(i == 4) { %>
+                        Vendredi
+                    <% } else if(i == 5) { %>
+                        Samedi
+                    <% } else { %>
+                        Dimanche
+                    <% } %>
+                    <% var loop4 = recetteFav; %>
+                    <form action="/famille" method="post">
+                        <input type="hidden" name="form" value="addRP">
+                        <input type="hidden" name="jour" value="<%= i+1 %>">
+
+                        <select class="form-control" name="idRecette">
+                            <% for (loop4 of loop4){ %>
+                                <option value="<%= loop4.id_recette %>"><%= loop4.nom %></option>
+                            <% } %>
+                        </select>
+                        <select class="form-control" name="moment">
+                            <option value="1">petit Dejeuner</option>
+                            <option value="2">Dejeuner</option>
+                            <option value="3">Gouter</option>
+                            <option value="4">Dinner</option>
+                        </select>
+                        <button type="submit" class="btn btn-outline-success">Ajouter</button>
+                    </form>
+                </th>
+                <% for(var j = 0;j < 4;j++){ %>
+                    <td>
+                        <% var loop = planning; %>
+                        <% for (loop of loop){ %>
+                            <ul class="list-group">
+                                <% if(loop.jour == i + 1 && loop.moment == j + 1){ %>
+                                    <li class="list-group-item ">
+                                        <%= loop.nom %>
+                                        <form action="/famille" method="post">
+                                            <input type="hidden" name="form" value="addFP">
+                                            <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
+                                            <select class="form-control" name="idFamille">
+                                                <% var loop3 = familleBis; %>
+                                                <% for (famille of loop3){ %>
+                                                    <option value="<%= famille.id %>"><%= famille.nom %></option>
+                                                <% } %>
+                                            </select>
+                                            <button type="submit" class="btn btn-outline-success">+</button>
+                                        </form>
+                                        <form action="/famille" method="post">
+                                            <input type="hidden" name="form" value="removeRP">
+                                            <input type="hidden" name="idPlanning" value="<%= loop.idP %>">
+                                            <button type="submit" class="btn btn-outline-danger">x</button>
+                                        </form>
+                                    </li>
+                                    <% var loop2 = planningF; %>
+                                    <% for (loop2 of loop2){ %>
+                                        <% if(loop.idP == loop2.id_planning){ %>
+                                            <li class="list-group-item">
+                                                <%= loop2.nom %>
+                                                <form action="/famille" method="post">
+                                                    <input type="hidden" name="form" value="removeFP">
+                                                    <input type="hidden" name="idPlanning" value="<%= loop2.id_planning%>">
+                                                    <input type="hidden" name="idFamille" value="<%= loop2.id_famille %>">
+                                                    <button type="submit" class="btn btn-outline-danger">x</button>
+                                                </form>
+
+                                            </li>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </ul>
+                        <% } %>
+                    </td>
+                <% } %>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</section>
+<% include footer %>
