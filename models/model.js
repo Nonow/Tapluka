@@ -83,11 +83,14 @@ class Model {
         connection.query("select count(*) as existUser from familles where id_utilisateur = ? and id=?", [idUser, idFamille], (err, rows) => {
             if (err) throw err
             if (rows.length > 0) {
-                connection.query("delete from famille_spec where id_famille = ?", [idFamille], (err, rows) => {
+                connection.query("delete from planning_famille where id_famille = ?", [idFamille], (err, rows) => {
                     if (err) throw err
-                    connection.query("delete from familles where id=?", [idFamille], (err, rows) => {
+                    connection.query("delete from famille_spec where id_famille = ?", [idFamille], (err, rows) => {
                         if (err) throw err
-                        cb("OK")
+                        connection.query("delete from familles where id=?", [idFamille], (err, rows) => {
+                            if (err) throw err
+                            cb("OK")
+                        })
                     })
                 })
             } else {
@@ -100,30 +103,33 @@ class Model {
         connection.query("select count(*) as existUser from familles where id_utilisateur = ? and id=?", [idUser, idFamille], (err, rows) => {
             if (err) throw err
             if (rows.length > 0) {
-                connection.query("delete from famille_spec where id_famille = ?", [idFamille], (err, rows) => {
+                connection.query("delete from planning_famille where id_famille = ?", [idFamille], (err, rows) => {
                     if (err) throw err
-                    connection.query("delete from familles where id=?", [idFamille], (err, rows) => {
+                    connection.query("delete from famille_spec where id_famille = ?", [idFamille], (err, rows) => {
                         if (err) throw err
-                        var newId = Math.floor(Math.random() * 1000000);
-                        connection.query("insert into familles values (?,?,?,?);", [newId, idUser, data.nom, data.type], (err, rows) => {
+                        connection.query("delete from familles where id=?", [idFamille], (err, rows) => {
                             if (err) throw err
-                            var sql = "insert into famille_spec values"
-                            if (data.specAlim != undefined) {
-                                for (var i = 0; i < data.specAlim.length; i++) {
-                                    if (i == 0) {
-                                        sql += "(" + newId + "," + data.specAlim[i] + ")"
-                                    } else {
-                                        sql += ",(" + newId + "," + data.specAlim[i] + ")"
+                            var newId = Math.floor(Math.random() * 1000000);
+                            connection.query("insert into familles values (?,?,?,?);", [newId, idUser, data.nom, data.type], (err, rows) => {
+                                if (err) throw err
+                                var sql = "insert into famille_spec values"
+                                if (data.specAlim != undefined) {
+                                    for (var i = 0; i < data.specAlim.length; i++) {
+                                        if (i == 0) {
+                                            sql += "(" + newId + "," + data.specAlim[i] + ")"
+                                        } else {
+                                            sql += ",(" + newId + "," + data.specAlim[i] + ")"
+                                        }
                                     }
+                                    connection.query(sql, (err, rows) => {
+                                        if (err) throw err
+                                        cb("OK")
+                                    })
+                                } else {
+                                    cb("OK without specAlim")
                                 }
-                                connection.query(sql, (err, rows) => {
-                                    if (err) throw err
-                                    cb("OK")
-                                })
-                            } else {
-                                cb("OK without specAlim")
-                            }
 
+                            })
                         })
                     })
                 })
@@ -245,10 +251,11 @@ class Model {
     }
 
     static removeFamillePlanning(idPlanning, idFamille, cb) {
-        connection.query("delete from planning_famille where id_planning = ? and id_famille = ?",[idPlanning,idFamille],(err,rows)=>{
+        connection.query("delete from planning_famille where id_planning = ? and id_famille = ?", [idPlanning, idFamille], (err, rows) => {
             if (err) throw err
             cb("OK")
         })
     }
 }
+
 module.exports = Model
