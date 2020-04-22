@@ -1,0 +1,55 @@
+body {
+    font-family: 'Raleway';
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-weight: bold;
+    color: black;
+}
+
+.blanc
+{
+    color: white;
+    font-weight: normal;
+}
+
+nav a img{
+    width: 140px;
+    margin:10px;
+}
+
+nav ul{
+    display: inline;
+    color: white;
+}
+
+nav ul li{
+    display: inline;
+    padding-left: 2em; 
+}
+
+nav ul li a, nav ul li a:hover{
+    color: white;
+    text-decoration: none;
+}
+
+#connexion{
+    padding-top: 2em;
+    margin: auto;
+    margin-bottom: 15em;
+}
+
+#connexion h4{
+    margin-bottom: 3em;
+}
+
+#newsletter{
+    margin: auto;
+    margin-top: 2em;
+}
+
+footer h6{
+    margin-top: 1em;
+}

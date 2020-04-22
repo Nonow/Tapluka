@@ -1,0 +1,72 @@
+#corps{
+	padding-top:4.5%;
+}
+#div-message{
+	background-color: white !important;
+	padding-bottom: 14.4%;
+}
+#div-img{
+	margin-right: -1.2%;
+}
+#div-bienvenue{
+	padding-top: 25%;
+}
+
+#imgBack1{
+	padding-bottom: 32%;
+	background-image: url("/images/img/img6.png");
+	background-repeat:no-repeat;
+	background-position: center;
+}
+#imgBack2{
+	padding-bottom: 32%;
+	background-image: url("/images/img/img5.png");
+	background-repeat:no-repeat;
+	background-position: center;
+
+}
+#imgBack3{
+	padding-bottom:32%;
+	background-image: url("/images/img/img17.jpg");
+	background-repeat:no-repeat;
+	background-position: center;
+}
+#imgBack4{
+	padding-bottom: 32%;
+	background-image: url("/images/img/img9.png");
+	background-repeat:no-repeat;
+	background-position: center;
+
+}
+
+#imgBack5{
+	padding-bottom: 32%;
+	background-image: url("/images/img/img15.png");
+	background-repeat:no-repeat;
+	background-position: center;
+
+}
+#imgBack6{
+	padding-bottom:32%;
+	background-image: url("/images/img/img16.png");
+	background-repeat:no-repeat;	
+	background-position: center;
+}
+.white-div{
+	background-color: white;
+	position: relative;
+	bottom: 20px;
+		left: 0%;
+		padding: 20px;
+}
+.content-white-div{
+	font-size: 180%;
+		font-weight: 600;	
+	}
+	body{
+    background-color: rgb(242, 242, 242);
+    overflow-x:none !important;
+}
+h6{
+	color:black;
+}

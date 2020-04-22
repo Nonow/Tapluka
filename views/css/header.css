@@ -1,0 +1,23 @@
+.navbar{
+    background-color: white;
+}
+.nav-item{
+	padding-top: 10px;
+}
+#nav-link1:hover{
+    color:black;
+}
+#nav-link2:hover{
+    color:black;
+}
+#nav-link3:hover{
+    color:black;
+}
+.login-container{
+	padding-top: 17px;
+}
+#tapluka{
+	padding-top: 0px;
+	color: black;
+	font-size: 120%;
+}
