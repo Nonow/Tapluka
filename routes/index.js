@@ -64,6 +64,10 @@ router.get('/recherchePlanning', function (req, res, next) {
     res.render('recherchePlanning', {login: req.session.id_user, title: 'recherchePlanning',diners: [], plats: [] });
 });
 
+router.get('/platsDuMoment', function (req, res, next) {
+    res.render('platsDuMoment', {login: req.session.id_user, title: 'platsDuMoment'});
+});
+
 
 
 router.post('/recherche', function (req, res, next) {
