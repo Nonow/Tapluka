@@ -1,0 +1,46 @@
+<% include header %>
+
+
+<section>
+    <% for (data of data){ %>
+        <form action="/modifier_famille/<%= data.id %>" method="post">
+            <input id="form" name="form" type="hidden" value="add">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Nom">Nom</label>
+                    <input type="text" class="form-control" id="Nom" name="nom" value="<%= data.nom %>">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="type">Enfant ou adulte ? </label>
+                    <select id="type" class="form-control" name="type">
+                        <% if ( data.type == 0){ %>
+                            <option selected value="0">Adulte</option>
+                            <option value="1">Enfant</option>
+                        <% } else{ %>
+                            <option value="0">Adulte</option>
+                            <option selected value="1">Enfant</option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <fieldset>
+                <legend>Veuillez sélectionner vos intérêts :</legend>
+                <% for (coched of coched){ %>
+                    <div>
+                        <input type="checkbox" id="<%= coched.id %>" name="specAlim" value="<%= coched.id %>" checked>
+                        <label for="coding"><%= coched.nom %></label>
+                    </div>
+                <% } %>
+                <% for (uncoched of uncoched){ %>
+                    <div>
+                        <input type="checkbox" id="<%= uncoched.id %>" name="specAlim" value="<%= uncoched.id %>" >
+                        <label for="coding"><%= uncoched.nom %></label>
+                    </div>
+                <% } %>
+            </fieldset>
+            <button type="submit" class="btn btn-outline-success">+ Ajouter</button>
+        </form>
+    <% } %>
+</section>
+
+<% include footer %>

@@ -1,0 +1,63 @@
+<% include header %>
+
+<script> 
+function getValue() {
+    // Sélectionner l'élément input et récupérer sa valeur
+    var input = document.getElementById("allergie").value;
+
+    document.getElementById('allergie').value=input;
+    document.getElementById('allerg').value=input;
+}
+</script>
+
+
+<h4 id="titre">Liste de course</h4>
+
+<section id="service">
+    <div class="container">
+        <div class="row" style="margin : auto;">
+            <form action="/listecourse_ingredient" method="post">
+                 <input type="search" id="allergie" name="form" >
+                    <button type="submit" id='allerg' name="nom" value="" onclick='getValue()'>Allergie</button>
+             </form>
+
+             <form action="/listecourse_ingredient" method="post">
+                 <input type="submit" id="Supprimer" name="form" value="Supprimer" >
+             </form>
+        </div>
+    </div>
+
+    <form action="/listecourse_ingredient" method="post">
+
+    <input id="form" name="form" type="hidden" value="addPanier">
+        <div class="container">
+            <div class="row">
+                <% for (var i =0; i < ingredients.length ; i++) { %>
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4><%= ingredients[i].nom %></h4>
+                                <img src="/images/ingrédients/<%=ingredients[i].photo %>" class="card-img-top" alt="cereale_lion"
+                                         style="width: 150px; height: 150px; margin: auto;">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <button class="btn btn-sucess" type="submit"><%= ingredients[i].prix %> </button>
+                                    </div>
+                                            
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button type="submit" name="nom" value="<%= ingredients[i].nom %>" class="btn btn-outline-success offset-md-1 offset-xs-4">+Ajouter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                        
+                <% } %>
+            </div>
+        </div>
+        
+        </form>
+</section>
+        
+
+<% include footer %>

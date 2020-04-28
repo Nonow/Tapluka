@@ -1,0 +1,76 @@
+#titre{
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.banner .bg-color nav form{
+    padding-left: 32px;
+}
+
+.banner .bg-color nav form a{
+    color: white;
+    text-decoration: none;
+}
+
+.bg-color{
+	background-color: RGBA(13, 70, 83, 0.78);
+}
+
+#formulaire{
+	padding-top: 2em;
+	margin: auto;
+}
+
+#button_submit{
+	margin-top:1em;
+}
+
+#service{
+    padding: 60px 0px;
+    text-align: center;
+}
+
+#jouer{
+    width: 200px;
+}
+
+.container{
+    margin: auto;
+}
+
+.icon i{
+    color: #0cb8b6;
+    font-size: 45px;
+    margin-bottom: 25px;
+}
+
+.card{
+    height: 310px;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+}
+
+.card img{
+	padding: 10px;
+	width: 150px;
+	height: 150px;
+}
+
+.card h4{
+	text-align: left;
+	font-size: 15px;
+}
+
+.card h6{
+	text-align: left;
+	font-size: 10px;
+	color: #AAA;
+}
+
+.card button{
+	padding-top: 2px;
+	padding-bottom: 2px;
+}

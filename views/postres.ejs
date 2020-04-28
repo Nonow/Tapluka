@@ -1,0 +1,32 @@
+<% include header %>
+
+<section>
+    <h4 id="titre">Liste de Magasin</h4>
+</section>
+
+
+<section id="service9">
+    <div class="container">
+        <div class="row">
+        
+            <% for (var i =0; i < status.length ; i++) { %>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="text-align: left;">
+                    
+                    <div class="card">
+                        <div class="card-body overflow-auto">
+                            <h4> ID_magasin : <%= status[i].id_magasin %></h4>
+                            <p>Nom : <%= status[i].nom %></p
+                            <p>Latitude : <%= status[i].latitude %></p
+                            <p>Longitude : <%= status[i].longitude %></p
+                            <p>Prix du panier : <%= status[i].Cout %> €</p>
+                        </div>
+                    </div>
+
+                </div> 
+            <% } %>           
+        </div>
+    </div>
+</section>
+
+
+<% include footer %>

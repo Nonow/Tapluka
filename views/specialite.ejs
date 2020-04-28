@@ -1,0 +1,34 @@
+<% include header %>
+
+
+<section>
+    <h4 id="titre">Spécialités du monde</h4>
+</section>
+<form action="/platsMonde" method="post" >
+ <section id="service">
+    <div class="container">
+        <div class="row">
+        	<% for (var i =0; i < specialite.length ; i++) { %>
+	            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" >
+			        
+                    <img src="/images/specialite/<%=specialite[i].chemin%>" class="card-img-top"
+			                 style="width: 200px; height: 150px; margin: auto;"></br>
+			        <%= specialite[i].nom_spe %>
+		    		<input type="checkbox" name='pays' value="<%= specialite[i].id%>" id="<%= specialite[i].nom_spe %>" >
+		     	
+		        </div>
+		        
+            <% } %>
+            
+                 
+        </div></br>
+        <input id="form" name="form" type="hidden" value="valider">
+                <div class="row pt-2 pb-2">
+                    <button type="submit" name="nom" value="" class="btn btn-primary btn-test" style="margin-top: 5em;margin : auto;"> Valider</button>
+                </div>
+    </div>
+
+                                                                
+</section>
+</form>
+<% include footer %>

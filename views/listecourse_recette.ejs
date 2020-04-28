@@ -1,0 +1,48 @@
+<% include header %>
+
+<section>
+    <h4 id="titre">Liste de course</h4>
+</section>
+<form action="/postres" method="post" >
+    <section id="service">
+        <div class="container">
+            <div class="row">
+            
+                <% for (var i =0; i < recettes.length ; i++) { %>
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="text-align: left;">
+                        
+                        <div class="card">
+                            <div class="card-body overflow-auto">
+                            <img src="/images/recette/<%=recettes[i].id%>/<%= recettes[i].chemin_rec %>" class="card-img-top"
+                                     style="width: 150px; height: 150px; margin: auto;">
+                                <h4><%= recettes[i].nom %></h4>
+                                <% for (var j =0; j < ingredients_recettes.length ; j++) { %>
+                                    <% if (ingredients_recettes[j].id_recette == recettes[i].id) { %>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name='food' value="<%= ingredients_recettes[j].id %>" id="<%= ingredients_recettes[j].nom %>" >
+                                            <label class="form-check-label" for="<%= ingredients_recettes[j].nom %>" > 
+                                                <%= ingredients_recettes[j].nom %>
+                                            </label>
+                                    
+                                         </div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                         
+                        
+                    </div>
+                <% } %>
+
+                    <input id="form" name="form" type="hidden" value="valider">
+                        <div class="row pt-2 pb-2">
+                            <button type="submit" name="nom" value="" class="btn btn-primary btn-test" style="margin-top: 5em;"> Valider</button>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</form>
+
+<% include footer %>
