@@ -27,7 +27,7 @@ nav ul{
 
 nav ul li{
     display: inline;
-    padding-left: 2em;
+    padding-left: 2em; 
 }
 
 nav ul li a, nav ul li a:hover{
@@ -51,40 +51,4 @@ nav ul li a, nav ul li a:hover{
 
 footer h6{
     margin-top: 1em;
-}
-
-#btn-close-plat{
-  color: #C4151C;
-  font-size: 50px;
-  line-height: 0;
-  position: absolute;
-  right: 16px;
-  padding-top: 10px;
-  z-index: 999;
-}
-
-.btn-add-pers-plat {
-  margin-left: -5%;
-  margin-top: -6%;
-}
-
-.btn-popup-plat{
-  margin-top: auto;
-}
-
-#btn-close-pers{
-  color: #C4151C;
-  font-size: 50px;
-  position: absolute;
-  right: -217%;
-  top: -32px;
-  z-index: 999;
-}
-
-.btn-add-plat-img{
-  color: grey;
-}
-
-.btn-add-plat-img:hover{
-  color: black;
 }

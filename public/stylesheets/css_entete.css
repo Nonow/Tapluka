@@ -18,14 +18,13 @@
 }
 
 #formulaire{
+	padding-top: 2em;
 	margin: auto;
 }
 
 #button_submit{
 	margin-top:1em;
 }
-
-
 
 #service{
     padding: 60px 0px;
@@ -46,32 +45,32 @@
     margin-bottom: 25px;
 }
 
-.carre{
+.card{
     height: 310px;
     margin: 5px;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #DDD;
     border-radius: 8px;
 }
 
-.carre img{
+.card img{
 	padding: 10px;
 	width: 150px;
 	height: 150px;
 }
 
-.carre h4{
+.card h4{
 	text-align: left;
 	font-size: 15px;
 }
 
-.carre h6{
+.card h6{
 	text-align: left;
 	font-size: 10px;
 	color: #AAA;
 }
 
-.carre button{
+.card button{
 	padding-top: 2px;
 	padding-bottom: 2px;
 }

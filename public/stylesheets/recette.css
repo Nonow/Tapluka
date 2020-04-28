@@ -59,28 +59,28 @@
 
 .arrow-container{
     width:30px;
-    background-color:lightgrey;
+    background-color:#0cb8b6;
     border-radius:50px;
 }
-/* étoile favoris */
 
-.favoris-star{
-    color:yellow;
+/* guide de préparation */
+.titre-guide{
+    background: #0cb8b6;
 }
 
 .guide-conditions{
-    border-top: 1px solid lightgrey;
+    border-top: 1px solid #0cb8b6;
     margin:0;
 }
 
 .guide-rep{
-    border-bottom: 1px solid lightgrey;
+    border-bottom: 1px solid #0cb8b6;
     margin:0;
 }
 
 /* ingrédient */
 .ingredient{
-    border-right: 1px solid lightgrey;
+    border-right: 1px solid #0cb8b6;
 }
 
 
@@ -97,7 +97,7 @@
 }
 .liste-preparation .numero-preparation::before {
     content: counter(li);
-    color: grey;
+    color: #0cb8b6;
     display: inline-block;
     width: 2em;
     height:1.8em;

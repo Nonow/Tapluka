@@ -1,0 +1,39 @@
+<% include header %>
+
+	<h4 id="titre">Recettes</h4>
+
+<section id="service">
+    <div class="container">
+        <div class="row">
+        	<% for (var i =0; i < platsMonde.length ; i++) { %>
+	            <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6"">
+	                <div class="card">
+	                    <div class="card-body overflow-auto">
+	                    	<img src="/images/recette/<%=platsMonde[i].id%>/<%= platsMonde[i].chemin_rec %>" class="card-img-top"
+	                             style="width: 150px; height: 150px; margin: auto; ">
+	                    	<div style ="text-align:left;">
+		                    	<h3> <%= platsMonde[i].nom %> recette <%= platsMonde[i].specialite %></h3>
+		                    	<p> Difficulte : <%= platsMonde[i].difficulte %>  </p>
+		                    	<p> Temps de préparation : <%= platsMonde[i].tempsPreparation %> </p>
+		                    	<p> Temps de cuisson : <%= platsMonde[i].tempsCuisson %> </p>
+		                    	<p> Preparations </p>
+		                    	  
+		                    	<% for (var j =0; j < preparation.length ; j++) { %>
+		                    		<% if (platsMonde[i].id == preparation[j].id_recette) { %>
+		                                <div class="form-check">
+		                                    <%= preparation[j].numero %>. <%= preparation[j].description %>
+		                                </div>
+	                                <% } %>
+	                            <% } %>
+	                    	</div>
+	                    </div>
+	                </div>   
+	            </div>
+            <% } %>
+        </div>
+    </div>
+
+</section>
+
+
+<% include footer %>

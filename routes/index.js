@@ -170,4 +170,143 @@ router.post('/modifier_famille/:id', function (req, res, next) {
     })
 });
 
+
+// code HASCO
+router.get('/panier', function (req, res, next) {
+    model.panier(req.session.id_user, function (panier, panier_user, magasin_dispo) {
+        console.log(magasin_dispo, 'magasin_dispo')
+        res.render('panier', {
+            login: req.session.id_user,
+            title: 'panier',
+            panier: panier,
+            panier_user: panier_user,
+            magasin_dispo: magasin_dispo
+        });
+    })
+});
+
+
+router.post('/panier', function (req, res, next) {
+
+    if (req.body.form == "removePanier") {
+        console.log(req.body.nom)
+
+        model.removeProduitPanier(req.session.id_user, req.body, function (statuts) {
+            console.log("rediretion remove");
+            res.redirect('/panier')
+        })
+    }
+});
+
+/* modifier pour avoir page postres*/
+router.get('/postres', function (req, res, next) {
+    res.render('postres', {login: req.session.id_user, title: 'recette'});
+});
+/* modifier pour avoir les magasins suivant un post d'ingredient */
+router.post('/postres', function (req, res, next) {
+    console.log('entrer dans POST, req.body.food:', req.body.food)
+    if (req.body.form == "valider") {
+        console.log('valider')
+        console.log('req.body:', req.body)
+        model.disponibilite(req.body, function (status) {
+            console.log('contenu requete :', status)
+            res.render('postres', {login: req.session.id_user, title: 'listecourse_recette', status: status});
+            //res.redirect('listecourse')
+        })
+    }
+});
+
+router.get('/specialite', function (req, res, next) {
+    model.affiche_specialite(function (specialite, platsMonde) {
+        res.render('specialite', {login: req.session.id_user, title: 'specialite', specialite: specialite});
+    })
+});
+
+router.get('/platsMonde', function (req, res, next) {
+    res.render('platsMonde', {login: req.session.id_user, title: 'platsMonde'});
+});
+
+router.post('/platsMonde', function (req, res, next) {
+    if (req.body.form == "valider") {
+        model.afficher_plats(req.body, function (platsMonde, preparation) {
+            res.render('platsMonde', {
+                login: req.session.id_user,
+                title: 'recette',
+                platsMonde: platsMonde,
+                preparation: preparation
+            });
+        })
+    }
+});
+
+router.get('/choix_listecourse', function (req, res, next) {
+    res.render('choix_listecourse', {login: req.session.id_user, title: 'choix_listecourse'});
+
+});
+
+
+/* Page listecourse_ajouterPanier , on affiche les ingrédients de la bdd */
+router.post('/listecourse_ingredient', function (req, res, next) {
+    if (req.body.form == "addPanier") {
+        model.addProduitPanier(req.session.id_user, req.body.nom, function (status) {
+            res.redirect('/listecourse_ingredient')
+        })
+    } else if (req.body.form == "Supprimer") {
+        model.AfficheIngr(req.body.form, function (ingredients) {
+            res.render('listecourse_ingredient', {
+                login: req.session.id_user,
+                title: 'listecourse_ingredient',
+                ingredients: ingredients
+            });
+        })
+    } else if (req.body.form) {
+        model.AfficheIngr(req.body.nom, function (ingredients) {
+            res.render('listecourse_ingredient', {
+                login: req.session.id_user,
+                title: 'listecourse_ingredient',
+                ingredients: ingredients
+            });
+        })
+    } else {
+        res.redirect('/listecourse_ingredient')
+    }
+});
+
+router.get('/listecourse_ingredient', function (req, res, next) {
+    model.AfficheIngr(req.body.nom, function (ingredients, magasin_ingredients) {
+        res.render('listecourse_ingredient', {
+            login: req.session.id_user,
+            title: 'listecourse_ingredient',
+            ingredients: ingredients
+        });
+    })
+});
+
+router.post('/listecourse_recette', function (req, res, next) {
+    model.AfficheRecette(function (recettes, ingredients_recettes) {
+        res.render('listecourse_recette', {
+            login: req.session.id_user,
+            title: 'listecourse_recette',
+            recettes: recettes,
+            ingredients_recettes: ingredients_recettes
+        });
+    })
+});
+
+router.get('/listecourse_recette', function (req, res, next) {
+    model.AfficheRecette(function (recettes, ingredients_recettes) {
+        res.render('listecourse_recette', {
+            login: req.session.id_user,
+            title: 'listecourse_recette',
+            recettes: recettes,
+            ingredients_recettes: ingredients_recettes
+        });
+    })
+});
+
+
+router.get('/regles', function (req, res, next) {
+    res.render('regles', {login: req.session.id_user, title: 'regles'});
+});
+
 module.exports = router;
