@@ -324,16 +324,17 @@
 <br/>
     <div class="container-fluid p-0">
       <div class = "row">
-	<div class = "col-md-2 col-lg-2">  </div>
+	<div class = "col-md-2 col-lg-2" style="margin-left:-50px">  </div>
 <% var i = 0  %>
 <% for (recette of plats) { %>
 	<% i=i+1 %>
 	<% if(i<8){ %>
 
 
-        <div class="recette-content mx-auto mt-3 col-md-1 col-lg-1">
-            <h4 class="grd-titre" style="display: inline"> <p style ="border-bottom: thick double #32a1ce;">Jour <%- i%> </p></br> <a href="/recette/<%= recette.id %>"> <%= recette.nom %></a></h4>
-            <h4 class="ss-titre"><%= recette.categorie %> - <%= recette.sousCategorie %></h4>
+        <div class="recette-content mx-auto mt-3 col-md-1 col-lg-1" style="width: 150px;">
+	        
+            <h4 class="grd-titre" style="display: inline"> <p style ="border-bottom: thick double #32a1ce;">Jour <%- i%> </p></br>            <h4 class="ss-titre" style="margin-top:-10px"><%= recette.categorie %>  <%= recette.sousCategorie %></h4> <div class="" style="padding-bottom:10px"><a href="/recette/<%= recette.id %>"><img src="/images/rechercheRecette/<%= recette.id %>.jpg" class="img-responsive text-center float-right" alt="image" style="max-width: 80%;height: 50%;width: 150px;"></a></div><a href="/recette/<%= recette.id %>"> <%= recette.nom %></a></h4>
+
             <div class="text-secondary allergenes">
                 <%= recette.description %>
             </div>
@@ -348,16 +349,16 @@
          </div>
 
       <div class = "row">
-	<div class = "col-md-2 col-lg-2">  </div>
+	<div class = "col-md-2 col-lg-2" style="margin-left:-50px" >  </div>
 <% var i = 0  %>
 <% for (recette of diners) { %>
 	<% i=i+1 %>
 	<% if(i<8){ %>
 
 
-        <div class="recette-content mx-auto mt-3 col-md-1 col-lg-1"  style ="border-top: thick double #32a1ce;">
-	     <h4 class="ss-titre"><%= recette.categorie %> - <%= recette.sousCategorie %></h4>
-            <h4 class="grd-titre" style="display: inline"></br> <a href="/recette/<%= recette.id %>"> <%= recette.nom %></a></h4>
+        <div class="recette-content mx-auto mt-3 col-md-1 col-lg-1"  style ="border-top: thick double #32a1ce;width: 150px;">
+	     <h4 class="ss-titre"><%= recette.categorie %><%= recette.sousCategorie %></h4>
+            <h4 class="grd-titre" style="display: inline"></br><div class="" style="padding-bottom:10px"><a href="/recette/<%= recette.id %>"><img src="/images/rechercheRecette/<%= recette.id %>.jpg" class="img-responsive text-center float-right" alt="image" style="max-width: 80%;height: 50%;"></a></div> <a href="/recette/<%= recette.id %>"> <%= recette.nom %></a></h4>
 
             <div class="text-secondary allergenes">
                 <%= recette.description %>
