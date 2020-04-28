@@ -9,7 +9,7 @@
     <div class="row">
         <% var familleBis = famille; %>
         <% for (famille of famille){ %>
-            <div class="card border-0 col-4 mb-4">
+            <div class="card border-0 col-3 mb-4">
                 <div class="card-body shadow-sm bg-light">
                     <form action="/famille" method="post" class="col-4">
                         <input id="form" name="form" type="hidden" value="remove">
@@ -20,9 +20,9 @@
                     </form>
                     <h5 class="card-title"><%= famille.nom %></h5>
                     <% if (famille.type == 1 ){ %>
-                        <h6 class="card-subtitle mb-2 text-muted">Enfant</h6>
+                        <spam class="card-subtitle mb-2 text-muted">Enfant</spam>
                     <% } else { %>
-                        <h6 class="card-subtitle mb-2 text-muted">Adulte</h6>
+                        <spam class="card-subtitle mb-2 text-muted">Adulte</spam>
                     <% } %>
                     <div class="row">
                       <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-modif-<%= famille.id %>">
@@ -72,7 +72,7 @@
           <div class="card-body shadow-sm bg-light">
             <form action="/famille" method="post">
                 <h5>Un nouveau membre ?</h5>
-                <h6>Ajoutez le en 3 clic !</h6>
+                <spam class="card-subtitle">Ajoutez le en 3 clic !</spam>
                 <input id="form" name="form" type="hidden" value="add">
                 <div class="form-group">
                     <input type="text" id="Nom" name="nom" placeholder="Prénom" class="col-md-8 offset-md-1 rounded"
