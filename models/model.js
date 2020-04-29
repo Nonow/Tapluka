@@ -190,7 +190,7 @@ class Model {
     }
 
     static recherches(nom,prix,pays,personnes,temps,moment,regime, cb) {
-        connection.query("select * from recettes where categorie=? OR nom=? AND tempsPreparation>? OR sousCategorie=? OR specialite=?", [moment,nom,temps,regime,pays], (err, rows1) => {
+        connection.query("select * from recettes where categorie=? OR nom=? OR tempsPreparation>? OR sousCategorie=? OR specialite=?", [moment,nom,temps,regime,pays], (err, rows1) => {
             if (err) throw err
             cb(rows1)
         })
