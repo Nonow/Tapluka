@@ -61,7 +61,7 @@ router.get('/recherche', function (req, res, next) {
 
 
 router.get('/recherchePlanning', function (req, res, next) {
-    res.render('recherchePlanning', {login: req.session.id_user, title: 'recherchePlanning',diners: [], plats: [] });
+    res.render('recherchePlanning', {login: req.session.id_user, title: 'recherchePlanning',diners: [], plats: [],moment:-1 });
 });
 
 router.get('/platsDuMoment', function (req, res, next) {
@@ -84,12 +84,13 @@ router.post('/recherche', function (req, res, next) {
 
 
 router.post('/recherchePlanning', function (req, res, next) {
-    model.recherchePlanning(req.body.nom,req.body.prix, req.body.pays, req.body.personnes, req.body.temps, req.body.moment, req.body.regime, function (diners,plats) {
+    model.recherchePlanning(req.body.nom,req.body.prix, req.body.pays, req.body.personnes, req.body.temps, req.body.moment, req.body.regime, function (diners,plats,moment) {
 	    res.render('recherchePlanning', {
 	    login: req.session.id_user, 
             title: 'recherchePlanning',
             diners: diners,
-	    plats: plats
+	    plats: plats,
+	    moment : moment
         });
 	
     })
