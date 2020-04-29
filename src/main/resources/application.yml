@@ -1,0 +1,48 @@
+server:
+  port: 5000
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 4KB
+      max-file-size: 20MB
+      max-request-size: 25MB
+  profiles:
+    active: dev
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+---
+spring:
+  profiles:
+    active: rct
+  jpa:
+    hibernate:
+      ddl-auto: update
+ssl:
+  key-store: classpath:keystore.jks
+  key-store-password: password
+  key-store-type: JKS
+  key-alias: fastcook
+  key-password: password
+---
+spring:
+  profiles:
+    active: prod
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+
