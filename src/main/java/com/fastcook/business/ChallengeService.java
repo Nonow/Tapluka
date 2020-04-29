@@ -45,8 +45,9 @@ public class ChallengeService {
         return userRepository.save(userDao);
     }
 
-    public Boolean updateChallenge(ChallengeDto challengeDto, Long challengeId, User user) {
-        Optional<Challenge> optional = challengeRepository.findById(challengeId);
+    public User updateChallenge(ChallengeDto challengeDto, Long challengeId, User user) {
+        Optional<Challenge> optional = challengeRepository.findById(challengeDto.getUpdateId());
+        User userDao = userRepository.findById(user.getId()).get();
         if (optional.isPresent()) {
             Challenge challenge = optional.get();
             challenge.setTitle(challengeDto.getTitle());
@@ -57,9 +58,10 @@ public class ChallengeService {
                 file.setImageInBase64(Base64.getEncoder().encodeToString(challengeDto.getFile().getBytes()));
                 challenge.setFile(fileRepository.save(file));
             }
-            return true;
+            challengeRepository.save(challenge);
+            return userRepository.findById(user.getId()).get();
         }
-        return false;
+        return null;
     }
 
     public User deleteChallenge(Long challengeId, User user) {

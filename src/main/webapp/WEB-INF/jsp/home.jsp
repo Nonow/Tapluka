@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <title>Fast Cook</title>
 <meta charset="UTF-8">
@@ -14,7 +15,6 @@
 <script src="/static/scripts/dh.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
 
 <style>
     body {
@@ -92,9 +92,36 @@
 
                     </div>
                 </div>
-                <a href="#" class="dh-bar-item dh-button dh-hide-small dh-padding-large dh-hover-white"
-                   title="Notifications"><i class="fa fa-bell"></i>
-                    <span class="dh-badge dh-right dh-small dh-red">3</span></a>
+                <!-- Début Menu Notification" -->
+               <div class="dh-dropdown-hover dh-hide-small">
+                <a href="#" class="dh-button dh-padding-large dh-hover-white" title="Notifications"><i class="fa fa-bell"></i>
+                  <span class="dh-badge dh-right dh-small dh-red" id="nbNotif">3</span></a>
+                <div class="dh-dropdown-content dh-card-4 dh-bar-block" style="width:17%">
+                  <ul class="dh-ul dh-hoverable dh-white" id="listNotif">
+                    <li class="dh-padding">
+                      <a href="#" style="text-decoration: none;">
+                        <img id="imNotif" src="images/user1.png" alt="Kahina" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                        <span id="msgeNotif" style="font-size: 14px; position:relative; bottom: 5px;">Kahina a publié une recette</span>
+                      </a>
+                    </li>
+                    <li class="dh-padding">
+                      <a href="#" style="text-decoration: none; color:black">
+                      <img src="images/user2.png" alt="Hao" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                      <span style="font-size: 14px; position:relative; bottom: 5px;">Hao aime votre recette</span>
+                    </a>
+                    </li>
+                    <li class="dh-padding">
+                      <a href="#" style="text-decoration: none; color:black">
+                      <img src="images/profile.png" alt="Sabah" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                      <span style="font-size: 14px; position:relative; bottom: 5px;">Sabah a commenté votre recette</span>
+                    </a>
+                    </li>
+                   
+                  </ul>
+                </div>
+               </div>
+                    
+             <!-- Fin Menu Notification" -->
 
                 <div class="dh-dropdown-hover dh-right">
                     <button class="dh-button dh-padding-large dh-hover-white" title="profil"
@@ -163,29 +190,88 @@
             <br>
         </div>
 
-        <!-- Middle Column -->
+        <!-- Début Colonne du milieu -->
         <div class="dh-col m7">
 
-            <div class="dh-row-padding">
-                <div class="dh-col m12">
-                    <div class="dh-card dh-round dh-white">
-                        <div class="dh-container dh-padding">
-                            <h6 class="dh-opacity"><strong>Des idées, des conseils, Exprimez-vous ici !!!</strong></h6>
-                            <hr>
-                            <!--p contenteditable="true" class="dh-border dh-padding"></p-->
-                            <div contenteditable="true" class="dh-border dh-padding" style="height:50px;"></div>
-                            <!--form>
-                                <textarea col="100" row="4" width="100%"></textarea>
-                            </form-->
-                            <br/>
-                            <button id="id_post" type="button" class="dh-button dh-theme-d2"
-                                    style="position:relative; left:578px;"><i class="fa fa-share"></i> Poster
-                            </button>
-                        </div>
-                    </div>
+            <!-- Début Poster Avis -->
+           <div class="dh-row-padding">
+            <div class="dh-col m12">
+              <div class="dh-card dh-round dh-white">
+                <div class="dh-container dh-padding">
+                  <h6 class="dh-opacity"><strong>Des idées, des conseils, Exprimez-vous ici !!!</strong></h6><hr>
+                  <div contenteditable="true" onclick="publierAvis()" class="dh-border dh-padding" id="postAvis" style="height:40px;"></div>
+                  <br/>
                 </div>
+              </div>
             </div>
+          </div>
+          <!--Fin Poster Avis-->
 
+            <!-- Début Display Avis-->
+            <c:if test="${not empty publications}">
+            <c:forEach items="${publications}" var="publication">
+              <input type="hidden" id="publicationId" name="publicationId" value="${publication.id}" />
+              <div class="dh-container dh-card dh-white dh-round dh-margin"><br>
+                  <img src="data:${publication.getUser().avatar.mimeType};base64, ${publication.getUser().avatar.imageInBase64}" alt="${publication.user.username}" class="dh-left dh-circle dh-margin-right"
+                       style="width:60px">
+                  <div class="dh-right">
+                      <span>"${publication.createDate}" </span> <span style="margin-right: 4px;"> | </span>
+                      <div class="dh-dropdown-hover dh-right" id="modProf1"> <!-- Pour survoler-->
+                          <a style="text-decoration:none;" class="" href="#" id="ic_modifSup">
+                              <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                          </a>
+
+                          <div id="edit" class="dh-dropdown-content dh-card-4 dh-bar-block" style="right:0;">
+                              <a href="#" onclick="modifierAvis('avisPub');" style="text-decoration:none;" class="dh-bar-item dh-button">modifier</a>
+                              <a href="#" onclick="supprimerAvis();" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
+                          </div>
+
+                      </div>
+                  </div>
+                  <span class="dh-opacity"
+                        style="font-size:16px; font-family:'Segoe UI',Arial,sans-serif; font-weight:400;"><b>${publication.user.username} | Idées</b></span><br>
+                  <hr class="dh-clear">
+                  <p id="avisPub">"${publication.content}"</p>
+                  <button class="dh-button dh-white dh-border dh-left" onclick="likeFunction(this)"><b><i class="fa fa-thumbs-up"></i> Like</b></button>
+                  <p><button class="dh-button dh-theme-d1 dh-right" onclick="voirComment('com', 'sepCom')" id="btnCom"><b>Reponses  </b> <span class="dh-tag dh-white">${publication.comments.size()}</span></button></p>
+                  <span class="dh-clear"></span>
+                  <div  id="com" style="display:none">
+                     <hr/>
+                     <div class="dh-col-s4"></div>
+
+                      <div style="margin-left: 70px;">
+                          <c:if test="${not empty publication.comments}"
+                          <c:forEach items="${publication.comments}" var="comment">
+                            <div class="dh-row">
+                              <img src="data:${comment.user.avatar.mimeType};base64, ${comment.user.avatar.imageInBase64}" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
+                              <div class="dh-col s10" style="position : relative; top:-10px;">
+                                <h4 >
+                                <span id="idUserComment">"${comment.user.username}"</span>
+                                <span class="dh-opacity dh-medium"><span id="dateCom">"${comment.createDate}"</span> </span></h4>
+                                <p id="c">${comment.content}</p>
+                              </div>
+                            </div>
+                          </c:forEach>
+                          </c:if>
+                      </div>
+                       <div class="dh-row" style="margin-left: 70px;">
+
+                          <img src="images/profile.png" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
+                          <form:form enctype="multipart/form-data" action="newComment " method="post" modelAttribute="newComment"  class="dh-col s10">
+                            <div class="dh-row">
+                               <form:textarea style="width:70%;"  class="dh-border dh-padding dh-white dh-col s10" rows="1"  name="comment" id="comment" path="content" placeholder="Laisses ton commentaire ici !!!"/>
+                              <form:errors cssClass="error" path="content"/>
+                              <button class=" dh-section" type="submit" id="comment" style="margin-left: 4px; background-color: transparent;">
+                                <i class="fa fa-paper-plane" style="color:#4d636f; position: relative; top: 1px;" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                          </form:form>
+                      </div>
+                  </div>
+                  <br/>
+            </div>
+            </c:forEach>
+            </c:if>
             <div class="dh-container dh-card dh-white dh-round dh-margin"><br>
                 <img src="/images/user2.png" alt="Mich Davh" class="dh-left dh-circle dh-margin-right"
                      style="width:60px">
@@ -195,126 +281,157 @@
                         <a style="text-decoration:none;" class="" href="#" id="ic_modifSup">
                             <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                         </a>
-                        <div id="edit" class="dh-dropdown-content dh-card-4 dh-bar-block" style="right:0;">
-                            <a href="#" onclick="modifierAvis('avisPub');" style="text-decoration:none;" class="dh-bar-item dh-button">modifier</a>
-                            <a href="#" onclick="supprimerAvis();" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
-                        </div>
                     </div>
                 </div>
                 <span class="dh-opacity"
                       style="font-size:16px; font-family:'Segoe UI',Arial,sans-serif; font-weight:400;"><b>Mich Davh | Idées</b></span><br>
                 <hr class="dh-clear">
-                <p id="pub1_avant">Manger 5 fruits et Légumes par Jour.</p>
-                <button id="id_like_1" type="button" class="dh-button dh-theme-d2 dh-margin-bottom"><i
-                        class="fa fa-thumbs-up"></i> Like
-                </button>
-                <button id="id_comment_1" type="button" class="dh-button dh-theme-d2 dh-margin-bottom"
-                        onclick="myFunction('commentaire1')"><i class="fa fa-comment"></i> Comment
-                </button>
-                <div id="commentaire1" class="dh-hide dh-container">
+                <p id="avisPub">Manger 5 fruits et Légumes par Jour.</p>
+                <button class="dh-button dh-white dh-border dh-left" onclick="likeFunction(this)"><b><i class="fa fa-thumbs-up"></i> Like</b></button>
+                <p><button class="dh-button dh-theme-d1 dh-right" onclick="voirComment('com', 'sepCom')" id="btnCom"><b>Reponses  </b> <span class="dh-tag dh-white">1</span></button></p>
+                <span class="dh-clear"></span>
+                <div  id="com" style="display:none">
+                   <hr/>
+                   <div class="dh-col-s4"></div>
 
-                    <span class="dh-left dh-margin-right"> <i class="fa fa-user-circle"
-                                                              style="font-size: 24px;"></i></span>
-                    <!--span class="dh-right"> <i class="fa fa-send-o"></i></span-->
-                    <textarea style="width:50%;" class="form-control" rows="1" name="comment"
-                              placeholder="Laisses ton commentaire ici !!!"> </textarea> <br/>
-
-
-                </div>
-            </div>
-
-            <div class="dh-container dh-card dh-white dh-round dh-margin"><br>
-                <img src="/images/user1.png" alt="Sabah" class="dh-left dh-circle dh-margin-right" style="width:60px">
-                <div class="dh-right">
-                    <span>15 min </span> <span style="margin-right: 4px;"> | </span>
-                    <!--div class="dh-dropdown-click dh-right" id="modProf1"--> <!-- Pour le clic-->
-                    <div class="dh-dropdown-hover dh-right" id="modProf2"> <!-- Pour survoler-->
-                        <a style="text-decoration:none;" class="" href="#" id="ic_modifSupRec">
-                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                        </a>
-                        <div id="" class="dh-dropdown-content dh-card-4 dh-bar-block" style="right:0;">
-                            <a href="#" onclick="modifierRecette('modRecet','titreR', 'descRecet', 'partRecet', 'cateRecet',
-              'imageRec', 'durRecP', 'durRecC');"
-                               style="text-decoration:none;" class="dh-bar-item dh-button">modifier</a>
-                            <a href="#" onclick="supprimerRecette('supRecette');" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
+                    <div style="margin-left: 70px;">
+                        <div class="dh-row">
+                          <img src="images/user1.png" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
+                          <div class="dh-col s10" style="position : relative; top:-10px;">
+                            <h4 ><span id="idUserComment">Jalil</span> <span class="dh-opacity dh-medium"><span id="dateCom">3 mars 2020</span>, <span></span id="heureCom">6:32 </span></h4>
+                            <p id="c">Bon conseil mec !</p>
+                          </div>
                         </div>
                     </div>
-                </div>
-                <span class="dh-opacity"
-                      style="font-size:16px; font-family:'Segoe UI',Arial,sans-serif; font-weight:400;"><b>Jalil | Recette</b></span><br>
-                <hr class="dh-clear">
+                     <div class="dh-row" style="margin-left: 70px;">
 
-                <p>Gateaux d'Algéries</p>
-                <div class="dh-row-padding" style="margin:0 -16px">
-                    <div class="dh-half">
-                        <img src="/images/recette7.jpeg" style="width:100%" alt="Gateau 1" class="dh-margin-bottom">
+                        <img src="images/profile.png" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
+                        <form:form enctype="multipart/form-data" action="newComment" method="post" modelAttribute="newComment"  class="dh-col s10">
+                          <div class="dh-row">
+                             <form:textarea style="width:70%;"  class="dh-border dh-padding dh-white dh-col s10" rows="1"  name="comment" id="comment" path="content" placeholder="Laisses ton commentaire ici !!!"/>
+                            <form:errors cssClass="error" path="content"/>
+                            <button class=" dh-section" type="submit" id="comment" style="margin-left: 4px; background-color: transparent;">
+                              <i class="fa fa-paper-plane" style="color:#4d636f; position: relative; top: 1px;" aria-hidden="true"></i>
+                            </button>
+                          </div>
+                        </form:form>
                     </div>
-                    <div class="dh-half">
-                        <div class="dh-row">
+                </div>
+                <br/>
+            </div>
+            <!-- Fin Display Avis -->
+            
+        <!-- Début Display Publication Recette-->
+
+            <div class="dh-container dh-card dh-white dh-round dh-margin"><br>
+        <img src="images/user1.png" alt="Sabah" class="dh-left dh-circle dh-margin-right" style="width:60px">
+        <div class="dh-right">
+          <span>15 min </span> <span style="margin-right: 4px;"> | </span>
+          <!--div class="dh-dropdown-click dh-right" id="modProf1"--> <!-- Pour le clic-->
+          <div class="dh-dropdown-hover dh-right" id="modProf2"> <!-- Pour survoler-->
+            <a style="text-decoration:none;" class="" href="#" id="ic_modifSupRec"> 
+              <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+            </a>
+            <div id="edit" class="dh-dropdown-content dh-card-4 dh-bar-block" style="right:0;">
+              <a href="#" onclick="modifierRecette('modRecet','titreR', 'descRecet', 'partRecet', 'cateRecet', 
+              'imageRec', 'durRecP', 'durRecC');"
+               style="text-decoration:none;" class="dh-bar-item dh-button">modifier</a>
+              <a href="#" onclick="supprimerRecette('supRecette');" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
+            </div>
+          </div>
+        </div>
+         <span class="dh-opacity" style="font-size:16px; font-family:'Segoe UI',Arial,sans-serif; font-weight:400;"><b>Jalil | Recette</b></span><br>
+        <hr class="dh-clear">
+
+        <p id="titreR">Gateaux d'Algéries</p>
+          <div class="dh-row-padding" style="margin:0 -16px">
+            <div class="dh-half">
+              <img id="imageRec" src="images/recette7.jpeg" style="width:100%" alt="Gateau 1" class="dh-margin-bottom">
+            </div>
+           <div class="dh-half">
+            <div class="dh-row">
                     <span class="dh-half">
                       <b>Catégorie : </b> <span id="cateRecet"> Gateau  </span>
                     </span>
-                            <span class="dh-half">
+                  <span class="dh-half">
                     <b>Nombre de parts : </b><span id="partRecet"> 4 </span>
                   </span>
-
-                        </div>
-                        <div class="dh-row">
+                
+             </div>
+             <div class="dh-row">
                 <span class="dh-col s6">
                   <b>Préparation : </b> <span id="durRecP"> 4 </span> min
                 </span>
-
-
-                            <span class="dh-col s6">
+                
+             
+                <span class="dh-col s6">
                   <b>Cuisson : </b> <span id="durRecC"> 10 </span> min
                 </span>
-
-                        </div>
-                        <div>
-                            <p id="descRecet">
-                                <b>Etapes de préparation : </b> <br/>
-                                <span style="margin-left: 50px;"><i><b>Etape 1 : </b></i></span><span> <i>Epulcher</i></span><br/>
-                                <span style="margin-left: 50px;"><i><b>Etape 2 : </b></i></span><span> <i>Cuire</i></span><br/>
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <span class="note">
-            <button type="button" class="dh-button dh-margin-bottom">
-              <i class="fa fa-star-o" style="font-size: 24px; color:red;"></i>
-              <i class="fa fa-star-o" style="font-size: 24px; color:red;"></i>
-              <i class="fa fa-star-o" style="font-size: 24px; color:red;"></i>
-              <i class="fa fa-star-o" style="font-size: 24px; color:red;"></i>
-              <i class="fa fa-star-o" style="font-size: 24px; color:red;"></i>
-            </button> 
-        </span>
-
-                <button id="id_like_2" type="button" class="dh-button dh-theme-d2 dh-margin-bottom">
-                    <i class="fa fa-thumbs-up"></i> Like
-                </button>
-
-                <button id="id_comment_2" type="button" class="dh-button dh-theme-d2 dh-margin-bottom"
-                        onclick="myFunction('commentaire')"><i class="fa fa-comment"></i> Comment
-                </button>
-
-
-                <div id="commentaire" class="dh-hide dh-container">
-
-                    <span class="dh-left dh-margin-right"> <i class="fa fa-user-circle"
-                                                              style="font-size: 24px;"></i></span>
-                    <!--span class="dh-right"> <i class="fa fa-send-o"></i></span-->
-                    <textarea style="width:50%;" class="form-control" rows="1" name="comment"
-                              placeholder="Laisses ton commentaire ici !!!"> </textarea> <br/>
-
-                </div>
+              
             </div>
-
-            <!-- End Middle Column -->
+            <div>
+               <p id="descRecet">
+                <b>Etapes de préparation : </b> <br/>
+                <span style="margin-left: 50px;"><i><b>Etape 1 : </b></i></span><span> <i>Epulcher</i></span><br/>
+                <span style="margin-left: 50px;"><i><b>Etape 2 : </b></i></span><span> <i>Cuire</i></span><br/>
+               </p>
+             
+             </div>
+           </div>
         </div>
 
-        <!-- Right Column -->
+        <div class=" dh-left" style="display: inline;">
+          <button class="dh-button dh-white dh-border" onclick="likeFunction(this)">
+            <b><i class="fa fa-thumbs-up"></i> Like</b>
+          </button>
+          <div style="display: inline; position: relative; top: 10px; margin-left: 2px;">
+            <span onclick="noter(this)" id="1one" style="font-size:30px; cursor:pointer;"  class="fa fa-star"></span>
+            <span onclick="noter(this)" id="2one"  style="font-size:30px; cursor:pointer;" class="fa fa-star "></span>
+            <span onclick="noter(this)" id="3one"  style="font-size:30px; cursor:pointer;" class="fa fa-star "></span>
+            <span onclick="noter(this)" id="4one"  style="font-size:30px; cursor:pointer;" class="fa fa-star"></span>
+            <span onclick="noter(this)" id="5one"  style="font-size:30px; cursor:pointer;" class="fa fa-star"></span>  
+          </div>
+           <span style="display: inline; position: relative; top: 7px;" class="dh-opacity">(Note : <span id="note">0</span>/5)</span> 
+        </div>
+        
+        <p><button class="dh-button dh-theme-d1 dh-right" onclick="voirComment('com2', 'sepCom')" id="btnCom"><b>Reponses  </b> <span class="dh-tag dh-white">1</span></button></p>
+        <span class="dh-clear"></span>
+        <div  id="com2" style="display:none">
+           <hr/>
+           <div class="dh-col-s4"></div>
+            
+            <div style="margin-left: 70px;">
+                <div class="dh-row">
+                  <img src="images/user2.png" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
+                  <div class="dh-col s10" style="position : relative; top:-10px;">
+                    <h4 ><span id="idUserComment">Sarah</span> <span class="dh-opacity dh-medium"><span id="dateCom">2 mars 2020</span>, <span></span id="heureCom">18:09 </span></h4>
+                    <p id="c">Très bonne recette.</p>
+                  </div>
+                </div>
+            </div>
+            <div class="dh-row" style="margin-left: 70px;">
+              
+              <img src="images/profile.png" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
+              <form action="#" class="dh-col s10">
+                <div class="dh-row">
+                  <textarea id="comment" style="width:70%;" class="form-control dh-col s10" rows="1" name="comment" placeholder="Laisses ton commentaire ici !!!">
+                  </textarea>
+                  <button class=" dh-section" type="submit" id="comment" style="margin-left: 4px; background-color: transparent;">
+                    <i class="fa fa-paper-plane" style="color:#4d636f; position: relative; top: 1px;" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </form>
+          </div>
+        </div>
+       
+        <br/>
+      </div>
+      <!--Fin Display Publication Recette-->
+
+            <!-- Fin  Colonne du milieu -->
+        </div>
+
+        <!-- Début colonne de droite -->
 
         <div class="dh-col m3">
 
@@ -392,7 +509,7 @@
         <br>
 
 
-        <!-- End Right Column -->
+        <!-- Fin Colonne de droite -->
     </div>
 
     <!-- End Grid -->
@@ -400,11 +517,13 @@
 
 <!-- End Page Container -->
 
+<!-- Début Blocs modaux-->
 <script src="/scripts/dreamhunter.js"></script>
 <script src="/scripts/home.js"></script>
 <script src="/scripts/recipe.js"></script>
 
 <jsp:include page="modals.jsp"/>
+<!-- Fin blocs modaux-->
 
 <!-- Footer -->
 <!--footer class="dh-container dh-theme-d3 dh-padding-16">

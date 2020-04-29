@@ -1,4 +1,9 @@
-function modifierChallenge(titreChal, descChal, imChal) {
+function modifierChallenge(titreChal, descChal, imChal, idComp) {
+
+    let idComponent = document.getElementById(idComp);
+    let idHiddenInput = document.getElementById("updateChallengeId");
+    idHiddenInput.value = idComponent.value;
+
     /* Données issues de la recette sauvegardée, publiée ou créée*/
     let titre = document.getElementById(titreChal);
     let descript = document.getElementById(descChal);   
@@ -17,7 +22,10 @@ function modifierChallenge(titreChal, descChal, imChal) {
     document.getElementById("modifChallenge").style.display = "block";
 } 
 
-function supprimerChallenge(){
+function supprimerChallenge(idComp){
+       let idComponent = document.getElementById(idComp);
+       let idHiddenInput = document.getElementById("deleteChallengeId");
+       idHiddenInput.value = idComponent.value;
     document.getElementById("supChallenge").style.display='block';
 }
  

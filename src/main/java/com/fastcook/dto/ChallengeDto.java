@@ -10,6 +10,8 @@ import javax.validation.constraints.Null;
 @Data
 public class ChallengeDto {
 
+    private Long updateId;
+
     @NotEmpty
     @NotNull
     private String title;

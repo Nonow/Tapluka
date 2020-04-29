@@ -92,3 +92,51 @@ function modifierAvis(avisPub) {
 function supprimerAvis(){
     document.getElementById("suprimerAvis").style.display='block';
 }
+/* Publier Avis */
+function publierAvis(){
+    document.getElementById("publierAvis").style.display='block';
+}
+
+document.getElementById("btnCom").click();
+
+/*Modifier statut Bouton J'aime*/
+function likeFunction(x) {
+  x.style.fontWeight = "bold";
+  x.innerHTML = "✓ Liked";
+}
+
+/*Voir commentaire et commenter*/
+ 
+ function voirComment(id, s) {
+    var x = document.getElementById(id); //on récupères l'id du bloc caché
+    var sep = document.getElementById(s); //Séparateurs (optionnel)
+
+    if (x.className.indexOf("dh-show") == -1) { //Si les commentaires sont cachés
+      x.className += " dh-show";
+
+      sep.className = x.className.replace("dh-show", "dh-hide");
+    } else {  //Si les commentaires sont visibles
+      x.className = x.className.replace("dh-show", "");
+      sep.className += " dh-show";
+    }
+    
+  }
+  
+ /* Noter */
+function noter(item)
+{
+    let maNote = document.getElementById('note');
+    let count=item.id[0];
+    sessionStorage.starRating = count; //On stocke localement l'état courant la note
+    let subid= item.id.substring(1);//on recupère le premier caractère de l'id 
+    for(let i=0;i<5;i++){
+        if(i<count){
+            document.getElementById((i+1)+subid).style.color="orange";
+            maNote.textContent = count;
+        }
+        else{
+            document.getElementById((i+1)+subid).style.color="#000";
+        }
+    }
+
+}

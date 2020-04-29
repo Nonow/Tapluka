@@ -3,6 +3,7 @@ package com.fastcook.controller;
 import com.fastcook.business.PublicationService;
 import com.fastcook.dao.Publication;
 import com.fastcook.dao.User;
+import com.fastcook.dto.DeleteDto;
 import com.fastcook.dto.PublicationDto;
 import com.fastcook.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,9 @@ public class PublicationController {
     PublicationService publicationService;
 
     @PostMapping("deletePublication")
-    public String deletePublication(@RequestParam("deletePublicationId") Long publicationId, @SessionAttribute User user, HttpSession httpSession) {
-        publicationService.deletePublication(publicationId, user);
+    public String deletePublication(@ModelAttribute("deleteDto") @Validated DeleteDto deleteDto, @SessionAttribute User user, HttpSession httpSession) {
+        user = publicationService.deletePublication(deleteDto.getDeleteId(), user);
+        httpSession.setAttribute("user", user);
         return "home";
     }
 }

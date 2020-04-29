@@ -1,5 +1,6 @@
 package com.fastcook.controller;
 
+import com.fastcook.dao.Publication;
 import com.fastcook.dto.*;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
@@ -89,5 +90,11 @@ public class DefaultController {
     public DeleteDto deleteDto() {
         return new DeleteDto();
     }
+
+    @ModelAttribute("newPublication")
+    public PublicationDto newPublicationDto() {
+        return new PublicationDto();
+    }
+
 
 }

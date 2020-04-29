@@ -29,6 +29,7 @@ public class ConversationService {
     public User saveSubjectOfConversation(SubjectOfConversationDto subjectOfConversationDto, User user) {
         User userDao = userRepository.findById(user.getId()).get();
         Conversation conversation = new Conversation();
+        conversation.setUser(user);
         conversation.setTitle(subjectOfConversationDto.getTitle2());
         conversation.setContent(subjectOfConversationDto.getDescription2());
         File file = new File();
@@ -48,10 +49,22 @@ public class ConversationService {
     }
 
     public User deleteConversation(Long conversationId, User user) {
-        //conversationRepository.deleteById(conversationId);
+        conversationRepository.deleteById(conversationId);
         User userDao = userRepository.findById(user.getId()).get();
         userDao.getConversations().removeIf(c -> (c.getId() == conversationId));
         return userRepository.save(userDao);
+    }
+
+    public User updateConversation(SubjectOfConversationDto subjectOfConversationDto, Long updateId, User user) {
+        Conversation conversation = conversationRepository.findById(updateId).get();
+        conversation.setTitle(subjectOfConversationDto.getTitle2());
+        conversation.setContent(subjectOfConversationDto.getDescription2());
+        File file = new File();
+        file.setMimeType(subjectOfConversationDto.getFile2().getContentType());
+        file.setImageInBase64(Base64.getEncoder().encodeToString(subjectOfConversationDto.getFile2().getBytes()));
+        conversation.setFile(fileRepository.save(file));
+        conversationRepository.save(conversation);
+        return userRepository.findById(user.getId()).get();
     }
 
 

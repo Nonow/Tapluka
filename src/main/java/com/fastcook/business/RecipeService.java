@@ -85,7 +85,6 @@ public class RecipeService {
         recipeRepository.delete(recipeRepository.findById(recipeId).get());
         User userDao = userRepository.findById(user.getId()).get();
         userDao.getRecipes().removeIf(recipe -> (recipe.getId() == recipeId));
-        userRepository.save(userDao);
-        return userDao;
+        return userRepository.save(userDao);
     }
 }

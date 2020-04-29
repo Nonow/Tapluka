@@ -93,9 +93,34 @@ h1, h2, h3, h4, h6 {
 
                      </div>
                  </div>
-                 <a href="#" class="dh-bar-item dh-button dh-hide-small dh-padding-large dh-hover-white"
-                    title="Notifications"><i class="fa fa-bell"></i>
-                     <span class="dh-badge dh-right dh-small dh-red">3</span></a>
+                 
+                 <div class="dh-dropdown-hover dh-hide-small">
+                    <a href="#" class="dh-button dh-padding-large dh-hover-white" title="Notifications"><i class="fa fa-bell"></i>
+                      <span class="dh-badge dh-right dh-small dh-red" id="nbNotif">3</span></a>
+                    <div class="dh-dropdown-content dh-card-4 dh-bar-block" style="width:17%">
+                      <ul class="dh-ul dh-hoverable dh-white" id="listNotif">
+                        <li class="dh-padding">
+                          <a href="#" style="text-decoration: none;">
+                            <img id="imNotif" src="images/user1.png" alt="Kahina" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                            <span id="msgeNotif" style="font-size: 14px; position:relative; bottom: 5px;">Kahina a publié une recette</span>
+                          </a>
+                        </li>
+                        <li class="dh-padding">
+                          <a href="#" style="text-decoration: none; color:black">
+                          <img src="images/user2.png" alt="Hao" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                          <span style="font-size: 14px; position:relative; bottom: 5px;">Hao aime votre recette</span>
+                        </a>
+                        </li>
+                        <li class="dh-padding">
+                          <a href="#" style="text-decoration: none; color:black">
+                          <img src="images/profile.png" alt="Sabah" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                          <span style="font-size: 14px; position:relative; bottom: 5px;">Sabah a commenté votre recette</span>
+                        </a>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                   </div>
 
                  <div class="dh-dropdown-hover dh-right">
                      <button class="dh-button dh-padding-large dh-hover-white" title="profil"
@@ -152,30 +177,32 @@ h1, h2, h3, h4, h6 {
                             <div id="chalCree" class="dh-container menu dh-padding">
                                     <h5 class="dh-opacity text-uppercase dh-medium"><strong>Mes Challenges créés </strong></h5>
                                     <c:forEach items="${myChallenges}" var="challenge">
+                                    <input type="hidden" id="challengeId" name="challengeId" value="${challenge.id}">
                                     <hr class="dh-clear">
                                       <div class="dh-row">
-                                        <div class="dh-col m2 text-center">
-                                          <img class="dh-circle" src="data:${challenge.file.mimeType};base64, ${challenge.file.imageInBase64}" style="width:40px;height:40px" id="imChal1">
-                                        </div>
-                                        <div class="dh-col m10 dh-container">
-                                          <h4 style="font-size:medium" class="dh-left" id="tChal1">${challenge.title} </h4>
-                                          <p id="dChal1" class="dh-hide">
-                                              ${challenge.description}
-                                          </p>
-                                          <div class="dh-right dh-medium">
-                                              <span style="margin-right: 4px;" class="dh-opacity">|</span>
-                                              <div class="dh-dropdown-hover dh-right dh-hide-small" id="modRec"> <!-- Pour survoler-->
-                                                  <i class="fa fa-ellipsis-h" aria-hidden="true" style="cursor: pointer; "></i>
-                                                <div id="" class="dh-dropdown-content dh-card-4 dh-bar-block" style="right:0;">
-                                                  <a href="#"  onclick="modifierChallenge('tChal1', 'dChal1', 'imChal1');" style="text-decoration:none;" class="dh-bar-item dh-white dh-button">modifier</a>
-                                                  <a href="#"  onclick="supprimerChallenge();" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
-                                                </div>
+                                      <div class="dh-col m2 text-center">
+                                        <img class="dh-circle" src="data:${challenge.file.mimeType};base64, ${challenge.file.imageInBase64}" style="width:40px;height:40px" id="imChal1">
+                                      </div>
+                                      <div class="dh-col m10 dh-container">
+                                        <h4 style="font-size:medium" class="dh-left" id="tChal1">${challenge.title} </h4>
+                                        <p id="dChal1" class="dh-hide">
+                                            ${challenge.description} 
+                                        </p>  
+                                        <div class="dh-right dh-medium">
+                                            <span style="margin-right: 4px;" class="dh-opacity">|</span>
+                                            <div class="dh-dropdown-hover dh-right dh-hide-small" id="modRec"> <!-- Pour survoler-->
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true" style="cursor: pointer; "></i>
+                                              <div id="" class="dh-dropdown-content dh-card-4 dh-bar-block" style="right:0;">
+                                                <a href="#"  onclick="modifierChallenge('tChal1', 'dChal1', 'imChal1','challengeId');" style="text-decoration:none;" class="dh-bar-item dh-white dh-button">modifier</a>
+                                                <a href="#"  onclick="supprimerChallenge('challengeId');" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
                                               </div>
                                             </div>
-
-                                        </div>
+                                          </div>
+                                    
                                       </div>
+                                    </div>
                                     </c:forEach>
+                                    
                                     <hr class="dh-clear">
                                     <div class="dh-row">
                                         <div class="dh-col m2 text-center">
@@ -385,6 +412,7 @@ h1, h2, h3, h4, h6 {
   </div>
   <br/>
 
+ <!-- Début Blocs modaux-->
   <script src="/scripts/dreamhunter.js"></script>
   <script src="/scripts/challenge.js"></script>
  <jsp:include page="modals.jsp"/>

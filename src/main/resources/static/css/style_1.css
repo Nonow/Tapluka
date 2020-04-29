@@ -338,10 +338,15 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .dh-border-pale-red,.dh-hover-border-pale-red:hover{border-color:#ffe7e7!important}.dh-border-pale-green,.dh-hover-border-pale-green:hover{border-color:#e7ffe7!important}
 .dh-border-pale-yellow,.dh-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.dh-border-pale-blue,.dh-hover-border-pale-blue:hover{border-color:#e7ffff!important}
 
-#noter:hover{
-	background-color:white;
-}
 
 .dh-titre{
 	font-size:16px;
+}
+
+#listNotif li:hover{
+	background-color:#4d636f;
+}
+
+#listNotif span:hover, #listNotif a:hover{
+	color:#fff;
 }

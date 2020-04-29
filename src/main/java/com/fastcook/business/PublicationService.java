@@ -33,6 +33,7 @@ public class PublicationService {
     public User savePublication(PublicationDto publicationDto, User user) {
         User userDao = userRepository.findById(user.getId()).get();
         Publication publication = new Publication();
+        publication.setUser(user);
         publication.setContent(publicationDto.getContent());
         if (publicationDto.getFile() != null) {
             File file = new File();
@@ -104,6 +105,11 @@ public class PublicationService {
         User userDao = userRepository.findById(user.getId()).get();
         userDao.getPublications().removeIf(p -> (p.getId() == publicationId));
         return userRepository.save(userDao);
+    }
+
+    public Iterable<Publication> getAll() {
+
+        return publicationRepository.findAll();
     }
 }
 

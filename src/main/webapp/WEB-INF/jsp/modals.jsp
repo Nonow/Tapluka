@@ -322,8 +322,8 @@
                 <div class="dh-row dh-padding">
 
                 <div class="dh-col s9" >
-                    <form:textarea class="dh-border dh-padding dh-white" rows="4" cols="50" name="aviModi" id="aviModi" path="aviModi"/>
-                    <form:errors cssClass="error" path="aviModi"/>
+                    <form:textarea class="dh-border dh-padding dh-white" rows="4" cols="50" name="aviModi" id="aviModi" path="content"/>
+                    <form:errors cssClass="error" path="content"/>
                 </div>
                 <span onclick="document.getElementById('publicationAvis').style.display='none'" class="dh-col s3">
                       <button class="dh-button  dh-round dh-theme-d2" type="submit" style="position:relative; top:50px; margin-left:20px; color:#fff !important; background-color:#4d636f !important;">
@@ -340,18 +340,21 @@
 <!-- Supprimer Avis-->
 <div id="suprimerAvis" class="dh-modal">
     <div class="dh-modal-content dh-animate-zoom" style="width:40%">
-        <div class="dh-container dh-theme-d2 dh-center">
-            <span onclick="document.getElementById('suprimerAvis').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
-            <h4>Etes-vous sûr de vouloir supprimer cet avis ?</h4>
-        </div>
-        <div class="dh-container">
-            <div class="dh-padding">
-                <button class="dh-button  dh-round dh-theme-d2" type="submit" style="margin-left:100px; color:#fff !important; background-color:#4d636f !important;"><i class="fa fa-check"></i> Confirmer</button>
-                <span onclick="document.getElementById('suprimerAvis').style.display='none'" class="">
-              <button class="dh-button  dh-round dh-theme-d2" type="reset" style="color:#fff !important; background-color:#4d636f !important;"><i class=""></i> Annuler</button>
-          </span>
+        <form:form action="deletePublication" method="post" modelAttribute="deleteDto">
+            <form:input type="hidden" id="deletePublicationId" name="deletePublicationId" path="deleteId"/>
+            <div class="dh-container dh-theme-d2 dh-center">
+                <span onclick="document.getElementById('suprimerAvis').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
+                <h4>Etes-vous sûr de vouloir supprimer cet avis ?</h4>
             </div>
-        </div>
+            <div class="dh-container">
+                <div class="dh-padding">
+                    <button class="dh-button  dh-round dh-theme-d2" type="submit" style="margin-left:100px; color:#fff !important; background-color:#4d636f !important;"><i class="fa fa-check"></i> Confirmer</button>
+                    <span onclick="document.getElementById('suprimerAvis').style.display='none'" class="">
+                  <button class="dh-button  dh-round dh-theme-d2" type="reset" style="color:#fff !important; background-color:#4d636f !important;"><i class=""></i> Annuler</button>
+              </span>
+                </div>
+            </div>
+        </form:form>
     </div>
 </div>
 
@@ -360,22 +363,25 @@
 <!-- Supprimer Sujet-->
 <div id="supSujet" class="dh-modal">
     <div class="dh-modal-content dh-animate-zoom" style="width:40%">
-        <div class="dh-container dh-theme-d2 dh-center">
-            <span onclick="document.getElementById('supSujet').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
-            <h4>Etes-vous sûr de vouloir supprimer ce sujet ?</h4>
-        </div>
-        <div class="dh-container">
-            <div class="dh-padding">
-                <button class="dh-button  dh-round dh-theme-d2" type="submit" style="margin-left:100px; color:#fff !important; background-color:#4d636f !important;"><i class="fa fa-check"></i> Confirmer</button>
-                <span onclick="document.getElementById('supSujet').style.display='none'" class="">
-              <button class="dh-button  dh-round dh-theme-d2" type="reset" style="color:#fff !important; background-color:#4d636f !important;"><i class=""></i> Annuler</button>
-          </span>
+        <form:form action="deleteSubject" method="post" modelAttribute="deleteDto">
+            <form:input type="hidden" id="deleteSubjectId" name="deleteSubjectId" path="deleteId"/>
+            <div class="dh-container dh-theme-d2 dh-center">
+                <span onclick="document.getElementById('supSujet').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
+                <h4>Etes-vous sûr de vouloir supprimer ce sujet ?</h4>
             </div>
-        </div>
+            <div class="dh-container">
+                <div class="dh-padding">
+                    <button class="dh-button  dh-round dh-theme-d2" type="submit" style="margin-left:100px; color:#fff !important; background-color:#4d636f !important;"><i class="fa fa-check"></i> Confirmer</button>
+                    <span onclick="document.getElementById('supSujet').style.display='none'" class="">
+                  <button class="dh-button  dh-round dh-theme-d2" type="reset" style="color:#fff !important; background-color:#4d636f !important;"><i class=""></i> Annuler</button>
+              </span>
+                </div>
+            </div>
+        </form:form>
     </div>
 </div>
 
-<!-- Modification Challenge Modal -->
+<!-- Modifier Challenge Modal -->
 <div id="modifChallenge" class="dh-modal">
     <div class="dh-modal-content dh-animate-zoom">
         <div class="dh-container dh-theme-d3">
@@ -384,10 +390,11 @@
         </div>
         <div class="dh-container">
             <form:form enctype="multipart/form-data" action="editChallenge" method="post" modelAttribute="editChallenge">
+                <form:input type="hidden" id="updateChallengeId" name="subjectId" path="updateId" />
                 <br/>
                 <div class="form-group">
-                    <form:input type="text" cssClass="form-control" id="titreMod" name="titreMod"  path="titreMod"/>
-                    <form:errors path="titreMod" cssClass="error"/>
+                    <form:input type="text" cssClass="form-control" id="titreMod" name="titreMod"  path="title"/>
+                    <form:errors path="title" cssClass="error"/>
                 </div>
 
                 <div class="input-group">
@@ -396,15 +403,15 @@
                     </div>
                     <div class="custom-file">
                         <form:input type="file" cssClass="custom-file-input" id="imageMod" aria-describedby="inputGroupFileAddon01"
-                                    path="imageMod" name="imageMod"/>
-                        <form:errors path="imageMod" cssClass="error"/>
+                                    path="file" name="imageMod"/>
+                        <form:errors path="file" cssClass="error"/>
                         <label class="custom-file-label" for="imageMod">Choisir le logo du Challenge</label>
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <form:textarea class="form-control" rows="5" id="detailMod" name="detailMod" path="detailMod"/>
-                    <form:errors cssClass="error" path="detailMod"/>
+                    <form:textarea class="form-control" rows="5" id="detailMod" name="detailMod" path="description"/>
+                    <form:errors cssClass="error" path="description"/>
                 </div>
                 <p style="margin-left:70%;">
                     <button class="dh-button dh-round-large dh-section" type="submit" id="modifier" style="color:#fff !important; background-color:#435761 !important;">MODIFIER</button>
@@ -426,10 +433,11 @@
         </div>
         <div class="dh-container">
             <form:form enctype="multipart/form-data" action="editSujet" method="post" modelAttribute="editSujet">
+                <form:input type="hidden" id="updateSubjectId" name="subjectId" path="updateId" />
                 <br/>
                 <div class="form-group">
-                    <form:input type="text" cssClass="form-control" id="titreModif" name="titreModif"  path="titreModif"/>
-                    <form:errors path="titreModif" cssClass="error"/>
+                    <form:input type="text" cssClass="form-control" id="sujetTitreModif" name="sujetTitreModif"  path="title2"/>
+                    <form:errors path="title2" cssClass="error"/>
                 </div>
 
                 <div class="input-group">
@@ -437,16 +445,16 @@
                         <span class="input-group-text" >  Upload</span>
                     </div>
                     <div class="custom-file">
-                        <form:input type="file" cssClass="custom-file-input" id="imModif" name="imModif" aria-describedby="inputGroupFileAddon01"
-                                    path="imModif"/>
-                        <form:errors path="imageMod" cssClass="error"/>
+                        <form:input type="file" cssClass="custom-file-input" id="sujetImModif" name="sujetImModif" aria-describedby="inputGroupFileAddon01"
+                                    path="file2"/>
+                        <form:errors path="file2" cssClass="error"/>
                         <label class="custom-file-label" for="inputGroupFile01">Choisir le logo du Sujet</label>
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <form:textarea class="form-control" rows="5" id="descriptionModif" name="descriptionModif" path="descriptionModif"/>
-                    <form:errors cssClass="error" path="descriptionModif"/>
+                    <form:textarea class="form-control" rows="5" id="sujetDescriptionModif" name="descriptionModif" path="description2"/>
+                    <form:errors cssClass="error" path="description2"/>
                 </div>
                 <p style="margin-left:70%;">
                     <button class="dh-button dh-round-large dh-section" type="submit" id="creer" style="color:#fff !important; background-color:#435761 !important;">MODIFIER</button>
@@ -464,17 +472,46 @@
 <!-- Supprimer Challenge-->
 <div id="supChallenge" class="dh-modal">
     <div class="dh-modal-content dh-animate-zoom" style="width:40%">
-        <div class="dh-container dh-theme-d2 dh-center">
-            <span onclick="document.getElementById('supChallenge').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
-            <h4>Etes-vous sûr de vouloir supprimer ce challenge ?</h4>
-        </div>
-        <div class="dh-container">
-            <div class="dh-padding">
-                <button class="dh-button  dh-round dh-theme-d2" type="submit" style="margin-left:100px; color:#fff !important; background-color:#4d636f !important;"><i class="fa fa-check"></i> Confirmer</button>
-                <span onclick="document.getElementById('supChallenge').style.display='none'" class="">
-              <button class="dh-button  dh-round dh-theme-d2" type="reset" style="color:#fff !important; background-color:#4d636f !important;"><i class=""></i> Annuler</button>
-          </span>
+        <form:form action="deleteChallenge" method="post" modelAttribute="deleteDto">
+            <form:input type="hidden" id="deleteChallengeId" name="deleteChallengeId" path="deleteId"/>
+            <div class="dh-container dh-theme-d2 dh-center">
+                <span onclick="document.getElementById('supChallenge').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
+                <h4>Etes-vous sûr de vouloir supprimer ce challenge ?</h4>
             </div>
-        </div>
+            <div class="dh-container">
+                <div class="dh-padding">
+                    <button class="dh-button  dh-round dh-theme-d2" type="submit" style="margin-left:100px; color:#fff !important; background-color:#4d636f !important;"><i class="fa fa-check"></i> Confirmer</button>
+                    <span onclick="document.getElementById('supChallenge').style.display='none'" class="">
+                  <button class="dh-button  dh-round dh-theme-d2" type="reset" style="color:#fff !important; background-color:#4d636f !important;"><i class=""></i> Annuler</button>
+              </span>
+              
+                </div>
+            </div>
+        </form:form>
     </div>
+</div>
+<!-- Publier Avis -->
+<div id="publierAvis" class="dh-modal">
+  <div class="dh-modal-content dh-animate-zoom" style="width:40%">
+    <div class="dh-container dh-theme-d2 dh-center">
+      <span onclick="document.getElementById('publierAvis').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
+      <h4>Poster un Avis</h4>
+    </div>
+    <div class="dh-container">
+        <form:form enctype="multipart/form-data" action="newPublication" method="post" modelAttribute="newPublication">
+        <br/>
+        <form:textarea class="form-control" rows="5" id="pubAvis" name="pubAvis" path="content"/>
+        <form:errors cssClass="error" path="content"/>
+        
+        <div class="dh-padding">
+          <hr>
+          <span onclick="document.getElementById('publierAvis').style.display='none'" class="">
+              <button style="margin-left:100px;" class="dh-button  dh-round dh-theme-d2" type="reset" ><i class=""></i> Annuler</button>
+          </span>
+          <button class="dh-button  dh-round dh-theme-d2" type="submit" >Poster <i class="fa fa-share"></i></button>
+        </div>     
+      </form:form>
+     
+   </div>
+  </div>
 </div>

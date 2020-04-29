@@ -4,6 +4,7 @@ import com.fastcook.business.ChallengeService;
 import com.fastcook.business.ConversationService;
 import com.fastcook.business.PublicationService;
 import com.fastcook.business.RecipeService;
+import com.fastcook.dao.Publication;
 import com.fastcook.dao.Recipe;
 import com.fastcook.dao.User;
 import com.fastcook.dto.ChallengeDto;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -70,13 +72,14 @@ public class ModalController {
     }
 
     @PostMapping("newPublication")
-    public String newPublication(@ModelAttribute("newPublication")
+    public ModelAndView newPublication(@ModelAttribute("newPublication")
                                  @Validated PublicationDto publicationDto,
                                  @SessionAttribute("user") User user,
                                  HttpSession httpSession) {
         httpSession.setAttribute("user", publicationService.savePublication(publicationDto, user));
-        httpSession.setAttribute("publications", publicationRepository.findAll());
-        return "home";
+        ModelAndView model = new ModelAndView("home");
+        model.addObject("publications", publicationRepository.findAll());
+        return model;
     }
 
     @PostMapping("newRecipe")
@@ -112,25 +115,30 @@ public class ModalController {
 
     //TODO:
     @PostMapping("editChallenge")
-    public String editChallenge(@ModelAttribute("editChallenge")
+    public ModelAndView editChallenge(@ModelAttribute("editChallenge")
                                 @Validated ChallengeDto challengeDto,
                                 @RequestParam("updateId") Long updateId,
                                 @SessionAttribute("user") User user,
                                 HttpSession httpSession) {
-        return "mesChallenges";
+        user = challengeService.updateChallenge(challengeDto, updateId, user);
+        httpSession.setAttribute("user", user);
+        ModelAndView model = new ModelAndView("mesChallenges");
+        model.addObject("myChallenges", user.getChallenges());
+        return model;
     }
 
 
     @PostMapping("editSujet")
-    public String editSubject(@ModelAttribute("editChallenge")
+    public ModelAndView editSubject(@ModelAttribute("editSujet")
                               @Validated SubjectOfConversationDto subjectOfConversationDto,
                               @RequestParam("updateId") Long updateId,
                               @SessionAttribute("user") User user,
                               HttpSession httpSession) {
-        return "mesSujets";
+        user = conversationService.updateConversation(subjectOfConversationDto, updateId, user);
+        httpSession.setAttribute("user", user);
+        ModelAndView model = new ModelAndView("mesSujets");
+        model.addObject("mySubjects", user.getConversations());
+        return model;
     }
-
-
-
 
 }

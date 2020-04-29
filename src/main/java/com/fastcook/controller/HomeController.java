@@ -2,19 +2,20 @@ package com.fastcook.controller;
 
 import com.fastcook.business.ChallengeService;
 import com.fastcook.business.ConversationService;
+import com.fastcook.business.PublicationService;
 import com.fastcook.business.RecipeService;
-import com.fastcook.dao.Challenge;
-import com.fastcook.dao.Conversation;
-import com.fastcook.dao.Recipe;
-import com.fastcook.dao.User;
+import com.fastcook.dao.*;
 import com.fastcook.repository.ConversationRepository;
+import com.fastcook.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -30,6 +31,9 @@ public class HomeController {
 
     @Autowired
     ConversationRepository conversationRepository;
+
+    @Autowired
+    PublicationService publicationService;
 
     @GetMapping(path = {"/", "/index"})
     public String index() {
@@ -47,8 +51,17 @@ public class HomeController {
     }
 
     @GetMapping(path = {"/home"})
-    public String home() {
-        return "home";
+    public ModelAndView home(@SessionAttribute("user") User user) {
+
+        //
+
+
+        ModelAndView model = new ModelAndView("home");
+        //TODO: add notifications
+
+        //add publications
+        model.addObject("publications", publicationService.getAll());
+        return model;
     }
 
     @GetMapping(path = {"/recipes"})
@@ -90,9 +103,8 @@ public class HomeController {
     @GetMapping(path = {"/mesChallenges"})
     public ModelAndView myChallenges(@SessionAttribute("user") User user, HttpSession httpSession) {
         Iterable<Challenge> myChallenges = challengeService.getChallengesByUser(user);
-        httpSession.setAttribute("myChallenges", myChallenges);
         ModelAndView model = new ModelAndView("mesChallenges");
-        model.addObject("myChallenges");
+        model.addObject("myChallenges", myChallenges);
         return model;
     }
 
@@ -100,10 +112,11 @@ public class HomeController {
     public ModelAndView myConversation(@SessionAttribute("user") User user,
                                        HttpSession httpSession) {
         Iterable<Conversation> mySubjects = conversationService.getMySubjectOfConversation2(user);
-        httpSession.setAttribute("mySubjects", mySubjects);
         ModelAndView model = new ModelAndView("mesSujets");
         model.addObject("mySubjects", mySubjects);
         return model;
     }
+
+
 
 }

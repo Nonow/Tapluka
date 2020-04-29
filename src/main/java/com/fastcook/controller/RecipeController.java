@@ -22,7 +22,7 @@ public class RecipeController {
 
     @PostMapping("deleteRecipe")
     public String deleteRecipe(@ModelAttribute("deleteDto") @Validated DeleteDto deleteDto, @SessionAttribute("user") User user, HttpSession httpSession) {
-        recipeService.deleteRecipe(deleteDto.getDeleteId(), user);
+        user = recipeService.deleteRecipe(deleteDto.getDeleteId(), user);
         httpSession.setAttribute("user", user);
         return "recipes";
     }

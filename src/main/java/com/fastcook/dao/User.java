@@ -85,4 +85,8 @@ public class User extends BaseEntity {
         super.preUpdate();
         dateOfBirthInString = dateOfBirth.format(DATE_FORMATTER);
     }
+
+    public String toString() {
+        return username;
+    }
 }

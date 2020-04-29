@@ -89,9 +89,34 @@
                             un Challenge</a>
                     </div>
                 </div>
-                <a href="#" class="dh-bar-item dh-button dh-hide-small dh-padding-large dh-hover-white"
-                   title="Notifications"><i class="fa fa-bell"></i>
-                    <span class="dh-badge dh-right dh-small dh-red">3</span></a>
+                
+               <div class="dh-dropdown-hover dh-hide-small">
+                <a href="#" class="dh-button dh-padding-large dh-hover-white" title="Notifications"><i class="fa fa-bell"></i>
+                  <span class="dh-badge dh-right dh-small dh-red" id="nbNotif">3</span></a>
+                <div class="dh-dropdown-content dh-card-4 dh-bar-block" style="width:17%">
+                  <ul class="dh-ul dh-hoverable dh-white" id="listNotif">
+                    <li class="dh-padding">
+                      <a href="#" style="text-decoration: none;">
+                        <img id="imNotif" src="images/user1.png" alt="Kahina" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                        <span id="msgeNotif" style="font-size: 14px; position:relative; bottom: 5px;">Kahina a publié une recette</span>
+                      </a>
+                    </li>
+                    <li class="dh-padding">
+                      <a href="#" style="text-decoration: none; color:black">
+                      <img src="images/user2.png" alt="Hao" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                      <span style="font-size: 14px; position:relative; bottom: 5px;">Hao aime votre recette</span>
+                    </a>
+                    </li>
+                    <li class="dh-padding">
+                      <a href="#" style="text-decoration: none; color:black">
+                      <img src="images/profile.png" alt="Sabah" class="dh-left dh-circle" style="width:20px; margin-right:5px;">
+                      <span style="font-size: 14px; position:relative; bottom: 5px;">Sabah a commenté votre recette</span>
+                    </a>
+                    </li>
+                   
+                  </ul>
+                </div>
+               </div>
 
                 <div class="dh-dropdown-hover dh-right">
                     <button class="dh-button dh-padding-large dh-hover-white" title="profil"

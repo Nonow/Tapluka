@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class SubjectOfConversationDto {
+
+    private Long updateId;
+
     @NotEmpty
     @NotNull
     private String title2;
