@@ -6,7 +6,7 @@
 				<form id="myForm" action="/recherchePlanning" method="POST" class="form-group">
 					<div class="row">
 						<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 text-center">
-					 					<button id="btn-recherche" class="btn btn-elegant btn-rounded btn-lg my-0" type="submit">Création Planning</button>	
+					 					<button id="btn-recherche" class="btn btn-outline-dark btn-elegant btn-rounded btn-lg my-0 active " type="submit">Création Planning</button>	
 						</div>
 						<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center">
 							<div class="md-form mt-0">
@@ -306,9 +306,9 @@
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
 							<label> Formule </label> <br/>
 							<input type="radio" name="moment" value="Petit" /> Petit-déjeuner, Déjeuner, Dîner <br/>
-			  				<input type="radio" name="moment" value="Plat" /> Déjeuner, Dîner <br/>
+			  				<input type="radio" name="moment" value="1" /> Déjeuner, Dîner <br/>
 			  			<!---	<input type="radio" name="moment" value="Dessert" />Petit-déjeuner, Déjeuner,  Goûter , Dîner <br/> --->
-			  				<input type="radio" name="moment" value="Dîner" /> Dîner Seulement <br/>
+			  				<input type="radio" name="moment" value="0" /> Dîner Seulement <br/>
 						</div>	
 						<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 text-center">
 							<label> Régime alimentaire </label> <br/>
@@ -326,26 +326,29 @@
       <div class = "row">
 	<div class = "col-md-2 col-lg-2" style="margin-left:-50px">  </div>
 <% var i = 0  %>
-<% for (recette of plats) { %>
-	<% i=i+1 %>
-	<% if(i<8){ %>
+<% if (moment>0) { %>
+	<% for (recette of plats) { %>
+		<% i=i+1 %>
+		<% if(i<8){ %>
 
 
-        <div class="recette-content mx-auto mt-3 col-md-1 col-lg-1" style="width: 150px;">
-	        
-            <h4 class="grd-titre" style="display: inline"> <p style ="border-bottom: thick double #32a1ce;">Jour <%- i%> </p></br>            <h4 class="ss-titre" style="margin-top:-10px"><%= recette.categorie %>  <%= recette.sousCategorie %></h4> <div class="" style="padding-bottom:10px"><a href="/recette/<%= recette.id %>"><img src="/images/rechercheRecette/<%= recette.id %>.jpg" class="img-responsive text-center float-right" alt="image" style="max-width: 80%;height: 50%;width: 150px;"></a></div><a href="/recette/<%= recette.id %>"> <%= recette.nom %></a></h4>
+		<div class="recette-content mx-auto mt-3 col-md-1 col-lg-1" style="width: 150px;">
+			
+		    <h4 class="grd-titre" style="display: inline"> <p style ="border-bottom: thick double #32a1ce;">Jour <%- i%> </p></br>            <h4 class="ss-titre" style="margin-top:-10px"><%= recette.categorie %>  <%= recette.sousCategorie %></h4> <div class="" style="padding-bottom:10px"><a href="/recette/<%= recette.id %>"><img src="/images/rechercheRecette/<%= recette.id %>.jpg" class="img-responsive text-center float-right" alt="image" style="max-width: 80%;height: 50%;width: 150px;"></a></div><a href="/recette/<%= recette.id %>"> <%= recette.nom %></a></h4>
 
-            <div class="text-secondary allergenes">
-                <%= recette.description %>
-            </div>
-            <div>
-                <p></p>
-            </div>
-	</div>
+		    <div class="text-secondary allergenes">
+		        <%= recette.description %>
+		    </div>
+		    <div>
+		        <p></p>
+		    </div>
+		</div>
 
 
-<%}%>
+	<%}%>
+
 <% } %>
+
          </div>
 
       <div class = "row">
@@ -370,6 +373,34 @@
 
 
 <%}%>
+<% } %>
+<% } %>
+
+<% if (moment==0) { %>
+	<% for (recette of diners) { %>
+		<% i=i+1 %>
+		<% if(i<8){ %>
+
+
+		<div class="recette-content mx-auto mt-3 col-md-1 col-lg-1" style="width: 150px;">
+			
+		    <h4 class="grd-titre" style="display: inline"> <p style ="border-bottom: thick double #32a1ce;">Jour <%- i%> </p></br>            <h4 class="ss-titre" style="margin-top:-10px"><%= recette.categorie %>  <%= recette.sousCategorie %></h4> <div class="" style="padding-bottom:10px"><a href="/recette/<%= recette.id %>"><img src="/images/rechercheRecette/<%= recette.id %>.jpg" class="img-responsive text-center float-right" alt="image" style="max-width: 80%;height: 50%;width: 150px;"></a></div><a href="/recette/<%= recette.id %>"> <%= recette.nom %></a></h4>
+
+		    <div class="text-secondary allergenes">
+		        <%= recette.description %>
+		    </div>
+		    <div>
+		        <p></p>
+		    </div>
+		</div>
+
+
+	<%}%>
+
+<% } %>
+
+
+
 <% } %>
          </div>
       </div>
