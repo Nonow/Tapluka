@@ -4,17 +4,17 @@
 <section>
 	<h4 id="titre">Vous avez 2 choix : faire votre liste de course a partir d'une recette ou choisir des ingredients séparement</h4>
 	    
-	<form action="/listecourse_recette" method="post" >
+	<form action="/listecourse_recette" method="post" style="margin-top:5em;">
 	    <input id="form" name="form" type="hidden" value="valider_recette">
 	        <div class="row pt-2 pb-2">
-	            <button type="submit" name="nom" value="" class="btn btn-primary btn-test" style="margin-top: 5em;margin : auto;"> A partir d'une recette</button>
+	            <button type="submit" name="nom" value="" class="btn btn-info btn-test" style="margin-top: 5em;margin : auto;"> A partir d'une recette</button>
 	         </div>
 	</form>
 	     
-	<form action="/listecourse_ingredient" method="post" >
+	<form action="/listecourse_ingredient" method="post" style="margin-bottom:10em;">
 	    <input id="form2" name="form2" type="hidden" value="valider_ingredient">
 	        <div class="row pt-2 pb-2">
-	            <button type="submit" name="nom" value="" class="btn btn-primary btn-test" style="margin-top: 5em;margin : auto;"> Choisir mes ingrédients</button>
+	            <button type="submit" name="nom" value="" class="btn btn-info btn-test" style="margin-top: 5em;margin : auto;"> Choisir mes ingrédients</button>
 	         </div>
 	</form>
 
