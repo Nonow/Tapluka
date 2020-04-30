@@ -16,15 +16,16 @@ spring:
       settings:
         web-allow-others: true
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:tcp://localhost/~/test
     driverClassName: org.h2.Driver
     username: sa
-    password: g4info
+    password:
 
   jpa:
     hibernate:
       ddl-auto: update
     generate-ddl: true
+    database-platform: org.hibernate.dialect.H2Dialect
 
   mvc:
     view:

@@ -43,7 +43,7 @@ public class FastCookApplication extends SpringBootServletInitializer implements
 
     @Override
     public void run(String... args) throws Exception {
-        dbPopulation();
+        //dbPopulation();
     }
 
     private void dbPopulation() {
