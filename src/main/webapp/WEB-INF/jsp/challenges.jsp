@@ -161,7 +161,7 @@
             </div>
 
             <div class="dh-row dh-center dh-container" id="challenge1">
-                <c:forEach items="${sessionScope.challenges}" var="challenge">
+                <c:forEach items="${challenges}" var="challenge">
                     <div class="dh-col s4 dh-container dh-margin-bottom" style="height: 50%;">
                         <div class="dh-card">
                             <img src="data:${challenge.file.mimeType};base64, ${challenge.file.imageInBase64}"

@@ -4,13 +4,11 @@ import com.fastcook.business.ChallengeService;
 import com.fastcook.business.ConversationService;
 import com.fastcook.business.PublicationService;
 import com.fastcook.business.RecipeService;
+import com.fastcook.dao.Conversation;
 import com.fastcook.dao.Publication;
 import com.fastcook.dao.Recipe;
 import com.fastcook.dao.User;
-import com.fastcook.dto.ChallengeDto;
-import com.fastcook.dto.PublicationDto;
-import com.fastcook.dto.RecipeDto;
-import com.fastcook.dto.SubjectOfConversationDto;
+import com.fastcook.dto.*;
 import com.fastcook.repository.ChallengeRepository;
 import com.fastcook.repository.ConversationRepository;
 import com.fastcook.repository.PublicationRepository;
@@ -48,18 +46,19 @@ public class ModalController {
 
 
     @PostMapping("newChallenge")
-    public String newChallenge(@ModelAttribute("newChallenge")
+    public ModelAndView newChallenge(@ModelAttribute("newChallenge")
                                @Validated ChallengeDto challengeDto,
                                @SessionAttribute("user") User user,
                                HttpSession httpSession) {
         httpSession.setAttribute("user",
                 challengeService.saveSubjectOfConversation(challengeDto, user));
-        httpSession.setAttribute("challenges", challengeRepository.findAll());
-        return "challenges";
+        ModelAndView model = new ModelAndView("challenges");
+        model.addObject("challenges", challengeRepository.findAll());
+        return model;
     }
 
     @PostMapping("newSubject")
-    public String newSubject(@ModelAttribute("newSubject")
+    public ModelAndView newSubject(@ModelAttribute("newSubject")
                              @Validated SubjectOfConversationDto subjectOfConversationDto,
                              @SessionAttribute("user") User user,
                              HttpSession httpSession) {
@@ -67,8 +66,11 @@ public class ModalController {
                 "user",
                 conversationService.saveSubjectOfConversation(subjectOfConversationDto, user)
         );
-        httpSession.setAttribute("subjects", conversationRepository.findAll());
-        return "subjects";
+        Iterable<Conversation> subjects = conversationRepository.findAll();
+        httpSession.setAttribute("subjects", subjects);
+        ModelAndView model = new ModelAndView("subjects");
+        model.addObject("", subjects);
+        return model;
     }
 
     @PostMapping("newPublication")
@@ -77,6 +79,16 @@ public class ModalController {
                                  @SessionAttribute("user") User user,
                                  HttpSession httpSession) {
         httpSession.setAttribute("user", publicationService.savePublication(publicationDto, user));
+        ModelAndView model = new ModelAndView("home");
+        model.addObject("publications", publicationService.getAll(user));
+        return model;
+    }
+
+    @PostMapping("newComment")
+    public ModelAndView newComment(@ModelAttribute("newComment") @Validated CommentDto commentDto,
+                                   @SessionAttribute("user") User user,
+                                   HttpSession httpSession) {
+        publicationService.saveComment(commentDto, commentDto.getPublicationId(), user);
         ModelAndView model = new ModelAndView("home");
         model.addObject("publications", publicationRepository.findAll());
         return model;
@@ -96,12 +108,14 @@ public class ModalController {
 
 
     @PostMapping("editAvis")
-    public String updatePublication(@ModelAttribute("editAvis") @Validated PublicationDto publicationDto,
+    public ModelAndView updatePublication(@ModelAttribute("editAvis") @Validated PublicationDto publicationDto,
                                     @RequestParam("updateId") Long publicationId,
                                     @SessionAttribute User user,
                                     HttpSession httpSession) {
         publicationService.updatePublication(publicationDto, publicationId, user);
-        return "home";
+        ModelAndView model = new ModelAndView("home");
+        model.addObject("publications", publicationService.getAll(user));
+        return model;
     }
 
     @PostMapping("editRecette")

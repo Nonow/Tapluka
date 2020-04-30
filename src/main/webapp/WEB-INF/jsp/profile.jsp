@@ -147,13 +147,13 @@
         <div class="dh-row">
             <div class="dh-col s2">
                 <p class="dh-center">
-                    <img src="/images/profile.png" class="dh-circle" style="height:120px;width:120px" alt="profil">
+                    <img src="data:${sessionScope.user.file.mimeType};base64, ${sessionScope.user.file.imageInBase64}" class="dh-circle" style="height:120px;width:120px" alt="profil">
                 </p>
             </div>
             <div class="dh-col s10 dh-container dh-content dh-padding dh-border dh-center" style="margin-left: 11px; ">
-                <h5 class="dh-opacity dh-xlarge"><strong><span class="text-uppercase" style="text-align: center;"> Alexandre Niveau</span></strong>
+                <h5 class="dh-opacity dh-xlarge"><strong><span class="text-uppercase" style="text-align: center;"> ${sessionScope.user.firstName} ${sessionScope.user.lastName} </span></strong>
                 </h5>
-                <p>Inscrit depuis le 2 Avril 2020</p>
+                <p>Inscrit depuis le ${sessionScope.user.createDate}</p>
                 <p>
                         <span id="contentPropos">A mes heures perdues, faire la cuisine est plus un plaisir pour moi qu'un fardeau
                             Je n'hésite d'oser toutes sortes de recettes qui me traverse la tête.</span>
@@ -200,7 +200,7 @@
                                 class="text-uppercase"> Modification du profil</span></strong></h5>
                         <hr class="dh-clear">
                         <div class="dh-white">
-                            <form:form action="updateProfile" target="" method="post" modelAttribute="newUser">
+                            <form:form action="updateProfile" target="" method="post" modelAttribute="newUser" enctype="multipart/form-data">
                                 <div class="dh-row">
                                     <div class="dh-col s6">
                                         <p style="padding-left: 32px; padding-top: 32px;"><label for="nom"
@@ -292,7 +292,22 @@
                                         </p>
                                     </div>
                                 </div>
-
+                                <div class="dh-row">
+                                    <div class="dh-col s6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupFileAddon01">  Télécharger</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <form:input type="file" cssClass="custom-file-input" id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01" path="file"/>
+                                                <form:errors path="file" cssClass="error"/>
+                                                <label class="custom-file-label" for="inputGroupFile01">Choisir l'image</label>
+                                            </div>
+                                            </br>
+                                        </div>
+                                    </div>
+                                </div>
                                 <p style="padding-left:32px; padding-bottom: 32px;">
                                     <button class="dh-button  dh-theme-d2  dh-padding-large" type="submit">
                                         Modifier mon profil

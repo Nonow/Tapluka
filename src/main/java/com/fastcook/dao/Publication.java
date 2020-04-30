@@ -17,12 +17,19 @@ public class Publication extends BaseEntity {
     private String title;
     @Lob
     private String content;
-    @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Reaction> reactions = new ArrayList<>();
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private File file;
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @JoinTable(name = "publication_comment",
+                joinColumns = @JoinColumn(name="publication_id"),
+                inverseJoinColumns = @JoinColumn(name="comment_id"))
     private List<Comment> comments = new ArrayList<>();
+
+    @Transient
+    private Integer reactionType = 0;
 }

@@ -1,6 +1,8 @@
 package com.fastcook.dto;
 
+import com.fastcook.dao.File;
 import lombok.Data;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -29,4 +31,6 @@ public class UserDto {
     @NotNull
     @NotEmpty
     private String phone;
+
+    private CommonsMultipartFile file;
 }

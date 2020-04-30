@@ -73,7 +73,12 @@ function FunctionInteressé(x) {
 }
 
 /* Modification Avis */
-function modifierAvis(avisPub) {
+function modifierAvis(avisPub, idPub) {
+
+    let idComponent = document.getElementById(idPub);
+    let idHiddenInput = document.getElementById('updatePublicationId');
+    idHiddenInput.value = idComponent.value;
+
     /* Données issues de l'avis publié*/
     let avis = document.getElementById(avisPub);   
     
@@ -89,8 +94,11 @@ function modifierAvis(avisPub) {
 
 /* Supprimer Avis */
 
-function supprimerAvis(){
-    document.getElementById("suprimerAvis").style.display='block';
+function supprimerAvis(idAvis){
+    let idComponent = document.getElementById(idAvis);
+    let idHiddenInput = document.getElementById('deletePublicationId');
+    idHiddenInput.value = idComponent.value;
+    document.getElementById("supprimerAvis").style.display='block';
 }
 /* Publier Avis */
 function publierAvis(){
@@ -101,8 +109,14 @@ document.getElementById("btnCom").click();
 
 /*Modifier statut Bouton J'aime*/
 function likeFunction(x) {
-  x.style.fontWeight = "bold";
-  x.innerHTML = "✓ Liked";
+
+  if( x.textContent == 'LIKE') {
+    x.textContent = "✓ LIKED";
+    x.style.fontWeight = "bold";
+  } else if( x.textContent == '✓ LIKED') {
+    x.textContent = "LIKE";
+    x.style.fontWeight = "normal";
+  }
 }
 
 /*Voir commentaire et commenter*/

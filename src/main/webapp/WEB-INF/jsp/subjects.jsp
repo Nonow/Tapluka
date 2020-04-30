@@ -167,17 +167,18 @@
                       <h4 class="dh-titre dh-opacity"><b>Notifications</b></h4>
                     </div-->
                     <ul class="dh-ul dh-white">
-                        <c:forEach items="${sessionScope.subjects}" var="subject">
+                        <c:forEach items="${subjects}" var="subject">
+                            <input type="hidden" id="subjectId${subject.id}" value="subjectId${subject.id}" name="subjectId${subject.id}"/>
                             <li class="">
                                 <div class="dh-row">
                                     <div class="dh-col s2">
-                                        <a href="#" onclick="openConv(event, 'Sconversation1');"> <img
+                                        <a href="#" onclick="openConv(event, subjectId${subject.id});"> <img
                                                 src="data:${subject.file.mimeType};base64, ${subject.file.imageInBase64}"
                                                 alt="Image" class="dh-left dh-margin-right"
                                                 style="width:70px; height:70px;"></a>
                                     </div>
                                     <div class="dh-col s10">
-                                        <a href="#" onclick="openConv(event, 'Sconversation1');"
+                                        <a href="#" onclick="openConv(event, 'Sconversation${subject.id}', 'subjectId${subject.id}');"
                                            style="text-decoration: none;"><h6
                                                 class="dh-large dh-opacity">${subject.title}</h6></a><span
                                             class="dh-small dh-opacity"> (${subject.comments.size()} discussions)</span>
@@ -195,7 +196,7 @@
                                                      style="width:70px; height:70px;"></a>
                                 </div>
                                 <div class="dh-col s10">
-                                    <a href="#" onclick="openConv(event, 'Sconversation2');"
+                                    <a href="#" onclick="openConv(event, 'Sconversation22');"
                                        style="text-decoration: none;"><h6 class="dh-large dh-opacity">Comment chauffer
                                         un magret au canard ? </h6></a> <span class="dh-small dh-opacity">(5 discussions)</span>
                                     <p class="dh-left">Par Kahina | le 11 avril 2020</p>
@@ -210,7 +211,7 @@
                                                      style="width:70px; height:70px;"></a>
                                 </div>
                                 <div class="dh-col s10">
-                                    <a href="#" onclick="openConv(event, 'Sconversation3');"
+                                    <a href="#" onclick="openConv(event, 'Sconversation23');"
                                        style="text-decoration: none;"><h6 class="dh-large dh-opacity">Congélation des
                                         champignons pieds de mouton </h6></a><span class="dh-small dh-opacity">(2 discussions)</span>
                                     <p class="dh-left">Par Jalil | le 24 mars 2020</p>
@@ -224,7 +225,7 @@
                                                      style="width:70px; height:70px;"></a>
                                 </div>
                                 <div class="dh-col s10">
-                                    <a href="#" onclick="openConv(event, 'Sconversation4');"
+                                    <a href="#" onclick="openConv(event, 'Sconversation24');"
                                        style="text-decoration: none;"><h6 class="dh-large dh-opacity">Boeuf bourguignon,
                                         ma viande est dure </h6></a><span
                                         class="dh-opacity dh-small">(9 discussions)</span>
@@ -240,7 +241,7 @@
                                                      style="width:70px; height:70px;"></a>
                                 </div>
                                 <div class="dh-col s10">
-                                    <a href="#" onclick="openConv(event, 'Sconversation5');"
+                                    <a href="#" onclick="openConv(event, 'Sconversation25');"
                                        style="text-decoration: none;"><h6 class="dh-large dh-opacity">Comment faire une
                                         pintade farcie aux abricots </h6></a> <span class="dh-small dh-opacity">(12 discussions)</span>
                                     <p class="dh-left">Par Sabah | le 08 février 2020</p>
@@ -254,110 +255,52 @@
             </div>
 
             <!-- sujet1-->
-            <div id="Sconversation1" class="dh-container conversation">
-                <h5 class="dh-opacity dh-medium dh-center"><a onclick="openConv(event, 'listeConv');" href="#"
-                                                              title="Retour à la liste des sujets"> <i
-                        class="fa fa-arrow-left" aria-hidden="true"></i> </a> | <strong><span class="text-uppercase"> Comment cuisiner une viande Hachée sans boeuf ?</span></strong>
-                </h5>
-                <hr/>
-                <div class="dh-container">
-                    <div class="dh-row dh-white dh-content dh-container dh-margin">
-                        <div class="dh-col s2 dh-padding">
-                            <img class="dh-round dh-margin-right dh-circle" src="/images/user1.png"
-                                 style="height:30px; width:30px;">
-                            <span class="dh-opacity dh-large" style="display: block;">Sarah</span>
-                            <small>Le 9 mars 2020 à 11h50</small>
-                        </div>
-                        <div class="dh-col s10 dh-padding dh-justify">
-                            <p>
-                                Bonjour à tous, <br/>
-                                J'ai une question un peu générale. Nous avons un hachoir à viande et donc nous aimerions
-                                faire nos propres steak haché/ boulettes / saucisses etc.
-                                Sachant que nous ne mangeons ni bœuf, ni veau, quelles pièces de viande utiliser pour
-                                les différents types de préparation? <br/>
-                                Merci d'avance de votre aide
-                            </p>
-                            <p class="dh-left">
-                                <button class="dh-button dh-theme-d2 dh-border" onclick="aiméCommentaire(this)"><b><i
-                                        class="fa fa-thumbs-up"></i> Aimé</b></button>
-                            </p>
-                            <p class="dh-right">
-                                <button class="dh-button dh-theme-d2" onclick="myFunction('reponse')"><b>Répondre </b>
-                                </button>
-                            </p>
-                            <br/><br/>
-                            <div id="reponse" contenteditable="true"
-                                 style="display:none; position:relative; top:45px; width:400px; height:40px; left:90px;"
-                                 class="dh-border">
-                                <!--textarea style="width:50%;" class="form-control" rows="1" name="comment" placeholder=""> </textarea> <br-->
+            <c:forEach items="${subjects}" var="subject">
+                <div id="Sconversation${subject.id}" class="dh-container conversation" style="display: none;">
+                    <h5 class="dh-opacity dh-medium dh-center"><a onclick="openConv(event, 'listeConv');" href="#"
+                                                                  title="Retour à la liste des sujets"> <i
+                            class="fa fa-arrow-left" aria-hidden="true"></i> </a> | <strong><span class="text-uppercase"> ${subject.title} </span></strong>
+                    </h5>
+                    <hr/>
+                    <div class="dh-container">
+                        <c:forEach items="${subject.comments}" var="comment">
+                            <div class="dh-row dh-white dh-content dh-container dh-margin">
+                                <div class="dh-col s2 dh-padding">
+                                    <img class="dh-round dh-margin-right dh-circle" src="/images/user1.png"
+                                         style="height:30px; width:30px;">
+                                    <span class="dh-opacity dh-large" style="display: block;">Sarah</span>
+                                    <small>Le ${subject.createDate} </small>
+                                </div>
+                                <div class="dh-col s10 dh-padding dh-justify">
+                                    <p>
+                                        ${comment.content}
+                                    </p>
+                                    <p class="dh-left">
+                                        <button class="dh-button dh-theme-d2 dh-border" onclick="aiméCommentaire(this)"><b><i
+                                                class="fa fa-thumbs-up"></i> Aimé</b></button>
+                                    </p>
+                                    <p class="dh-right">
+                                        <button class="dh-button dh-theme-d2" onclick="myFunction('reponse')"><b>Répondre </b>
+                                        </button>
+                                    </p>
+                                    <br/><br/>
+                                    <div id="reponse" contenteditable="true"
+                                         style="display:none; position:relative; top:45px; width:400px; height:40px; left:90px;"
+                                         class="dh-border">
+                                        <!--textarea style="width:50%;" class="form-control" rows="1" name="comment" placeholder=""> </textarea> <br-->
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </c:forEach>
 
-                    <div class="dh-row dh-white dh-content dh-container dh-margin">
-                        <div class="dh-col s2 dh-padding">
-                            <img class="dh-round dh-margin-right dh-circle" src="/images/user2.png"
-                                 style="height:30px; width:30px;">
-                            <span class="dh-opacity dh-large" style="display: block;">Odette</span>
-                            <small>Le 12 mars 2020 à 10h00</small>
-                        </div>
-                        <div class="dh-col s10 dh-padding dh-justify">
-                            <p>
-                                Bonjour, <br/>
-                                J'utilise de la viande bovine, c'est très bon https://www.kupino.fr/catalogues/aldi
-                            </p>
-                            <p class="dh-left">
-                                <button class="dh-button dh-theme-d2 dh-border" onclick="aiméCommentaire(this)"><b><i
-                                        class="fa fa-thumbs-up"></i> Aimé</b></button>
-                            </p>
-                            <p class="dh-right">
-                                <button class="dh-button dh-theme-d2" onclick="myFunction('reponse1')"><b>Répondre </b>
-                                </button>
-                            </p>
-                            <br/><br/>
-                            <div id="reponse1" contenteditable="true"
-                                 style="display:none; position:relative; top:45px; width:400px; height:40px; left:90px;"
-                                 class="dh-border">
-                                <!--textarea style="width:50%;" class="form-control" rows="1" name="comment" placeholder=""> </textarea> <br-->
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="dh-row dh-white dh-content dh-container dh-margin">
-                        <div class="dh-col s2 dh-padding">
-                            <img class="dh-round dh-margin-right dh-circle" src="/images/profile.png"
-                                 style="height:30px; width:30px;">
-                            <span class="dh-opacity dh-large" style="display: block;">Judith</span>
-                            <small>Le 12 mars 2020 à 10h20</small>
-                        </div>
-                        <div class="dh-col s10 dh-padding dh-justify">
-                            <p>
-                                Bonjour, <br/>
-                                Regardes sur le site Journal des femmes
-                            </p>
-                            <p class="dh-left">
-                                <button class="dh-button dh-theme-d2 dh-border" onclick="aiméCommentaire(this)"><b><i
-                                        class="fa fa-thumbs-up"></i> Aimé</b></button>
-                            </p>
-                            <p class="dh-right">
-                                <button class="dh-button dh-theme-d2" onclick="myFunction('reponse2')"><b>Répondre </b>
-                                </button>
-                            </p>
-                            <br/><br/>
-                            <div id="reponse2" contenteditable="true"
-                                 style="display:none; position:relative; top:45px; width:400px; height:40px; left:90px;"
-                                 class="dh-border">
-                                <!--textarea style="width:50%;" class="form-control" rows="1" name="comment" placeholder=""> </textarea> <br-->
-                            </div>
-                        </div>
                     </div>
-
+                    <!-- Fin sujet 1-->
                 </div>
-                <!-- Fin sujet 1-->
-            </div>
+            </c:forEach>
 
-            <!-- sujet 2-->
-            <div id="Sconversation2" class="dh-container conversation">
+            <!-- sujet 10-->
+            <div id="Sconversation22" class="dh-container conversation" style="display: none;">
                 <h5 class="dh-opacity dh-medium dh-center"><a onclick="openConv(event, 'listeConv');" href="#"
                                                               title="Retour à la liste des sujets"> <i
                         class="fa fa-arrow-left" aria-hidden="true"></i> </a> | <strong><span class="text-uppercase"> Comment chauffer un magret au canard ?</span></strong>
@@ -460,7 +403,7 @@
             </div>
 
             <!-- sujet 3-->
-            <div id="Sconversation3" class="dh-container conversation">
+            <div id="Sconversation23" class="dh-container conversation" style="display: none;">
                 <h5 class="dh-opacity dh-medium dh-center"><a onclick="openConv(event, 'listeConv');" href="#"
                                                               title="Retour à la liste des sujets"> <i
                         class="fa fa-arrow-left" aria-hidden="true"></i> </a> | <strong><span class="text-uppercase"> Congélation des champignons pieds de mouton </span></strong>
@@ -563,7 +506,7 @@
             </div>
 
             <!-- sujet 4-->
-            <div id="Sconversation4" class="dh-container conversation">
+            <div id="Sconversation24" class="dh-container conversation" style="display: none;">
                 <h5 class="dh-opacity dh-medium dh-center"><a onclick="openConv(event, 'listeConv');" href="#"
                                                               title="Retour à la liste des sujets"> <i
                         class="fa fa-arrow-left" aria-hidden="true"></i> </a> | <strong><span class="text-uppercase"> Boeuf bourguignon, ma viande est dure </span></strong>
@@ -666,7 +609,7 @@
             </div>
 
             <!-- sujet5-->
-            <div id="Sconversation5" class="dh-container conversation">
+            <div id="Sconversation25" class="dh-container conversation" style="display: none;">
                 <h5 class="dh-opacity dh-medium dh-center"><a onclick="openConv(event, 'listeConv');" href="#"
                                                               title="Retour à la liste des sujets"> <i
                         class="fa fa-arrow-left" aria-hidden="true"></i> </a> | <strong><span class="text-uppercase"> Comment faire une pintade farcie aux abricots</span></strong>
@@ -772,7 +715,7 @@
 
         <!-- section à droite-->
         <div class="dh-col m3">
-            <div class="dh-container dh-display-container dh-margin-bottom">
+            <div class="dh-container dh-display-container dh-margin-bottom" style="display: none;">
                 <div class="dh-container dh-theme-d2">
                     <h4 class="dh-titre dh-opacity"><b>Notifications</b></h4>
                 </div>

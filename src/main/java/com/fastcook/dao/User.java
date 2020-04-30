@@ -26,7 +26,7 @@ public class User extends BaseEntity {
     private String password;
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private File avatar;
+    private File file;
     private String firstName;
     private String lastName;
     @Email
@@ -54,10 +54,10 @@ public class User extends BaseEntity {
     //TODO: fix LazyOption
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Challenge> challenges = new ArrayList<>();
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Comment> comments = new ArrayList<>();
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE, mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Publication> publications = new ArrayList<>();
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "user")
@@ -65,7 +65,7 @@ public class User extends BaseEntity {
     private List<Conversation> conversations = new ArrayList<>();
     @OneToMany(
             orphanRemoval = true,
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.REMOVE,
             mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Reaction> reactions = new ArrayList<>();

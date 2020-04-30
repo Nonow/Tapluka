@@ -21,7 +21,11 @@ public class Conversation extends BaseEntity {
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private File file;
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @JoinTable(name = "conversation_comment",
+            joinColumns = @JoinColumn(name="conversation_id"),
+            inverseJoinColumns = @JoinColumn(name="comment_id"))
     private List<Comment> comments = new ArrayList<>();
 }

@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <title>Fast Cook</title>
 <meta charset="UTF-8">
@@ -210,20 +211,20 @@
             <!-- Début Display Avis-->
             <c:if test="${not empty publications}">
             <c:forEach items="${publications}" var="publication">
-              <input type="hidden" id="publicationId" name="publicationId" value="${publication.id}" />
+              <input type="hidden" id="publicationId${publication.id}" name="publicationId" value="${publication.id}" />
               <div class="dh-container dh-card dh-white dh-round dh-margin"><br>
-                  <img src="data:${publication.getUser().avatar.mimeType};base64, ${publication.getUser().avatar.imageInBase64}" alt="${publication.user.username}" class="dh-left dh-circle dh-margin-right"
+                  <img src="data:${publication.getUser().file.mimeType};base64, ${publication.getUser().file.imageInBase64}" alt="${publication.user.username}" class="dh-left dh-circle dh-margin-right"
                        style="width:60px">
                   <div class="dh-right">
-                      <span>"${publication.createDate}" </span> <span style="margin-right: 4px;"> | </span>
+                      <span>${publication.createDate} </span> <span style="margin-right: 4px;"> | </span>
                       <div class="dh-dropdown-hover dh-right" id="modProf1"> <!-- Pour survoler-->
                           <a style="text-decoration:none;" class="" href="#" id="ic_modifSup">
                               <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                           </a>
 
                           <div id="edit" class="dh-dropdown-content dh-card-4 dh-bar-block" style="right:0;">
-                              <a href="#" onclick="modifierAvis('avisPub');" style="text-decoration:none;" class="dh-bar-item dh-button">modifier</a>
-                              <a href="#" onclick="supprimerAvis();" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
+                              <a href="#" onclick="modifierAvis('avisPub','publicationId${publication.id}');" style="text-decoration:none;" class="dh-bar-item dh-button">modifier</a>
+                              <a href="#" onclick="supprimerAvis('publicationId${publication.id}');" style="text-decoration:none;" class="dh-bar-item dh-button">supprimer</a>
                           </div>
 
                       </div>
@@ -231,8 +232,8 @@
                   <span class="dh-opacity"
                         style="font-size:16px; font-family:'Segoe UI',Arial,sans-serif; font-weight:400;"><b>${publication.user.username} | Idées</b></span><br>
                   <hr class="dh-clear">
-                  <p id="avisPub">"${publication.content}"</p>
-                  <button class="dh-button dh-white dh-border dh-left" onclick="likeFunction(this)"><b><i class="fa fa-thumbs-up"></i> Like</b></button>
+                  <p id="avisPub">${publication.content}</p>
+                    <button class="dh-button dh-white dh-border dh-left" onclick="$.post('/newReaction?pubId=${publication.id}&reactionType=${publication.reactionType}');likeFunction(this)"><b><i class="fa fa-thumbs-up"></i><c:if test="${ publication.reactionType eq 0 }" >LIKE</c:if><c:if test="${ publication.reactionType eq 1 }" >✓ LIKED</c:if></b></button>
                   <p><button class="dh-button dh-theme-d1 dh-right" onclick="voirComment('com', 'sepCom')" id="btnCom"><b>Reponses  </b> <span class="dh-tag dh-white">${publication.comments.size()}</span></button></p>
                   <span class="dh-clear"></span>
                   <div  id="com" style="display:none">
@@ -240,24 +241,25 @@
                      <div class="dh-col-s4"></div>
 
                       <div style="margin-left: 70px;">
-                          <c:if test="${not empty publication.comments}"
-                          <c:forEach items="${publication.comments}" var="comment">
-                            <div class="dh-row">
-                              <img src="data:${comment.user.avatar.mimeType};base64, ${comment.user.avatar.imageInBase64}" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
-                              <div class="dh-col s10" style="position : relative; top:-10px;">
-                                <h4 >
-                                <span id="idUserComment">"${comment.user.username}"</span>
-                                <span class="dh-opacity dh-medium"><span id="dateCom">"${comment.createDate}"</span> </span></h4>
-                                <p id="c">${comment.content}</p>
-                              </div>
-                            </div>
-                          </c:forEach>
+                          <c:if test="${not empty publication.comments}" >
+                              <c:forEach items="${publication.comments}" var="comment">
+                                <div class="dh-row">
+                                  <img src="data:${comment.user.file.mimeType};base64, ${comment.user.file.imageInBase64}" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
+                                  <div class="dh-col s10" style="position : relative; top:-10px;">
+                                    <h4 >
+                                    <span id="idUserComment">"${comment.user.username}"</span>
+                                    <span class="dh-opacity dh-medium"><span id="dateCom">Le ${comment.createDate}</span> </span></h4>
+                                    <p id="c">${comment.content}</p>
+                                  </div>
+                                </div>
+                              </c:forEach>
                           </c:if>
                       </div>
                        <div class="dh-row" style="margin-left: 70px;">
 
                           <img src="images/profile.png" style="width:30px;" class="dh-circle dh-col s2 dh-margin-right">
-                          <form:form enctype="multipart/form-data" action="newComment " method="post" modelAttribute="newComment"  class="dh-col s10">
+                          <form:form enctype="multipart/form-data" action="newComment" method="post" modelAttribute="newComment"  class="dh-col s10">
+                            <form:input type="hidden" id="pubIdToComment" path="publicationId" value="${publication.id}" name="pubIdToComment" />
                             <div class="dh-row">
                                <form:textarea style="width:70%;"  class="dh-border dh-padding dh-white dh-col s10" rows="1"  name="comment" id="comment" path="content" placeholder="Laisses ton commentaire ici !!!"/>
                               <form:errors cssClass="error" path="content"/>

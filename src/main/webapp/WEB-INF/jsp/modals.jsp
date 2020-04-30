@@ -318,7 +318,7 @@
         </div>
         <div class="dh-container">
             <form:form enctype="multipart/form-data" action="editAvis" method="post" modelAttribute="editAvis">
-
+                <form:input type="hidden" id="updatePublicationId" name="publicationId" path="updateId" />
                 <div class="dh-row dh-padding">
 
                 <div class="dh-col s9" >
@@ -338,18 +338,18 @@
 </div>
 
 <!-- Supprimer Avis-->
-<div id="suprimerAvis" class="dh-modal">
+<div id="supprimerAvis" class="dh-modal">
     <div class="dh-modal-content dh-animate-zoom" style="width:40%">
         <form:form action="deletePublication" method="post" modelAttribute="deleteDto">
             <form:input type="hidden" id="deletePublicationId" name="deletePublicationId" path="deleteId"/>
             <div class="dh-container dh-theme-d2 dh-center">
-                <span onclick="document.getElementById('suprimerAvis').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
+                <span onclick="document.getElementById('supprimerAvis').style.display='none'" class="dh-button dh-display-topright dh-large">x</span>
                 <h4>Etes-vous sûr de vouloir supprimer cet avis ?</h4>
             </div>
             <div class="dh-container">
                 <div class="dh-padding">
                     <button class="dh-button  dh-round dh-theme-d2" type="submit" style="margin-left:100px; color:#fff !important; background-color:#4d636f !important;"><i class="fa fa-check"></i> Confirmer</button>
-                    <span onclick="document.getElementById('suprimerAvis').style.display='none'" class="">
+                    <span onclick="document.getElementById('supprimerAvis').style.display='none'" class="">
                   <button class="dh-button  dh-round dh-theme-d2" type="reset" style="color:#fff !important; background-color:#4d636f !important;"><i class=""></i> Annuler</button>
               </span>
                 </div>

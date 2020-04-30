@@ -5,6 +5,7 @@ import com.fastcook.business.ConversationService;
 import com.fastcook.business.PublicationService;
 import com.fastcook.business.RecipeService;
 import com.fastcook.dao.*;
+import com.fastcook.repository.ChallengeRepository;
 import com.fastcook.repository.ConversationRepository;
 import com.fastcook.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class HomeController {
     @Autowired
     PublicationService publicationService;
 
+    @Autowired
+    ChallengeRepository challengeRepository;
+
     @GetMapping(path = {"/", "/index"})
     public String index() {
         return "index";
@@ -60,7 +64,7 @@ public class HomeController {
         //TODO: add notifications
 
         //add publications
-        model.addObject("publications", publicationService.getAll());
+        model.addObject("publications", publicationService.getAll(user));
         return model;
     }
 
@@ -86,8 +90,10 @@ public class HomeController {
     }
 
     @GetMapping(path = {"/challenges"})
-    public String challenges() {
-        return "challenges";
+    public ModelAndView challenges() {
+        ModelAndView model = new ModelAndView("challenges");
+        model.addObject("challenges", challengeRepository.findAll());
+        return model;
     }
 
     @GetMapping(path = {"/settings"})

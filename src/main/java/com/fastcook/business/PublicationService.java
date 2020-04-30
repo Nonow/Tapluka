@@ -58,9 +58,22 @@ public class PublicationService {
         Publication publication = publicationRepository.findById(publicationId).get();
         Reaction reaction = new Reaction();
         reaction.setUser(user);
-        reaction.setReactionType(ReactionType.LIKE);
-        publication.getReactions().add(reactionRepository.save(reaction));
-        return null != publicationRepository.save(publication);
+        reaction.setPublication(publication);
+        if (reactionDto.getReactionType() == 0) {
+            reaction.setReactionType(ReactionType.LIKE);
+            reaction = reactionRepository.save(reaction);
+            return null != reaction;
+        } else if (reactionDto.getReactionType() == 1) {
+            for(Reaction publicationReaction : publication.getReactions()) {
+                if (publicationReaction.getUser().getId() == user.getId()) {
+                    reactionRepository.delete(publicationReaction);
+                    return true;
+                }
+            }
+        }
+        //publication.getReactions().add(reactionRepository.save(reaction));
+
+        return false;
     }
 
     public Boolean saveComment(CommentDto commentDto, Long publicationId, User user) {
@@ -68,9 +81,10 @@ public class PublicationService {
         if (publication != null) {
             Comment comment = new Comment();
             comment.setUser(user);
+            comment.getPublications().add(publication);
             comment.setContent(commentDto.getContent());
-            publication.getComments().add(commentRepository.save(comment));
-            return null != publicationRepository.save(publication);
+            Comment savedComment = commentRepository.save(comment);
+            return savedComment != null;
         } else {
             return false;
         }
@@ -107,9 +121,18 @@ public class PublicationService {
         return userRepository.save(userDao);
     }
 
-    public Iterable<Publication> getAll() {
-
-        return publicationRepository.findAll();
+    public Iterable<Publication> getAll(User user) {
+        Iterable<Publication> publications = publicationRepository.findAll();
+        for(Publication publication : publications) {
+            for(Reaction reaction : publication.getReactions()) {
+                if(reaction.getUser().getId() == user.getId()) {
+                    publication.setReactionType(1);
+                    break;
+                }
+            }
+        }
+        return publications;
     }
+
 }
 

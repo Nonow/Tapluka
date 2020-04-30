@@ -11,8 +11,10 @@ import javax.persistence.*;
 public class Reaction extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ReactionType reactionType;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private User user;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Publication publication;
     @Lob
     private String content;
 }

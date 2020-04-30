@@ -1,5 +1,6 @@
 package com.fastcook.business;
 
+import com.fastcook.dao.File;
 import com.fastcook.dao.User;
 import com.fastcook.dao.type.Civility;
 import com.fastcook.dto.AuthenticationDto;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.Base64;
 
 
 @Service
@@ -70,6 +72,12 @@ public class UserService {
                 .toLocalDate());
         userDao.setCivility(Civility.valueOf(userDto.getCivility().toUpperCase()));
         userDao.setUsername(userDto.getUsername());
+        if (userDto.getFile() != null) {
+            File file = new File();
+            file.setMimeType(userDto.getFile().getContentType());
+            file.setImageInBase64(Base64.getEncoder().encodeToString(userDto.getFile().getBytes()));
+            userDao.setFile(fileRepository.save(file));
+        }
         return userRepository.save(userDao);
     }
 

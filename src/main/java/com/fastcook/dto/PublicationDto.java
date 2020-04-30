@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class PublicationDto {
+
+    private Long updateId;
+
     @NotEmpty
     @NotNull
     private String content;
